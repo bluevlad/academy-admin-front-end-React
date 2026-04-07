@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   academy-front:
-    container_name: academy-front
     build: .
+    container_name: academy-front-end
     ports:
       - "3000:3000"
     volumes:
@@ -13,13 +13,15 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      - REACT_APP_API_URL=${REACT_APP_API_URL:-http://localhost:9001}
       # Polling mechanism for hot-reloading on Windows/Docker
       - CHOKIDAR_USEPOLLING=true
       - WDS_SOCKET_PORT=0
       # Ignore ESLint errors to prevent start failure
       - ESLINT_NO_DEV_ERRORS=true
       - DISABLE_ESLINT_PLUGIN=true
-    # Keep the container running
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     stdin_open: true
     tty: true
     restart: always
