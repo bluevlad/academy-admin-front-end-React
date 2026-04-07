@@ -26,8 +26,7 @@ import {
   fetchScheduleList, // This gets detail list, but we need getScheduleTable for update
   updateSchedule
 } from "api/counsel";
-import superagent from "superagent";
-import { BASE_API } from "../../../constants";
+import apiClient from "shared/api/client";
 
 // Helper to get Schedule Table (since it wasn't in main api export yet, or I named it differently?)
 // I named it fetchScheduleTable? No, in Api client I named: getScheduleTable -> fetchScheduleTable?
@@ -89,9 +88,9 @@ function CounselWrite() {
           // const result = await fetchScheduleTable({ SCH_DAY: date, CAT_CD: catCd });
 
           // Temp workaround until I fix API file:
-          const response = await superagent.get(`${BASE_API}/counsel/getScheduleTable`).query({ SCH_DAY: date, CAT_CD: catCd });
-          if (response.body && response.body.scheduleTable) {
-            setScheduleTable(response.body.scheduleTable);
+          const response = await apiClient.get("/counsel/getScheduleTable", { params: { SCH_DAY: date, CAT_CD: catCd } });
+          if (response.data && response.data.scheduleTable) {
+            setScheduleTable(response.data.scheduleTable);
           }
         } else {
           // Load Time Table for View (Insert Mode doesn't use it for input logic, just display?)

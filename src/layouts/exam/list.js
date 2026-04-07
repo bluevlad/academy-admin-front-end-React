@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col, Card, Table, Pagination, Button } from 'react-bootstrap';
-import { BASE_API } from "../../config/constant";
 import { fetchExamData } from './data';
 import { useNavigate } from "react-router-dom";
-import superagent from 'superagent';
+import apiClient from "shared/api/client";
 import EdExam from './reExam';
 
 
@@ -91,15 +90,12 @@ class List extends Component {
   onExam = async (id) => {
   
     try {
-      const res = await superagent
-        .post(`${BASE_API}/exam/getExamView`)
-        .type("form")
-        .send({ examId: id });
+      const res = await apiClient.post("/exam/getExamView", { examId: id });
 
-      if (res.body.retMsg === 'Y') {
+      if (res.data.retMsg === 'Y') {
         this.props.navigate(`/exam/view?id=${id}`);
       } else {
-        alert("시험 응시 여부 확인 실패: " + res.body.retMsg);
+        alert("시험 응시 여부 확인 실패: " + res.data.retMsg);
         this.props.navigate('/exam/list');
       }
     } catch (err) {

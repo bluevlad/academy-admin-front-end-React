@@ -1,13 +1,11 @@
-import superagent from "superagent";
-
-import { BASE_API } from "../../constants/index";
+import apiClient from "shared/api/client";
 
 // const BASE_API = "http://115.68.220.203:8080/api/gosi"; // Deprecated
 
 export const getSampleUserList = async (params) => {
   try {
-    const response = await superagent.get(`${BASE_API}/getSampleUserList`).query(params);
-    return response.body;
+    const response = await apiClient.get("/getSampleUserList", { params });
+    return response.data;
   } catch (error) {
     throw error;
   }
@@ -15,8 +13,8 @@ export const getSampleUserList = async (params) => {
 
 export const getSampleUserDetail = async (params) => {
   try {
-    const response = await superagent.get(`${BASE_API}/getSampleUserDetail`).query(params);
-    return response.body;
+    const response = await apiClient.get("/getSampleUserDetail", { params });
+    return response.data;
   } catch (error) {
     throw error;
   }
@@ -24,8 +22,8 @@ export const getSampleUserDetail = async (params) => {
 
 export const insertSampleUser = async (data) => {
   try {
-    const response = await superagent.post(`${BASE_API}/insertSampleUser`).type("form").send(data);
-    return response.body;
+    const response = await apiClient.post("/insertSampleUser", new URLSearchParams(data));
+    return response.data;
   } catch (error) {
     throw error;
   }
@@ -33,8 +31,8 @@ export const insertSampleUser = async (data) => {
 
 export const updateSampleUser = async (data) => {
   try {
-    const response = await superagent.post(`${BASE_API}/updateSampleUser`).type("form").send(data);
-    return response.body;
+    const response = await apiClient.post("/updateSampleUser", new URLSearchParams(data));
+    return response.data;
   } catch (error) {
     throw error;
   }
@@ -42,8 +40,8 @@ export const updateSampleUser = async (data) => {
 
 export const deleteSampleUser = async (data) => {
   try {
-    const response = await superagent.post(`${BASE_API}/deleteSampleUser`).type("form").send(data);
-    return response.body;
+    const response = await apiClient.post("/deleteSampleUser", new URLSearchParams(data));
+    return response.data;
   } catch (error) {
     throw error;
   }

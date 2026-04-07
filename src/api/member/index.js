@@ -1,15 +1,14 @@
-import superagent from "superagent";
-import { BASE_API } from "../../constants/index";
+import apiClient from "shared/api/client";
 
 export const fetchMemberListData = async (page = 1) => {
   const userId = localStorage.getItem("userId");
   try {
-    const response = await superagent.get(
-      `${BASE_API}/member/getMemberList?curPage=${page}&userId=${userId}`
+    const response = await apiClient.get(
+      `/member/getMemberList?curPage=${page}&userId=${userId}`
     );
 
     return {
-      memberList: response.body.memberList.map((member) => ({
+      memberList: response.data.memberList.map((member) => ({
         userId: member.USER_ID,
         userName: member.USER_NM,
         userPwd: member.USER_PWD,
@@ -27,17 +26,17 @@ export const fetchMemberListData = async (page = 1) => {
         isUse: member.IS_USE,
       })),
       paginationInfo: {
-        currentPageNo: response.body.paginationInfo.currentPageNo,
-        recordCountPerPage: parseInt(response.body.paginationInfo.recordCountPerPage),
-        pageSize: parseInt(response.body.paginationInfo.pageSize),
-        totalRecordCount: parseInt(response.body.paginationInfo.totalRecordCount),
-        totalPageCount: parseInt(response.body.paginationInfo.totalPageCount) || 1, // 기본값 설정
-        firstPageNoOnPageList: parseInt(response.body.paginationInfo.firstPageNoOnPageList),
-        lastPageNoOnPageList: parseInt(response.body.paginationInfo.lastPageNoOnPageList),
-        firstRecordIndex: parseInt(response.body.paginationInfo.firstRecordIndex),
-        lastRecordIndex: parseInt(response.body.paginationInfo.lastRecordIndex),
-        lastPageNo: parseInt(response.body.paginationInfo.lastPageNo),
-        firstPageNo: parseInt(response.body.paginationInfo.firstPageNo),
+        currentPageNo: response.data.paginationInfo.currentPageNo,
+        recordCountPerPage: parseInt(response.data.paginationInfo.recordCountPerPage),
+        pageSize: parseInt(response.data.paginationInfo.pageSize),
+        totalRecordCount: parseInt(response.data.paginationInfo.totalRecordCount),
+        totalPageCount: parseInt(response.data.paginationInfo.totalPageCount) || 1, // 기본값 설정
+        firstPageNoOnPageList: parseInt(response.data.paginationInfo.firstPageNoOnPageList),
+        lastPageNoOnPageList: parseInt(response.data.paginationInfo.lastPageNoOnPageList),
+        firstRecordIndex: parseInt(response.data.paginationInfo.firstRecordIndex),
+        lastRecordIndex: parseInt(response.data.paginationInfo.lastRecordIndex),
+        lastPageNo: parseInt(response.data.paginationInfo.lastPageNo),
+        firstPageNo: parseInt(response.data.paginationInfo.firstPageNo),
       },
     };
   } catch (error) {
@@ -51,7 +50,7 @@ export const fetchMemberDetailData = async () => {
     const url = new URL(window.location.href);
     const param = new URLSearchParams(url.search);
     const user_id = param.get("user_id");
-    const response = await superagent.get(`${BASE_API}/member/getMember?userId=` + user_id);
+    const response = await apiClient.get(`/member/getMember?userId=` + user_id);
 
     return {
       memberDetail: {

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import superagent from "superagent";
-import { BASE_API } from "../../config/constant";
+// apiClient available via: import apiClient from "shared/api/client";
 import { Form, Button, Row, Col, Card, Collapse, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import { fetchExamDetailData } from "./data";

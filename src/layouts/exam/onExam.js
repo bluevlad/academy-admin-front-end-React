@@ -1,6 +1,5 @@
 import React from "react";
-import superagent from "superagent";
-import { BASE_API } from "../../config/constant";
+import apiClient from "shared/api/client";
 import { Form, Button, Row, Col, Card, Collapse, Modal } from "react-bootstrap";
 import { fetchExamDetailData } from "./data";
 
@@ -54,12 +53,10 @@ export class ExamPopup extends React.Component {
       return;
     }
     const payload = { userId, userNm, examId: examDetail.exam_id, answers };
-    superagent
-      .post(`${BASE_API}/exam/insertExamResult`)
-      .type("form")
-      .send(payload)
+    apiClient
+      .post("/exam/insertExamResult", payload)
       .then((res) => {
-        alert("Response: " + res.text);
+        alert("Response: " + JSON.stringify(res.data));
         this.goList();
       })
       .catch((err) => console.error("시험 제출 오류:", err));

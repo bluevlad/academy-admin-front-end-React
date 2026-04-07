@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
-import superagent from "superagent";
-import { BASE_API } from "../../constants/index";
+import apiClient from "shared/api/client";
 
 // =====================================================
 // 배너 마스터 (TB_BANNER) API
@@ -9,8 +8,8 @@ import { BASE_API } from "../../constants/index";
 // 배너 목록 조회
 export const getBannerList = async (params) => {
   try {
-    const response = await superagent.get(`${BASE_API}/banner/getBannerList`).query(params);
-    return response.body;
+    const response = await apiClient.get("/banner/getBannerList", { params });
+    return response.data;
   } catch (error) {
     console.error("Error fetching banner list:", error);
     throw error;
@@ -20,8 +19,8 @@ export const getBannerList = async (params) => {
 // 배너 상세 조회
 export const getBannerDetail = async (bannerCd) => {
   try {
-    const response = await superagent.get(`${BASE_API}/banner/getBannerDetail`).query({ bannerCd });
-    return response.body;
+    const response = await apiClient.get("/banner/getBannerDetail", { params: { bannerCd } });
+    return response.data;
   } catch (error) {
     console.error("Error fetching banner detail:", error);
     throw error;
@@ -31,8 +30,8 @@ export const getBannerDetail = async (bannerCd) => {
 // 배너 등록
 export const insertBanner = async (data) => {
   try {
-    const response = await superagent.post(`${BASE_API}/banner/insertBanner`).send(data);
-    return response.body;
+    const response = await apiClient.post("/banner/insertBanner", data);
+    return response.data;
   } catch (error) {
     console.error("Error inserting banner:", error);
     throw error;
@@ -42,8 +41,8 @@ export const insertBanner = async (data) => {
 // 배너 수정
 export const updateBanner = async (data) => {
   try {
-    const response = await superagent.post(`${BASE_API}/banner/updateBanner`).send(data);
-    return response.body;
+    const response = await apiClient.post("/banner/updateBanner", data);
+    return response.data;
   } catch (error) {
     console.error("Error updating banner:", error);
     throw error;
@@ -53,8 +52,8 @@ export const updateBanner = async (data) => {
 // 배너 삭제
 export const deleteBanner = async (bannerCd) => {
   try {
-    const response = await superagent.post(`${BASE_API}/banner/deleteBanner`).send({ bannerCd });
-    return response.body;
+    const response = await apiClient.post("/banner/deleteBanner", { bannerCd });
+    return response.data;
   } catch (error) {
     console.error("Error deleting banner:", error);
     throw error;
@@ -68,8 +67,8 @@ export const deleteBanner = async (bannerCd) => {
 // 배너 아이템 목록 조회
 export const getBannerItemList = async (params) => {
   try {
-    const response = await superagent.get(`${BASE_API}/banner/getBannerItemList`).query(params);
-    return response.body;
+    const response = await apiClient.get("/banner/getBannerItemList", { params });
+    return response.data;
   } catch (error) {
     console.error("Error fetching banner item list:", error);
     throw error;
@@ -79,8 +78,8 @@ export const getBannerItemList = async (params) => {
 // 배너 아이템 상세 조회
 export const getBannerItemDetail = async (params) => {
   try {
-    const response = await superagent.get(`${BASE_API}/banner/getBannerItemDetail`).query(params);
-    return response.body;
+    const response = await apiClient.get("/banner/getBannerItemDetail", { params });
+    return response.data;
   } catch (error) {
     console.error("Error fetching banner item detail:", error);
     throw error;
@@ -90,8 +89,8 @@ export const getBannerItemDetail = async (params) => {
 // 배너 아이템 등록
 export const insertBannerItem = async (data) => {
   try {
-    const response = await superagent.post(`${BASE_API}/banner/insertBannerItem`).send(data);
-    return response.body;
+    const response = await apiClient.post("/banner/insertBannerItem", data);
+    return response.data;
   } catch (error) {
     console.error("Error inserting banner item:", error);
     throw error;
@@ -101,8 +100,8 @@ export const insertBannerItem = async (data) => {
 // 배너 아이템 수정
 export const updateBannerItem = async (data) => {
   try {
-    const response = await superagent.post(`${BASE_API}/banner/updateBannerItem`).send(data);
-    return response.body;
+    const response = await apiClient.post("/banner/updateBannerItem", data);
+    return response.data;
   } catch (error) {
     console.error("Error updating banner item:", error);
     throw error;
@@ -112,8 +111,8 @@ export const updateBannerItem = async (data) => {
 // 배너 아이템 플래그 수정
 export const updateBannerItemFlag = async (data) => {
   try {
-    const response = await superagent.post(`${BASE_API}/banner/updateBannerItemFlag`).send(data);
-    return response.body;
+    const response = await apiClient.post("/banner/updateBannerItemFlag", data);
+    return response.data;
   } catch (error) {
     console.error("Error updating banner item flag:", error);
     throw error;
@@ -123,8 +122,8 @@ export const updateBannerItemFlag = async (data) => {
 // 배너 아이템 초기화
 export const updateBannerItemReset = async (data) => {
   try {
-    const response = await superagent.post(`${BASE_API}/banner/updateBannerItemReset`).send(data);
-    return response.body;
+    const response = await apiClient.post("/banner/updateBannerItemReset", data);
+    return response.data;
   } catch (error) {
     console.error("Error resetting banner item:", error);
     throw error;
@@ -134,8 +133,8 @@ export const updateBannerItemReset = async (data) => {
 // 배너 아이템 삭제
 export const deleteBannerItem = async (data) => {
   try {
-    const response = await superagent.post(`${BASE_API}/banner/deleteBannerItem`).send(data);
-    return response.body;
+    const response = await apiClient.post("/banner/deleteBannerItem", data);
+    return response.data;
   } catch (error) {
     console.error("Error deleting banner item:", error);
     throw error;

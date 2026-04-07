@@ -1,20 +1,21 @@
-import superagent from "superagent";
-import { BASE_API } from "../../constants/index";
+import apiClient from "shared/api/client";
 
 // 일반 메뉴 트리 조회
 export const fetchMenuTree = async () => {
   try {
-    const response = await superagent.get(`${BASE_API}/menu/getMenuTree?onoffDiv=O`);
+    const response = await apiClient.get("/menu/getMenuTree", {
+      params: { onoffDiv: "O" },
+    });
 
     // API 응답 처리 (menuTree 배열로 반환)
     let menuData = [];
 
-    if (Array.isArray(response.body)) {
-      menuData = response.body;
-    } else if (response.body && Array.isArray(response.body.menuTree)) {
-      menuData = response.body.menuTree;
-    } else if (response.body && response.body.data) {
-      menuData = Array.isArray(response.body.data) ? response.body.data : [];
+    if (Array.isArray(response.data)) {
+      menuData = response.data;
+    } else if (response.data && Array.isArray(response.data.menuTree)) {
+      menuData = response.data.menuTree;
+    } else if (response.data && response.data.data) {
+      menuData = Array.isArray(response.data.data) ? response.data.data : [];
     }
 
     // 데이터 매핑 (member API 패턴 참고)
@@ -39,17 +40,17 @@ export const fetchMenuTree = async () => {
 // Pass 메뉴 트리 조회
 export const fetchPassMenuTree = async () => {
   try {
-    const response = await superagent.get(`${BASE_API}/menu/getpassMenuTree`);
+    const response = await apiClient.get("/menu/getpassMenuTree");
 
     // API 응답 처리 (menuTree 배열로 반환)
     let menuData = [];
 
-    if (Array.isArray(response.body)) {
-      menuData = response.body;
-    } else if (response.body && Array.isArray(response.body.menuTree)) {
-      menuData = response.body.menuTree;
-    } else if (response.body && response.body.data) {
-      menuData = Array.isArray(response.body.data) ? response.body.data : [];
+    if (Array.isArray(response.data)) {
+      menuData = response.data;
+    } else if (response.data && Array.isArray(response.data.menuTree)) {
+      menuData = response.data.menuTree;
+    } else if (response.data && response.data.data) {
+      menuData = Array.isArray(response.data.data) ? response.data.data : [];
     }
 
     // 데이터 매핑 (member API 패턴 참고)
@@ -74,10 +75,12 @@ export const fetchPassMenuTree = async () => {
 // 일반 메뉴 상세 조회
 export const fetchDetailMenu = async (menuId) => {
   try {
-    const response = await superagent.get(`${BASE_API}/menu/getDetailMenu`).query({ menuId });
+    const response = await apiClient.get("/menu/getDetailMenu", {
+      params: { menuId },
+    });
 
     // 데이터 매핑 (member API 패턴 참고)
-    const menuDetail = response.body;
+    const menuDetail = response.data;
     return {
       menuSeq: menuDetail.MENU_SEQ,
       isUse: menuDetail.ISUSE,
@@ -97,10 +100,12 @@ export const fetchDetailMenu = async (menuId) => {
 // Pass 메뉴 상세 조회
 export const fetchPassDetailMenu = async (menuId) => {
   try {
-    const response = await superagent.get(`${BASE_API}/menu/getpassDetailMenu`).query({ menuId });
+    const response = await apiClient.get("/menu/getpassDetailMenu", {
+      params: { menuId },
+    });
 
     // 데이터 매핑 (member API 패턴 참고)
-    const menuDetail = response.body;
+    const menuDetail = response.data;
     return {
       menuSeq: menuDetail.MENU_SEQ,
       isUse: menuDetail.ISUSE,
@@ -120,9 +125,9 @@ export const fetchPassDetailMenu = async (menuId) => {
 // 일반 메뉴 수정
 export const updateMenu = async (menuData) => {
   try {
-    const response = await superagent.post(`${BASE_API}/menu/menuUpdateProcess`).send(menuData);
+    const response = await apiClient.post("/menu/menuUpdateProcess", menuData);
 
-    return response.body;
+    return response.data;
   } catch (error) {
     console.error("Error updating menu:", error);
     throw error;
@@ -132,9 +137,9 @@ export const updateMenu = async (menuData) => {
 // Pass 메뉴 수정
 export const updatePassMenu = async (menuData) => {
   try {
-    const response = await superagent.post(`${BASE_API}/menu/passmenuUpdateProcess`).send(menuData);
+    const response = await apiClient.post("/menu/passmenuUpdateProcess", menuData);
 
-    return response.body;
+    return response.data;
   } catch (error) {
     console.error("Error updating pass menu:", error);
     throw error;
@@ -144,9 +149,9 @@ export const updatePassMenu = async (menuData) => {
 // 일반 메뉴 삭제
 export const deleteMenu = async (menuId) => {
   try {
-    const response = await superagent.post(`${BASE_API}/menu/menuDeleteProcess`).send({ menuId });
+    const response = await apiClient.post("/menu/menuDeleteProcess", { menuId });
 
-    return response.body;
+    return response.data;
   } catch (error) {
     console.error("Error deleting menu:", error);
     throw error;
@@ -156,11 +161,9 @@ export const deleteMenu = async (menuId) => {
 // Pass 메뉴 삭제
 export const deletePassMenu = async (menuId) => {
   try {
-    const response = await superagent
-      .post(`${BASE_API}/menu/passmenuDeleteProcess`)
-      .send({ menuId });
+    const response = await apiClient.post("/menu/passmenuDeleteProcess", { menuId });
 
-    return response.body;
+    return response.data;
   } catch (error) {
     console.error("Error deleting pass menu:", error);
     throw error;
@@ -170,9 +173,11 @@ export const deletePassMenu = async (menuId) => {
 // 메뉴 ID 중복 체크
 export const checkMenuId = async (menuId) => {
   try {
-    const response = await superagent.get(`${BASE_API}/menu/menuIdCheck`).query({ menuId });
+    const response = await apiClient.get("/menu/menuIdCheck", {
+      params: { menuId },
+    });
 
-    return response.body;
+    return response.data;
   } catch (error) {
     console.error("Error checking menu ID:", error);
     throw error;
@@ -182,9 +187,9 @@ export const checkMenuId = async (menuId) => {
 // 일반 메뉴 최대 ID 조회
 export const getMaxMenuId = async () => {
   try {
-    const response = await superagent.get(`${BASE_API}/menu/getMaxMenuId`);
+    const response = await apiClient.get("/menu/getMaxMenuId");
 
-    return response.body;
+    return response.data;
   } catch (error) {
     console.error("Error getting max menu ID:", error);
     throw error;
@@ -194,9 +199,9 @@ export const getMaxMenuId = async () => {
 // Pass 메뉴 최대 ID 조회
 export const getPassMaxMenuId = async () => {
   try {
-    const response = await superagent.get(`${BASE_API}/menu/getpassMaxMenuId`);
+    const response = await apiClient.get("/menu/getpassMaxMenuId");
 
-    return response.body;
+    return response.data;
   } catch (error) {
     console.error("Error getting pass max menu ID:", error);
     throw error;
@@ -206,9 +211,9 @@ export const getPassMaxMenuId = async () => {
 // 일반 메뉴 등록
 export const insertMenu = async (menuData) => {
   try {
-    const response = await superagent.post(`${BASE_API}/menu/menuInsertProcess`).send(menuData);
+    const response = await apiClient.post("/menu/menuInsertProcess", menuData);
 
-    return response.body;
+    return response.data;
   } catch (error) {
     console.error("Error inserting menu:", error);
     throw error;
@@ -218,9 +223,9 @@ export const insertMenu = async (menuData) => {
 // Pass 메뉴 등록
 export const insertPassMenu = async (menuData) => {
   try {
-    const response = await superagent.post(`${BASE_API}/menu/passmenuInsertProcess`).send(menuData);
+    const response = await apiClient.post("/menu/passmenuInsertProcess", menuData);
 
-    return response.body;
+    return response.data;
   } catch (error) {
     console.error("Error inserting pass menu:", error);
     throw error;

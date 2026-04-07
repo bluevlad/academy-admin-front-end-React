@@ -32,6 +32,8 @@ export default defineConfig({
       config: path.resolve(__dirname, "./src/config"),
       constants: path.resolve(__dirname, "./src/constants"),
       utils: path.resolve(__dirname, "./src/utils"),
+      shared: path.resolve(__dirname, "./src/shared"),
+      types: path.resolve(__dirname, "./src/types"),
       App: path.resolve(__dirname, "./src/App.js"),
       routes: path.resolve(__dirname, "./src/routes.js"),
     },

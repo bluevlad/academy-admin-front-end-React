@@ -1,5 +1,4 @@
-import superagent from "superagent";
-import { BASE_API } from "../../constants/index";
+import apiClient from "shared/api/client";
 
 // ===========================================
 // Free Order API (무료 수강신청 관리)
@@ -8,10 +7,8 @@ import { BASE_API } from "../../constants/index";
 // 수강신청 회원 목록 조회
 export const getMemberFreeOrderList = async (params) => {
   try {
-    const response = await superagent
-      .get(`${BASE_API}/freeOrder/getMemberFreeOrderList`)
-      .query(params);
-    return response.body;
+    const response = await apiClient.get("/freeOrder/getMemberFreeOrderList", { params });
+    return response.data;
   } catch (error) {
     console.error("Error fetching member free order list:", error);
     throw error;
@@ -21,8 +18,8 @@ export const getMemberFreeOrderList = async (params) => {
 // 강의 마스터 정보 조회
 export const getLectureMstInfo = async (params) => {
   try {
-    const response = await superagent.get(`${BASE_API}/freeOrder/getLectureMstInfo`).query(params);
-    return response.body;
+    const response = await apiClient.get("/freeOrder/getLectureMstInfo", { params });
+    return response.data;
   } catch (error) {
     console.error("Error fetching lecture mst info:", error);
     throw error;
@@ -32,8 +29,8 @@ export const getLectureMstInfo = async (params) => {
 // 카테고리 목록 조회
 export const getCategoryList = async (params) => {
   try {
-    const response = await superagent.get(`${BASE_API}/freeOrder/getCategoryList`).query(params);
-    return response.body;
+    const response = await apiClient.get("/freeOrder/getCategoryList", { params });
+    return response.data;
   } catch (error) {
     console.error("Error fetching category list:", error);
     throw error;
@@ -43,10 +40,8 @@ export const getCategoryList = async (params) => {
 // 학습형태 목록 조회
 export const getLearningFormList = async (params) => {
   try {
-    const response = await superagent
-      .get(`${BASE_API}/freeOrder/getLearningFormList`)
-      .query(params);
-    return response.body;
+    const response = await apiClient.get("/freeOrder/getLearningFormList", { params });
+    return response.data;
   } catch (error) {
     console.error("Error fetching learning form list:", error);
     throw error;
@@ -56,8 +51,8 @@ export const getLearningFormList = async (params) => {
 // 과목 목록 조회
 export const getSubjectList = async (params) => {
   try {
-    const response = await superagent.get(`${BASE_API}/freeOrder/getSubjectList`).query(params);
-    return response.body;
+    const response = await apiClient.get("/freeOrder/getSubjectList", { params });
+    return response.data;
   } catch (error) {
     console.error("Error fetching subject list:", error);
     throw error;
@@ -67,10 +62,8 @@ export const getSubjectList = async (params) => {
 // 강의선택 팝업 목록 조회
 export const getLectureListForFreeOrder = async (params) => {
   try {
-    const response = await superagent
-      .get(`${BASE_API}/freeOrder/getLectureListForFreeOrder`)
-      .query(params);
-    return response.body;
+    const response = await apiClient.get("/freeOrder/getLectureListForFreeOrder", { params });
+    return response.data;
   } catch (error) {
     console.error("Error fetching lecture list for free order:", error);
     throw error;
@@ -80,8 +73,8 @@ export const getLectureListForFreeOrder = async (params) => {
 // 수강신청 등록
 export const insertFreeOrder = async (data) => {
   try {
-    const response = await superagent.post(`${BASE_API}/freeOrder/insertFreeOrder`).send(data);
-    return response.body;
+    const response = await apiClient.post("/freeOrder/insertFreeOrder", data);
+    return response.data;
   } catch (error) {
     console.error("Error inserting free order:", error);
     throw error;
@@ -91,10 +84,8 @@ export const insertFreeOrder = async (data) => {
 // 다중 수강신청 등록
 export const insertFreeOrderMultiple = async (data) => {
   try {
-    const response = await superagent
-      .post(`${BASE_API}/freeOrder/insertFreeOrderMultiple`)
-      .send(data);
-    return response.body;
+    const response = await apiClient.post("/freeOrder/insertFreeOrderMultiple", data);
+    return response.data;
   } catch (error) {
     console.error("Error inserting free order multiple:", error);
     throw error;
@@ -104,10 +95,8 @@ export const insertFreeOrderMultiple = async (data) => {
 // 수강변경 목록 조회
 export const getChangeLectureList = async (params) => {
   try {
-    const response = await superagent
-      .get(`${BASE_API}/freeOrder/getChangeLectureList`)
-      .query(params);
-    return response.body;
+    const response = await apiClient.get("/freeOrder/getChangeLectureList", { params });
+    return response.data;
   } catch (error) {
     console.error("Error fetching change lecture list:", error);
     throw error;
@@ -117,10 +106,8 @@ export const getChangeLectureList = async (params) => {
 // 수강변경 상세 조회
 export const getChangeViewDetail = async (params) => {
   try {
-    const response = await superagent
-      .get(`${BASE_API}/freeOrder/getChangeViewDetail`)
-      .query(params);
-    return response.body;
+    const response = await apiClient.get("/freeOrder/getChangeViewDetail", { params });
+    return response.data;
   } catch (error) {
     console.error("Error fetching change view detail:", error);
     throw error;
@@ -130,8 +117,8 @@ export const getChangeViewDetail = async (params) => {
 // 수강변경 처리
 export const updateChangeLecture = async (data) => {
   try {
-    const response = await superagent.post(`${BASE_API}/freeOrder/updateChangeLecture`).send(data);
-    return response.body;
+    const response = await apiClient.post("/freeOrder/updateChangeLecture", data);
+    return response.data;
   } catch (error) {
     console.error("Error updating change lecture:", error);
     throw error;

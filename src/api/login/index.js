@@ -1,16 +1,14 @@
-import superagent from "superagent";
-import { BASE_API } from "../../constants/index";
+import apiClient from "shared/api/client";
 
 export const login = async (credentials) => {
   try {
-    const response = await superagent
-      .post(`${BASE_API}/auth/sign-in`)
-      .type("form")
-      .send(credentials);
-    return response.body;
+    const response = await apiClient.post("/auth/sign-in", credentials, {
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    });
+    return response.data;
   } catch (error) {
-    if (error.response && error.response.body) {
-      throw error.response.body;
+    if (error.response && error.response.data) {
+      throw error.response.data;
     }
     throw error;
   }
@@ -18,11 +16,11 @@ export const login = async (credentials) => {
 
 export const register = async (userData) => {
   try {
-    const response = await superagent.post(`${BASE_API}/auth/sign-up`).send(userData);
-    return response.body;
+    const response = await apiClient.post("/auth/sign-up", userData);
+    return response.data;
   } catch (error) {
-    if (error.response && error.response.body) {
-      throw error.response.body;
+    if (error.response && error.response.data) {
+      throw error.response.data;
     }
     throw error;
   }
@@ -36,14 +34,11 @@ export const getProfile = async (userId, token = null) => {
       throw new Error("No token found");
     }
 
-    const response = await superagent
-      .post(`${BASE_API}/auth/profile`)
-      .set("Authorization", `Bearer ${useToken}`)
-      .send({ userId });
-    return response.body;
+    const response = await apiClient.post("/auth/profile", { userId });
+    return response.data;
   } catch (error) {
-    if (error.response && error.response.body) {
-      throw error.response.body;
+    if (error.response && error.response.data) {
+      throw error.response.data;
     }
     throw error;
   }
