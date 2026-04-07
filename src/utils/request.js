@@ -27,7 +27,9 @@ function onRefreshed(token) {
 
 const instance = axios.create({
   // 테스트
-  baseURL: isMobileDevice() ? process.env.REACT_APP_MOBILE_URL : process.env.REACT_APP_URL,
+  baseURL: isMobileDevice()
+    ? (import.meta.env.VITE_MOBILE_URL || process.env.REACT_APP_MOBILE_URL)
+    : (import.meta.env.VITE_APP_URL || process.env.REACT_APP_URL),
   timeout: userCompanyCode === "H501" ? 0 : 60 * 1000,
   headers: {
     "Content-Type": "application/json;charset=UTF-8",

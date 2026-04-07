@@ -14,8 +14,8 @@ RUN npm install --legacy-peer-deps
 # Copy the rest of the application code
 COPY . .
 
-# Expose port 3000 for the React application
+# Expose port 3000 for the Vite dev server
 EXPOSE 3000
 
-# Start the application in development mode
-CMD ["npm", "start"]
+# Start the application with Vite dev server
+CMD ["npm", "run", "dev"]
