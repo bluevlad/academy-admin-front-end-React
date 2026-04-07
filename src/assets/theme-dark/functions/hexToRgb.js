@@ -22,6 +22,9 @@ Coded by www.creative-tim.com
 import chroma from "chroma-js";
 
 function hexToRgb(color) {
+  if (!color || color === "transparent" || color === "rgba(0, 0, 0, 0)") {
+    return "0, 0, 0";
+  }
   return chroma(color).rgb().join(", ");
 }
 
