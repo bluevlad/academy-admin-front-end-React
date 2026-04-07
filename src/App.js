@@ -15,6 +15,9 @@ Coded by www.creative-tim.com
 
 import { useState, useEffect, useMemo, Suspense } from "react";
 
+// i18n initialization
+import "shared/i18n";
+
 // react-router components
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
