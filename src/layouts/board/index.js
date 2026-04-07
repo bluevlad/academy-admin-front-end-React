@@ -1,51 +1,47 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Icon from "@mui/material/Icon";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
+import Chip from "@mui/material/Chip";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
-// Material Dashboard 2 React example components
+// Layout
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import DataTable from "examples/Tables/DataTable";
+
+// Shared Components
+import { ServerDataTable } from "shared/components/DataTable";
 
 // API
 import { getBoardList } from "api/board";
-import { createPaginationParams } from "utils/commonUtils";
 
 function Board() {
   const [boardList, setBoardList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [paginationInfo, setPaginationInfo] = useState(null);
+  const [pageSize, setPageSize] = useState(10);
+  const [paginationInfo, setPaginationInfo] = useState({});
 
   useEffect(() => {
     loadBoardData();
-  }, [currentPage]);
+  }, [currentPage, pageSize]);
 
   const loadBoardData = async () => {
     setLoading(true);
     try {
-      const params = createPaginationParams({ pageIndex: currentPage });
+      const params = {
+        currentPageNo: currentPage,
+        recordCountPerPage: pageSize,
+      };
       const data = await getBoardList(params);
       setBoardList(data.boardList || []);
-      setPaginationInfo(data.paginationInfo || null);
-      if (data.paginationInfo) {
-        setTotalPages(
-          Math.ceil(
-            data.paginationInfo.totalRecordCount / data.paginationInfo.recordCountPerPage
-          ) || 1
-        );
-      }
+      setPaginationInfo(data.paginationInfo || {});
     } catch (error) {
       console.error("Failed to load board data:", error);
     } finally {
@@ -53,75 +49,64 @@ function Board() {
     }
   };
 
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
-
-  const columns = [
-    { Header: "게시판구분", accessor: "boardMngSeq", width: "15%", align: "left" },
-    { Header: "게시판번호", accessor: "boardSeq", width: "15%", align: "left" },
-    { Header: "게시판제목", accessor: "subject", width: "15%", align: "left" },
-    { Header: "공지여부", accessor: "noticeTopYn", width: "20%", align: "left" },
-    { Header: "공개여부", accessor: "openYn", align: "center" },
-    { Header: "사용여부", accessor: "isUse", align: "center" },
-    { Header: "열람수", accessor: "hits", align: "center" },
-    { Header: "등록일", accessor: "regDt", align: "center" },
-    { Header: "등록자", accessor: "regId", align: "center" },
-    { Header: "action", accessor: "action", align: "center" },
-  ];
-
-  const rows = boardList.map((board) => ({
-    boardMngSeq: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
-        {board.boardMngSeq}
-      </MDTypography>
-    ),
-    boardSeq: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
-        {board.boardSeq}
-      </MDTypography>
-    ),
-    subject: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
-        {board.subject}
-      </MDTypography>
-    ),
-    noticeTopYn: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
-        {board.noticeTopYn === "Y" ? "공지" : "일반"}
-      </MDTypography>
-    ),
-    openYn: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
-        {board.openYn === "Y" ? "공개" : "비공개"}
-      </MDTypography>
-    ),
-    isUse: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
-        {board.isUse === "Y" ? "사용" : "비사용"}
-      </MDTypography>
-    ),
-    hits: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
-        {board.hits}
-      </MDTypography>
-    ),
-    regDt: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
-        {board.regDt ? new Date(board.regDt).toLocaleDateString("ko-KR") : "-"}
-      </MDTypography>
-    ),
-    regId: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
-        {board.regId}
-      </MDTypography>
-    ),
-    action: (
-      <MDTypography component="a" href="#" color="text">
-        <Icon>more_vert</Icon>
-      </MDTypography>
-    ),
-  }));
+  // TanStack Table 컬럼 정의
+  const columns = useMemo(
+    () => [
+      { accessorKey: "boardMngSeq", header: "게시판구분", size: 100 },
+      { accessorKey: "boardSeq", header: "게시판번호", size: 100 },
+      { accessorKey: "subject", header: "게시판제목", size: 200 },
+      {
+        accessorKey: "noticeTopYn",
+        header: "공지여부",
+        size: 80,
+        cell: ({ getValue }) => (
+          <Chip
+            label={getValue() === "Y" ? "공지" : "일반"}
+            size="small"
+            color={getValue() === "Y" ? "warning" : "default"}
+            variant="outlined"
+          />
+        ),
+      },
+      {
+        accessorKey: "openYn",
+        header: "공개여부",
+        size: 80,
+        cell: ({ getValue }) => (getValue() === "Y" ? "공개" : "비공개"),
+      },
+      {
+        accessorKey: "isUse",
+        header: "사용여부",
+        size: 80,
+        cell: ({ getValue }) => (
+          <Chip
+            label={getValue() === "Y" ? "사용" : "미사용"}
+            size="small"
+            color={getValue() === "Y" ? "success" : "default"}
+            variant="outlined"
+          />
+        ),
+      },
+      { accessorKey: "hits", header: "열람수", size: 70 },
+      {
+        accessorKey: "regDt",
+        header: "등록일",
+        size: 100,
+        cell: ({ getValue }) =>
+          getValue() ? new Date(getValue()).toLocaleDateString("ko-KR") : "-",
+      },
+      { accessorKey: "regId", header: "등록자", size: 90 },
+      {
+        id: "action",
+        header: "",
+        size: 50,
+        cell: () => (
+          <Icon sx={{ cursor: "pointer", color: "text.secondary" }}>more_vert</Icon>
+        ),
+      },
+    ],
+    []
+  );
 
   return (
     <DashboardLayout>
@@ -144,53 +129,19 @@ function Board() {
                   게시판 목록
                 </MDTypography>
               </MDBox>
-              <MDBox pt={3}>
-                {loading ? (
-                  <MDBox p={3} textAlign="center">
-                    <MDTypography variant="caption">로딩 중...</MDTypography>
-                  </MDBox>
-                ) : (
-                  <>
-                    <DataTable
-                      table={{ columns, rows }}
-                      isSorted={false}
-                      entriesPerPage={false}
-                      showTotalEntries={false}
-                      noEndBorder
-                    />
-                    {paginationInfo && (
-                      <MDBox
-                        p={3}
-                        display="flex"
-                        justifyContent="space-between"
-                        alignItems="center"
-                      >
-                        <MDBox>
-                          <MDTypography variant="caption" color="text">
-                            전체 {paginationInfo.totalRecordCount}건 중{" "}
-                            {paginationInfo.firstRecordIndex + 1} -{" "}
-                            {Math.min(
-                              paginationInfo.lastRecordIndex + 1,
-                              paginationInfo.totalRecordCount
-                            )}
-                            건 표시{" "}
-                          </MDTypography>
-                        </MDBox>
-                        <Stack spacing={2}>
-                          <Pagination
-                            count={totalPages}
-                            page={currentPage}
-                            onChange={handlePageChange}
-                            color="primary"
-                            shape="rounded"
-                            showFirstButton
-                            showLastButton
-                          />
-                        </Stack>
-                      </MDBox>
-                    )}
-                  </>
-                )}
+              <MDBox p={2}>
+                <ServerDataTable
+                  columns={columns}
+                  data={boardList}
+                  pagination={paginationInfo}
+                  onPageChange={(page) => setCurrentPage(page)}
+                  onPageSizeChange={(size) => {
+                    setPageSize(size);
+                    setCurrentPage(1);
+                  }}
+                  loading={loading}
+                  canSearch={false}
+                />
               </MDBox>
             </Card>
           </Grid>

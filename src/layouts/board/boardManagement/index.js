@@ -1,6 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { boardMngSchema } from "types/schemas";
 
-// @mui material components
+// @mui
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Icon from "@mui/material/Icon";
@@ -8,25 +11,22 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import TextField from "@mui/material/TextField";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
+import Chip from "@mui/material/Chip";
+import IconButton from "@mui/material/IconButton";
 
-// Material Dashboard 2 React components
+// MD Components
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
 import MDTypography from "components/MDTypography";
-import MDBadge from "components/MDBadge";
 
-// Material Dashboard 2 React example components
+// Layout
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import DataTable from "examples/Tables/DataTable";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
+
+// Shared Components
+import { ServerDataTable } from "shared/components/DataTable";
+import { FormTextField, FormSelect } from "shared/components/FormFields";
 
 // API
 import {
@@ -37,25 +37,46 @@ import {
   getBoardTypeList,
 } from "api/board";
 
+const YN_OPTIONS = [
+  { value: "Y", label: "가능" },
+  { value: "N", label: "불가" },
+];
+
+const USE_OPTIONS = [
+  { value: "Y", label: "사용" },
+  { value: "N", label: "미사용" },
+];
+
+const DEFAULT_VALUES = {
+  boardMngName: "",
+  boardMngType: "",
+  isUse: "Y",
+  attachFileYn: "Y",
+  replyYn: "Y",
+  commentYn: "Y",
+};
+
 function BoardManagement() {
   const [boardMngList, setBoardMngList] = useState([]);
   const [boardTypeList, setBoardTypeList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [paginationInfo, setPaginationInfo] = useState(null);
+  const [paginationInfo, setPaginationInfo] = useState({});
 
   // Dialog
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogMode, setDialogMode] = useState("add");
-  const [formData, setFormData] = useState({
-    boardMngSeq: "",
-    boardMngName: "",
-    boardMngType: "",
-    isUse: "Y",
-    attachFileYn: "Y",
-    replyYn: "Y",
-    commentYn: "Y",
+  const [editSeq, setEditSeq] = useState(null);
+
+  // React Hook Form + Zod
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting },
+  } = useForm({
+    resolver: zodResolver(boardMngSchema),
+    defaultValues: DEFAULT_VALUES,
   });
 
   useEffect(() => {
@@ -66,16 +87,9 @@ function BoardManagement() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const data = await getBoardMngList({ pageIndex: currentPage });
+      const data = await getBoardMngList({ currentPageNo: currentPage });
       setBoardMngList(data.boardMngList || []);
-      setPaginationInfo(data.paginationInfo);
-      if (data.paginationInfo) {
-        setTotalPages(
-          Math.ceil(
-            data.paginationInfo.totalRecordCount / data.paginationInfo.recordCountPerPage
-          ) || 1
-        );
-      }
+      setPaginationInfo(data.paginationInfo || {});
     } catch (error) {
       console.error(error);
     } finally {
@@ -92,16 +106,17 @@ function BoardManagement() {
     }
   };
 
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
+  const boardTypeOptions = boardTypeList.map((t) => ({
+    value: t.CODE_CD,
+    label: t.CODE_NM,
+  }));
 
   const handleOpenDialog = (mode, item = null) => {
     setDialogMode(mode);
     if (mode === "edit" && item) {
-      setFormData({
-        boardMngSeq: item.boardMngSeq,
-        boardMngName: item.boardMngName,
+      setEditSeq(item.boardMngSeq);
+      reset({
+        boardMngName: item.boardMngName || "",
         boardMngType: item.boardMngType || "",
         isUse: item.isUse || "Y",
         attachFileYn: item.attachFileYn || "Y",
@@ -109,34 +124,20 @@ function BoardManagement() {
         commentYn: item.commentYn || "Y",
       });
     } else {
-      setFormData({
-        boardMngSeq: "",
-        boardMngName: "",
-        boardMngType: "BOARD_TYPE_01", // Default to first type if available?
-        isUse: "Y",
-        attachFileYn: "Y",
-        replyYn: "Y",
-        commentYn: "Y",
-      });
+      setEditSeq(null);
+      reset(DEFAULT_VALUES);
     }
     setDialogOpen(true);
   };
 
-  const handleCloseDialog = () => {
-    setDialogOpen(false);
-  };
+  const handleCloseDialog = () => setDialogOpen(false);
 
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async () => {
+  const onSubmit = async (formData) => {
     try {
       if (dialogMode === "add") {
         await insertBoardMng(formData);
       } else {
-        await updateBoardMng(formData);
+        await updateBoardMng({ ...formData, boardMngSeq: editSeq });
       }
       handleCloseDialog();
       loadData();
@@ -158,83 +159,67 @@ function BoardManagement() {
     }
   };
 
-  const columns = [
-    { Header: "번호", accessor: "boardMngSeq", align: "center" },
-    { Header: "게시판명", accessor: "boardMngName", align: "left" },
-    { Header: "유형", accessor: "boardMngType", align: "center" },
-    { Header: "사용여부", accessor: "isUse", align: "center" },
-    { Header: "첨부파일", accessor: "attachFileYn", align: "center" },
-    { Header: "답글", accessor: "replyYn", align: "center" },
-    { Header: "댓글", accessor: "commentYn", align: "center" },
-    { Header: "등록일", accessor: "regDt", align: "center" },
-    { Header: "관리", accessor: "action", align: "center" },
-  ];
-
-  const rows = boardMngList.map((item) => ({
-    boardMngSeq: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
-        {item.boardMngSeq}
-      </MDTypography>
-    ),
-    boardMngName: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
-        {item.boardMngName}
-      </MDTypography>
-    ),
-    boardMngType: (
-      <MDTypography variant="caption" color="text">
-        {item.boardMngTypeName || item.boardMngType}
-      </MDTypography>
-    ),
-    isUse: (
-      <MDBadge
-        badgeContent={item.isUse === "Y" ? "사용" : "미사용"}
-        color={item.isUse === "Y" ? "success" : "dark"}
-        variant="gradient"
-        size="sm"
-      />
-    ),
-    attachFileYn: (
-      <MDTypography variant="caption" color="text">
-        {item.attachFileYn === "Y" ? "가능" : "불가"}
-      </MDTypography>
-    ),
-    replyYn: (
-      <MDTypography variant="caption" color="text">
-        {item.replyYn === "Y" ? "가능" : "불가"}
-      </MDTypography>
-    ),
-    commentYn: (
-      <MDTypography variant="caption" color="text">
-        {item.commentYn === "Y" ? "가능" : "불가"}
-      </MDTypography>
-    ),
-    regDt: (
-      <MDTypography variant="caption" color="text">
-        {item.regDt}
-      </MDTypography>
-    ),
-    action: (
-      <MDBox display="flex" justifyContent="center">
-        <MDButton
-          variant="text"
-          color="info"
-          iconOnly
-          onClick={() => handleOpenDialog("edit", item)}
-        >
-          <Icon>edit</Icon>
-        </MDButton>
-        <MDButton
-          variant="text"
-          color="error"
-          iconOnly
-          onClick={() => handleDelete(item.boardMngSeq)}
-        >
-          <Icon>delete</Icon>
-        </MDButton>
-      </MDBox>
-    ),
-  }));
+  // TanStack Table 컬럼
+  const columns = useMemo(
+    () => [
+      { accessorKey: "boardMngSeq", header: "번호", size: 70 },
+      { accessorKey: "boardMngName", header: "게시판명", size: 180 },
+      {
+        accessorKey: "boardMngType",
+        header: "유형",
+        size: 100,
+        cell: ({ row }) => row.original.boardMngTypeName || row.original.boardMngType,
+      },
+      {
+        accessorKey: "isUse",
+        header: "사용여부",
+        size: 90,
+        cell: ({ getValue }) => (
+          <Chip
+            label={getValue() === "Y" ? "사용" : "미사용"}
+            size="small"
+            color={getValue() === "Y" ? "success" : "default"}
+            variant="outlined"
+          />
+        ),
+      },
+      {
+        accessorKey: "attachFileYn",
+        header: "첨부파일",
+        size: 80,
+        cell: ({ getValue }) => (getValue() === "Y" ? "가능" : "불가"),
+      },
+      {
+        accessorKey: "replyYn",
+        header: "답글",
+        size: 70,
+        cell: ({ getValue }) => (getValue() === "Y" ? "가능" : "불가"),
+      },
+      {
+        accessorKey: "commentYn",
+        header: "댓글",
+        size: 70,
+        cell: ({ getValue }) => (getValue() === "Y" ? "가능" : "불가"),
+      },
+      { accessorKey: "regDt", header: "등록일", size: 100 },
+      {
+        id: "action",
+        header: "관리",
+        size: 90,
+        cell: ({ row }) => (
+          <MDBox display="flex" justifyContent="center">
+            <IconButton size="small" color="info" onClick={() => handleOpenDialog("edit", row.original)}>
+              <Icon fontSize="small">edit</Icon>
+            </IconButton>
+            <IconButton size="small" color="error" onClick={() => handleDelete(row.original.boardMngSeq)}>
+              <Icon fontSize="small">delete</Icon>
+            </IconButton>
+          </MDBox>
+        ),
+      },
+    ],
+    [boardTypeList]
+  );
 
   return (
     <DashboardLayout>
@@ -268,139 +253,52 @@ function BoardManagement() {
                   <Icon>add</Icon>&nbsp;등록
                 </MDButton>
               </MDBox>
-              <MDBox pt={3}>
-                {loading ? (
-                  <MDBox p={3} textAlign="center">
-                    <MDTypography variant="caption">로딩 중...</MDTypography>
-                  </MDBox>
-                ) : (
-                  <>
-                    <DataTable
-                      table={{ columns, rows }}
-                      isSorted={false}
-                      entriesPerPage={false}
-                      showTotalEntries={false}
-                      noEndBorder
-                    />
-                    {paginationInfo && (
-                      <MDBox
-                        p={3}
-                        display="flex"
-                        justifyContent="space-between"
-                        alignItems="center"
-                      >
-                        <MDBox>
-                          <MDTypography variant="caption" color="text">
-                            Total {paginationInfo.totalRecordCount} records
-                          </MDTypography>
-                        </MDBox>
-                        <Stack spacing={2}>
-                          <Pagination
-                            count={totalPages}
-                            page={currentPage}
-                            onChange={handlePageChange}
-                            color="primary"
-                            shape="rounded"
-                            showFirstButton
-                            showLastButton
-                          />
-                        </Stack>
-                      </MDBox>
-                    )}
-                  </>
-                )}
+              <MDBox p={2}>
+                <ServerDataTable
+                  columns={columns}
+                  data={boardMngList}
+                  pagination={paginationInfo}
+                  onPageChange={(page) => setCurrentPage(page)}
+                  loading={loading}
+                />
               </MDBox>
             </Card>
           </Grid>
         </Grid>
       </MDBox>
 
+      {/* 등록/수정 Dialog - React Hook Form + Zod */}
       <Dialog open={dialogOpen} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
         <DialogTitle>{dialogMode === "add" ? "게시판 등록" : "게시판 수정"}</DialogTitle>
         <DialogContent>
           <MDBox component="form" pt={2}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="게시판명"
+                <FormTextField
+                  control={control}
                   name="boardMngName"
-                  value={formData.boardMngName}
-                  onChange={handleFormChange}
+                  label="게시판명"
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControl fullWidth>
-                  <InputLabel>게시판 유형</InputLabel>
-                  <Select
-                    name="boardMngType"
-                    value={formData.boardMngType}
-                    onChange={handleFormChange}
-                    label="게시판 유형"
-                  >
-                    {boardTypeList.map((type) => (
-                      <MenuItem key={type.CODE_CD} value={type.CODE_CD}>
-                        {type.CODE_NM}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
+                <FormSelect
+                  control={control}
+                  name="boardMngType"
+                  label="게시판 유형"
+                  options={boardTypeOptions}
+                />
               </Grid>
               <Grid item xs={6}>
-                <TextField
-                  select
-                  fullWidth
-                  label="사용 여부"
-                  name="isUse"
-                  value={formData.isUse}
-                  onChange={handleFormChange}
-                  SelectProps={{ native: true }}
-                >
-                  <option value="Y">사용</option>
-                  <option value="N">미사용</option>
-                </TextField>
+                <FormSelect control={control} name="isUse" label="사용 여부" options={USE_OPTIONS} />
               </Grid>
               <Grid item xs={6}>
-                <TextField
-                  select
-                  fullWidth
-                  label="첨부파일 여부"
-                  name="attachFileYn"
-                  value={formData.attachFileYn}
-                  onChange={handleFormChange}
-                  SelectProps={{ native: true }}
-                >
-                  <option value="Y">가능</option>
-                  <option value="N">불가</option>
-                </TextField>
+                <FormSelect control={control} name="attachFileYn" label="첨부파일 여부" options={YN_OPTIONS} />
               </Grid>
               <Grid item xs={6}>
-                <TextField
-                  select
-                  fullWidth
-                  label="답글 여부"
-                  name="replyYn"
-                  value={formData.replyYn}
-                  onChange={handleFormChange}
-                  SelectProps={{ native: true }}
-                >
-                  <option value="Y">가능</option>
-                  <option value="N">불가</option>
-                </TextField>
+                <FormSelect control={control} name="replyYn" label="답글 여부" options={YN_OPTIONS} />
               </Grid>
               <Grid item xs={6}>
-                <TextField
-                  select
-                  fullWidth
-                  label="댓글 여부"
-                  name="commentYn"
-                  value={formData.commentYn}
-                  onChange={handleFormChange}
-                  SelectProps={{ native: true }}
-                >
-                  <option value="Y">가능</option>
-                  <option value="N">불가</option>
-                </TextField>
+                <FormSelect control={control} name="commentYn" label="댓글 여부" options={YN_OPTIONS} />
               </Grid>
             </Grid>
           </MDBox>
@@ -409,7 +307,12 @@ function BoardManagement() {
           <MDButton onClick={handleCloseDialog} color="secondary">
             취소
           </MDButton>
-          <MDButton onClick={handleSubmit} color="info" variant="gradient">
+          <MDButton
+            onClick={handleSubmit(onSubmit)}
+            color="info"
+            variant="gradient"
+            disabled={isSubmitting}
+          >
             {dialogMode === "add" ? "등록" : "수정"}
           </MDButton>
         </DialogActions>

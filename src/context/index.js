@@ -1,124 +1,47 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+ * Material Dashboard UI Context → Zustand 브릿지
+ *
+ * 기존 17개 파일이 사용하는 API를 유지하면서 내부를 Zustand로 교체
+ * - useMaterialUIController() → [state, noop] 반환 (dispatch는 미사용)
+ * - setMiniSidenav(dispatch, value) → useUIStore.getState().setMiniSidenav(value)
+ * - MaterialUIControllerProvider → 단순 children 패스스루 (Provider 불필요)
+ */
+import useUIStore from "stores/useUIStore";
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-/**
-  This file is used for controlling the global states of the components,
-  you can customize the states for the different components here.
-*/
-
-import { createContext, useContext, useReducer, useMemo } from "react";
-
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// Material Dashboard 2 React main context
-const MaterialUI = createContext();
-
-// Setting custom name for the context which is visible on react dev tools
-MaterialUI.displayName = "MaterialUIContext";
-
-// Material Dashboard 2 React reducer
-function reducer(state, action) {
-  switch (action.type) {
-    case "MINI_SIDENAV": {
-      return { ...state, miniSidenav: action.value };
-    }
-    case "TRANSPARENT_SIDENAV": {
-      return { ...state, transparentSidenav: action.value };
-    }
-    case "WHITE_SIDENAV": {
-      return { ...state, whiteSidenav: action.value };
-    }
-    case "SIDENAV_COLOR": {
-      return { ...state, sidenavColor: action.value };
-    }
-    case "TRANSPARENT_NAVBAR": {
-      return { ...state, transparentNavbar: action.value };
-    }
-    case "FIXED_NAVBAR": {
-      return { ...state, fixedNavbar: action.value };
-    }
-    case "OPEN_CONFIGURATOR": {
-      return { ...state, openConfigurator: action.value };
-    }
-    case "DIRECTION": {
-      return { ...state, direction: action.value };
-    }
-    case "LAYOUT": {
-      return { ...state, layout: action.value };
-    }
-    case "DARKMODE": {
-      return { ...state, darkMode: action.value };
-    }
-    default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
-    }
-  }
-}
-
-// Material Dashboard 2 React context provider
-function MaterialUIControllerProvider({ children }) {
-  const initialState = {
-    miniSidenav: false,
-    transparentSidenav: false,
-    whiteSidenav: false,
-    sidenavColor: "info",
-    transparentNavbar: true,
-    fixedNavbar: true,
-    openConfigurator: false,
-    direction: "ltr",
-    layout: "dashboard",
-    darkMode: false,
-  };
-
-  const [controller, dispatch] = useReducer(reducer, initialState);
-
-  const value = useMemo(() => [controller, dispatch], [controller, dispatch]);
-
-  return <MaterialUI.Provider value={value}>{children}</MaterialUI.Provider>;
-}
-
-// Material Dashboard 2 React custom hook for using context
+// 기존 컴포넌트가 [controller, dispatch] 패턴으로 사용
+// dispatch는 더 이상 필요 없지만 호환성을 위해 noop 반환
 function useMaterialUIController() {
-  const context = useContext(MaterialUI);
-
-  if (!context) {
-    throw new Error(
-      "useMaterialUIController should be used inside the MaterialUIControllerProvider."
-    );
-  }
-
-  return context;
+  const state = useUIStore();
+  return [state, null];
 }
 
-// Typechecking props for the MaterialUIControllerProvider
-MaterialUIControllerProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+// Provider는 Zustand에서 불필요하지만 기존 코드 호환을 위해 유지
+function MaterialUIControllerProvider({ children }) {
+  return children;
+}
 
-// Context module functions
-const setMiniSidenav = (dispatch, value) => dispatch({ type: "MINI_SIDENAV", value });
-const setTransparentSidenav = (dispatch, value) => dispatch({ type: "TRANSPARENT_SIDENAV", value });
-const setWhiteSidenav = (dispatch, value) => dispatch({ type: "WHITE_SIDENAV", value });
-const setSidenavColor = (dispatch, value) => dispatch({ type: "SIDENAV_COLOR", value });
-const setTransparentNavbar = (dispatch, value) => dispatch({ type: "TRANSPARENT_NAVBAR", value });
-const setFixedNavbar = (dispatch, value) => dispatch({ type: "FIXED_NAVBAR", value });
-const setOpenConfigurator = (dispatch, value) => dispatch({ type: "OPEN_CONFIGURATOR", value });
-const setDirection = (dispatch, value) => dispatch({ type: "DIRECTION", value });
-const setLayout = (dispatch, value) => dispatch({ type: "LAYOUT", value });
-const setDarkMode = (dispatch, value) => dispatch({ type: "DARKMODE", value });
+// Setter 함수들: 기존 시그니처 (dispatch, value) 유지
+// dispatch는 무시하고 Zustand store를 직접 업데이트
+const setMiniSidenav = (_dispatch, value) =>
+  useUIStore.getState().setMiniSidenav(value);
+const setTransparentSidenav = (_dispatch, value) =>
+  useUIStore.getState().setTransparentSidenav(value);
+const setWhiteSidenav = (_dispatch, value) =>
+  useUIStore.getState().setWhiteSidenav(value);
+const setSidenavColor = (_dispatch, value) =>
+  useUIStore.getState().setSidenavColor(value);
+const setTransparentNavbar = (_dispatch, value) =>
+  useUIStore.getState().setTransparentNavbar(value);
+const setFixedNavbar = (_dispatch, value) =>
+  useUIStore.getState().setFixedNavbar(value);
+const setOpenConfigurator = (_dispatch, value) =>
+  useUIStore.getState().setOpenConfigurator(value);
+const setDirection = (_dispatch, value) =>
+  useUIStore.getState().setDirection(value);
+const setLayout = (_dispatch, value) =>
+  useUIStore.getState().setLayout(value);
+const setDarkMode = (_dispatch, value) =>
+  useUIStore.getState().setDarkMode(value);
 
 export {
   MaterialUIControllerProvider,
