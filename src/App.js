@@ -210,10 +210,12 @@ export default function App() {
             </>
           )}
           {layout === "vr" && <Configurator />}
-          <Routes>
-            {getRoutes(routes)}
-            <Route path="*" element={<Navigate to="/dashboard" />} />
-          </Routes>
+          <Suspense fallback={<MDBox display="flex" justifyContent="center" alignItems="center" minHeight="60vh">Loading...</MDBox>}>
+            <Routes>
+              {getRoutes(routes)}
+              <Route path="*" element={<Navigate to="/dashboard" />} />
+            </Routes>
+          </Suspense>
         </ThemeProvider>
       )}
     </QueryClientProvider>

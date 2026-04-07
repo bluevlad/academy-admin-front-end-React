@@ -27,9 +27,9 @@ export const getLectureReplyDetail = async (params) => {
 };
 
 // 강의 후기 삭제
-export const deleteLectureReply = async (data) => {
+export const deleteLectureReply = async (params) => {
   try {
-    const response = await apiClient.delete("/lectureReply/delete", { data });
+    const response = await apiClient.delete("/lectureReply/delete", { params });
     return response.data;
   } catch (error) {
     console.error("Error deleting lecture reply:", error);

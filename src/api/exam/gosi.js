@@ -4,7 +4,7 @@ import apiClient from "shared/api/client";
 
 export const getSampleUserList = async (params) => {
   try {
-    const response = await apiClient.get("/getSampleUserList", { params });
+    const response = await apiClient.get("/gosi/getSampleUserList", { params });
     return response.data;
   } catch (error) {
     throw error;
@@ -13,7 +13,7 @@ export const getSampleUserList = async (params) => {
 
 export const getSampleUserDetail = async (params) => {
   try {
-    const response = await apiClient.get("/getSampleUserDetail", { params });
+    const response = await apiClient.get("/gosi/getSampleUserDetail", { params });
     return response.data;
   } catch (error) {
     throw error;
@@ -22,7 +22,7 @@ export const getSampleUserDetail = async (params) => {
 
 export const insertSampleUser = async (data) => {
   try {
-    const response = await apiClient.post("/insertSampleUser", new URLSearchParams(data));
+    const response = await apiClient.post("/gosi/insertSampleUser", new URLSearchParams(data));
     return response.data;
   } catch (error) {
     throw error;
@@ -31,7 +31,7 @@ export const insertSampleUser = async (data) => {
 
 export const updateSampleUser = async (data) => {
   try {
-    const response = await apiClient.post("/updateSampleUser", new URLSearchParams(data));
+    const response = await apiClient.post("/gosi/updateSampleUser", new URLSearchParams(data));
     return response.data;
   } catch (error) {
     throw error;
@@ -40,7 +40,7 @@ export const updateSampleUser = async (data) => {
 
 export const deleteSampleUser = async (data) => {
   try {
-    const response = await apiClient.post("/deleteSampleUser", new URLSearchParams(data));
+    const response = await apiClient.post("/gosi/deleteSampleUser", new URLSearchParams(data));
     return response.data;
   } catch (error) {
     throw error;
