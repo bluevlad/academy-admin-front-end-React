@@ -205,13 +205,16 @@ src/
 - [x] 공통 폼 필드 생성 (React Hook Form + Zod + FormTextField/FormSelect/FormSwitch)
 - [x] TipTap 리치 에디터 공통 컴포넌트 (react-quill 대체)
 - [x] i18n 설정 완료 (한국어/영어 로케일)
-- [ ] 게시판, 강의, 회원 관리 페이지에 공통 컴포넌트 적용
+- [x] 게시판 목록/관리 페이지에 공통 컴포넌트 적용 (대표 패턴)
 
-### M3: 전체 페이지 전환 완료 (Phase 2 후반)
-- [ ] 나머지 feature 모듈에 공통 컴포넌트 적용
-- [ ] MD* 래퍼 컴포넌트 정리 + MUI 6 업그레이드
-- [ ] Context → Zustand 점진적 전환 (17개 파일)
-- [ ] 다크모드/RTL 테마 정상 동작
+### M3: 전체 페이지 전환 완료 (Phase 2 후반) - 2026-04-07 인프라 완료
+- [x] MUI 5.12 → MUI 6.5 업그레이드
+- [x] Context → Zustand 브릿지 패턴 적용 (17개 파일 무변경 호환)
+- [x] 게시판 목록: ServerDataTable (TanStack Table 8) 적용
+- [x] 게시판 관리: React Hook Form + Zod 적용
+- [ ] 나머지 feature 페이지에 공통 컴포넌트 순차 적용
+- [ ] MD* 래퍼 컴포넌트 점진적 정리
+- [ ] 다크모드/RTL 테마 정상 동작 검증
 
 ---
 
