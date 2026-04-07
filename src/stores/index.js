@@ -1,44 +1,32 @@
-import { toJS } from "mobx";
-import { MobXProviderContext, observer } from "mobx-react";
-import { useContext } from "react";
+/**
+ * Zustand Store - 기존 MobX를 대체
+ * 현재는 Auth Store만 정의, UI Store는 context/index.js에서 관리 중
+ * 향후 Context → Zustand 전환 시 useUIStore 추가 예정
+ */
+import { create } from "zustand";
 
-// Store 클래스들 - 기본 구현
-class CommonStore {}
-class AuthStore {}
-class MenuStore {}
-class TableDndStore {}
-class MyApprovalBoxStore {}
-class ApprovalBatchStore {}
-class FavoriteDocumentBoxStore {}
-class SearchBarStore {}
-class SettingManageStore {}
-class RcvGroupSearchBarStore {}
-class BusinessViewStore {}
-class AdminStore {}
-class DocumentStore {}
-class BusinessTripPlanStore {}
+/**
+ * 인증 상태 관리 Store
+ */
+export const useAuthStore = create((set) => ({
+  token: sessionStorage.getItem("token"),
+  user: JSON.parse(sessionStorage.getItem("userProfile") || "null"),
+  isAuthenticated: !!sessionStorage.getItem("token"),
 
-const RootStore = {
-  commonStore: new CommonStore(),
-  authStore: new AuthStore(),
-  menuStore: new MenuStore(),
-  tableDndStore: new TableDndStore(),
-  myApprovalBoxStore: new MyApprovalBoxStore(),
-  approvalBatchStore: new ApprovalBatchStore(),
-  favoriteDocumentBoxStore: new FavoriteDocumentBoxStore(),
-  searchBarStore: new SearchBarStore(),
-  settingManageStore: new SettingManageStore(),
-  rcvGroupSearchBarStore: new RcvGroupSearchBarStore(),
-  businessViewStore: new BusinessViewStore(),
-  adminStore: new AdminStore(),
-  documentStore: new DocumentStore(),
-  businessTripPlanStore: new BusinessTripPlanStore(),
-};
+  setAuth: (token, user) => {
+    sessionStorage.setItem("token", token);
+    sessionStorage.setItem("userProfile", JSON.stringify(user));
+    set({ token, user, isAuthenticated: true });
+  },
 
-function useStores() {
-  return useContext(MobXProviderContext);
-}
-
-export { RootStore };
-export default useStores;
-export { observer, toJS };
+  clearAuth: () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userProfile");
+    localStorage.removeItem("access-token");
+    localStorage.removeItem("refresh-token");
+    localStorage.removeItem("x-user-id");
+    localStorage.removeItem("x-company-code");
+    localStorage.removeItem("x-user-role");
+    set({ token: null, user: null, isAuthenticated: false });
+  },
+}));

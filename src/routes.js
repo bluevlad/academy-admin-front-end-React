@@ -1,116 +1,88 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+ * Material Dashboard 2 React - Routes Configuration
+ * Lazy loading 적용으로 초기 번들 크기 최소화
+ */
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-/** 
-  All of the routes for the Material Dashboard 2 React are added here,
-  You can add a new route, customize the routes and delete the routes here.
-
-  Once you add a new route on this file it will be visible automatically on
-  the Sidenav.
-
-  For adding a new route you can follow the existing routes in the routes array.
-  1. The `type` key with the `collapse` value is used for a route.
-  2. The `type` key with the `title` value is used for a title inside the Sidenav. 
-  3. The `type` key with the `divider` value is used for a divider between Sidenav items.
-  4. The `name` key is used for the name of the route on the Sidenav.
-  5. The `key` key is used for the key of the route (It will help you with the key prop inside a loop).
-  6. The `icon` key is used for the icon of the route on the Sidenav, you have to add a node.
-  7. The `collapse` key is used for making a collapsible item on the Sidenav that has other routes
-  inside (nested routes), you need to pass the nested routes inside an array as a value for the `collapse` key.
-  8. The `route` key is used to store the route location which is used for the react router.
-  9. The `href` key is used to store the external links location.
-  10. The `title` key is only for the item with the type of `title` and its used for the title text on the Sidenav.
-  10. The `component` key is used to store the component of its route.
-*/
-
-// Material Dashboard 2 React layouts
-import Dashboard from "layouts/dashboard";
-import Tables from "layouts/tables";
-import Billing from "layouts/billing";
-import Member from "layouts/member";
-import Exam from "layouts/exam";
-import GosiList from "layouts/exam/gosi";
-import GosiDetail from "layouts/exam/gosi/detail";
-import MouiList from "layouts/exam/moui";
-import MouiDetail from "layouts/exam/moui/detail";
-import Menu from "layouts/menu";
-import Profile from "layouts/profile";
-// Board Components
-import Board from "layouts/board";
-import BoardAll from "layouts/board/boardAll";
-import BoardManagement from "layouts/board/boardManagement";
-
-import BoardViewManagement from "layouts/board/boardViewManagement";
-// Admin Components
-import AdminCode from "layouts/admin/code";
-import AdminAuth from "layouts/admin/auth";
-import AdminMenu from "layouts/admin/menu";
-import AdminBanner from "layouts/admin/banner";
-import UserMenu from "layouts/menu"; // Alias existing Menu layout as UserMenu
-import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
-
-// Book Components
-import BookList from "layouts/book";
-import BookWrite from "layouts/book/write";
-
-// Coop Components
-import CoopList from "layouts/coop";
-import CoopBoardList from "layouts/coop/board";
-import CoopBoardWrite from "layouts/coop/board/write";
-import CoopOrderList from "layouts/coop/order";
-
-// Counsel Components
-import CounselList from "layouts/counsel";
-import CounselWrite from "layouts/counsel/write";
-import CounselDetail from "layouts/counsel/detail";
-
-// D-Day Components
-import DdayList from "layouts/dday";
-import DdayDetail from "layouts/dday/detail";
-
-// New Components (Event, Note, Popup, Stat, Survey)
-import EventList from "layouts/event";
-import EventDetail from "layouts/event/detail";
-import NoteList from "layouts/note";
-import NoteDetail from "layouts/note/detail";
-import PopupList from "layouts/popup";
-import PopupDetail from "layouts/popup/detail";
-import StatList from "layouts/stat";
-import SurveyList from "layouts/survey";
-
-// Manage Components
-import CategorySaleList from "layouts/manage/categorySale";
-import LectureYearList from "layouts/manage/lectureYear";
-import TeacherCalculateList from "layouts/manage/teacherCalculate";
-
-// Order Components
-import ProductOrderList from "layouts/order/productOrder";
-import CouponList from "layouts/order/coupon";
-import FreeOrderList from "layouts/order/freeOrder";
-
-// Lecture Components
-import OnlineLectureList from "layouts/lecture/online";
-import OnlineLectureDetail from "layouts/lecture/online/detail";
-import OfflineLectureList from "layouts/lecture/offline";
-import OfflineLectureDetail from "layouts/lecture/offline/detail";
-import LectureReplyList from "layouts/lecture/reply";
-import LectureReplyDetail from "layouts/lecture/reply/detail";
+import { lazy } from "react";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+
+// Lazy-loaded layouts
+const Dashboard = lazy(() => import("layouts/dashboard"));
+const Tables = lazy(() => import("layouts/tables"));
+const Billing = lazy(() => import("layouts/billing"));
+const Member = lazy(() => import("layouts/member"));
+const Exam = lazy(() => import("layouts/exam"));
+const GosiList = lazy(() => import("layouts/exam/gosi"));
+const GosiDetail = lazy(() => import("layouts/exam/gosi/detail"));
+const MouiList = lazy(() => import("layouts/exam/moui"));
+const MouiDetail = lazy(() => import("layouts/exam/moui/detail"));
+const Menu = lazy(() => import("layouts/menu"));
+const Profile = lazy(() => import("layouts/profile"));
+
+// Board
+const Board = lazy(() => import("layouts/board"));
+const BoardAll = lazy(() => import("layouts/board/boardAll"));
+const BoardManagement = lazy(() => import("layouts/board/boardManagement"));
+const BoardViewManagement = lazy(() => import("layouts/board/boardViewManagement"));
+
+// Admin
+const AdminCode = lazy(() => import("layouts/admin/code"));
+const AdminAuth = lazy(() => import("layouts/admin/auth"));
+const AdminMenu = lazy(() => import("layouts/admin/menu"));
+const AdminBanner = lazy(() => import("layouts/admin/banner"));
+
+// Auth
+const SignIn = lazy(() => import("layouts/authentication/sign-in"));
+const SignUp = lazy(() => import("layouts/authentication/sign-up"));
+
+// Book
+const BookList = lazy(() => import("layouts/book"));
+const BookWrite = lazy(() => import("layouts/book/write"));
+
+// Coop
+const CoopList = lazy(() => import("layouts/coop"));
+const CoopBoardList = lazy(() => import("layouts/coop/board"));
+const CoopBoardWrite = lazy(() => import("layouts/coop/board/write"));
+const CoopOrderList = lazy(() => import("layouts/coop/order"));
+
+// Counsel
+const CounselList = lazy(() => import("layouts/counsel"));
+const CounselWrite = lazy(() => import("layouts/counsel/write"));
+const CounselDetail = lazy(() => import("layouts/counsel/detail"));
+
+// D-Day
+const DdayList = lazy(() => import("layouts/dday"));
+const DdayDetail = lazy(() => import("layouts/dday/detail"));
+
+// Service
+const EventList = lazy(() => import("layouts/event"));
+const EventDetail = lazy(() => import("layouts/event/detail"));
+const NoteList = lazy(() => import("layouts/note"));
+const NoteDetail = lazy(() => import("layouts/note/detail"));
+const PopupList = lazy(() => import("layouts/popup"));
+const PopupDetail = lazy(() => import("layouts/popup/detail"));
+const StatList = lazy(() => import("layouts/stat"));
+const SurveyList = lazy(() => import("layouts/survey"));
+
+// Manage
+const CategorySaleList = lazy(() => import("layouts/manage/categorySale"));
+const LectureYearList = lazy(() => import("layouts/manage/lectureYear"));
+const TeacherCalculateList = lazy(() => import("layouts/manage/teacherCalculate"));
+
+// Order
+const ProductOrderList = lazy(() => import("layouts/order/productOrder"));
+const CouponList = lazy(() => import("layouts/order/coupon"));
+const FreeOrderList = lazy(() => import("layouts/order/freeOrder"));
+
+// Lecture
+const OnlineLectureList = lazy(() => import("layouts/lecture/online"));
+const OnlineLectureDetail = lazy(() => import("layouts/lecture/online/detail"));
+const OfflineLectureList = lazy(() => import("layouts/lecture/offline"));
+const OfflineLectureDetail = lazy(() => import("layouts/lecture/offline/detail"));
+const LectureReplyList = lazy(() => import("layouts/lecture/reply"));
+const LectureReplyDetail = lazy(() => import("layouts/lecture/reply/detail"));
 
 const routes = [
   {
@@ -145,7 +117,6 @@ const routes = [
         route: "/board/management",
         component: <BoardManagement />,
       },
-
       {
         name: "게시판 뷰 관리",
         key: "board-view-management",
@@ -401,7 +372,7 @@ const routes = [
   {
     key: "coop-board-detail",
     route: "/coop/board/detail",
-    component: <CoopBoardWrite />, // Reuse write component for detail/edit
+    component: <CoopBoardWrite />,
   },
   {
     type: "collapse",
@@ -489,7 +460,7 @@ const routes = [
         name: "사용자 메뉴관리",
         key: "user-menu-management",
         route: "/admin/user-menu",
-        component: <UserMenu />,
+        component: <Menu />,
       },
       {
         name: "배너관리",
