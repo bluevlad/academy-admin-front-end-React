@@ -199,17 +199,19 @@ src/
 - [x] MobX 제거, Zustand 도입 (useAuthStore)
 - [x] 불필요 패키지 정리 (moment-timezone, qs 등)
 
-### M2: 핵심 페이지 리뉴얼 (Phase 2 전반)
+### M2: 핵심 페이지 리뉴얼 (Phase 2 전반) - 2026-04-07 공통 컴포넌트 완료
 - [x] 라우팅 lazy loading 적용 (50개+ 컴포넌트, 초기 번들 60% 감소)
-- [ ] DataTable 공통 컴포넌트 (TanStack Table 8)
-- [ ] 폼 컴포넌트 공통화 (React Hook Form + Zod)
-- [ ] 게시판, 강의, 회원 관리 페이지 전환 완료
+- [x] ServerDataTable 공통 컴포넌트 생성 (TanStack Table 8, 서버사이드 페이지네이션)
+- [x] 공통 폼 필드 생성 (React Hook Form + Zod + FormTextField/FormSelect/FormSwitch)
+- [x] TipTap 리치 에디터 공통 컴포넌트 (react-quill 대체)
+- [x] i18n 설정 완료 (한국어/영어 로케일)
+- [ ] 게시판, 강의, 회원 관리 페이지에 공통 컴포넌트 적용
 
 ### M3: 전체 페이지 전환 완료 (Phase 2 후반)
-- [ ] 나머지 feature 모듈 전환
-- [ ] MD* 래퍼 컴포넌트 완전 제거
+- [ ] 나머지 feature 모듈에 공통 컴포넌트 적용
+- [ ] MD* 래퍼 컴포넌트 정리 + MUI 6 업그레이드
+- [ ] Context → Zustand 점진적 전환 (17개 파일)
 - [ ] 다크모드/RTL 테마 정상 동작
-- [ ] i18n 적용
 
 ---
 
