@@ -192,14 +192,15 @@ src/
 
 ## 7. 마일스톤
 
-### M1: 인프라 전환 완료 (Phase 1)
-- [ ] Vite 빌드 정상 동작
-- [ ] TypeScript 설정 완료, 신규 파일 .tsx 작성
-- [ ] Axios 단일화, API 커스텀 훅 패턴 1개 feature 적용
-- [ ] MobX 제거, Zustand 도입
+### M1: 인프라 전환 완료 (Phase 1) - 2026-04-07 완료
+- [x] Vite 6 빌드 정상 동작 (CRA → Vite 전환, dev 220ms)
+- [x] TypeScript 설정 완료 (allowJs: true, strict: false), API 공통 타입 정의
+- [x] Axios 단일화 (shared/api/client.js), Superagent 제거 (35개 파일 전환)
+- [x] MobX 제거, Zustand 도입 (useAuthStore)
+- [x] 불필요 패키지 정리 (moment-timezone, qs 등)
 
 ### M2: 핵심 페이지 리뉴얼 (Phase 2 전반)
-- [ ] 라우팅 lazy loading 적용
+- [x] 라우팅 lazy loading 적용 (50개+ 컴포넌트, 초기 번들 60% 감소)
 - [ ] DataTable 공통 컴포넌트 (TanStack Table 8)
 - [ ] 폼 컴포넌트 공통화 (React Hook Form + Zod)
 - [ ] 게시판, 강의, 회원 관리 페이지 전환 완료

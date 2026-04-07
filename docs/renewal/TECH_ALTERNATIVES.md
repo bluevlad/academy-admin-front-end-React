@@ -203,6 +203,9 @@
 | 날짜 | 영역 | 변경 전 | 변경 후 | 사유 |
 |------|------|--------|--------|------|
 | 2026-04-07 | 빌드 도구 | Vite 8 (최초 설치) | Vite 6 | Vite 8은 Rolldown 기반으로 .js 파일의 JSX 파싱 미지원. Vite 6(esbuild 기반)에서 커스텀 플러그인(`jsx-in-js`)으로 CRA 호환 해결 |
+| 2026-04-07 | HTTP 클라이언트 | Superagent + Axios 혼용 | Axios 단일 (shared/api/client.js) | 35개 파일 전환 완료. 인터셉터 통합으로 인증 헤더 자동 주입 |
+| 2026-04-07 | 날짜 라이브러리 | moment-timezone (300KB) | 제거 (미사용 확인) | request.js 삭제로 moment 참조 소멸. 향후 필요 시 dayjs 도입 |
+| 2026-04-07 | 상태관리 | MobX (16KB, 미사용) | Zustand (~1KB) + 기존 Context 유지 | MobX 14개 빈 Store 삭제. Context→Zustand 전환은 점진적 진행 |
 
 ---
 
