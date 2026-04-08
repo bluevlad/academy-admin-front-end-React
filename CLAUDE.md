@@ -33,10 +33,10 @@ docker compose up -d --build   # Docker 컨테이너
 
 ## 연동 백엔드
 
-- **프로젝트**: `../academy-admin-back-end-JavaSpring/`
+- **프로젝트**: `../backend/`
 - **API**: `http://localhost:9001/api`
 - **DB**: MariaDB 172.30.1.72:3306/acm_basic (academyAdmin)
-- **CLAUDE.md**: `../academy-admin-back-end-JavaSpring/CLAUDE.md`
+- **CLAUDE.md**: `../backend/CLAUDE.md`
 
 프론트에서 필요한 API가 백엔드에 없으면, 백엔드 프로젝트에서 먼저 구현 후 프론트 연동.
 

@@ -103,7 +103,7 @@ npm start
 yarn start
 ```
 
-브라우저에서 [http://www.unmong.com:3000](http://www.unmong.com:3000)으로 접속합니다.
+브라우저에서 [http://academy.unmong.com:3000](http://academy.unmong.com:3000)으로 접속합니다.
 
 ### 빌드
 
@@ -312,9 +312,9 @@ import MDTypography from "components/MDTypography";
 ```
 ## Copyright
 
-<a href="http://www.unmong.com"><img src="assets/img/UM_CI.png" alt="UM Systems" width="10%"></a>
+<a href="https://academy.unmong.com"><img src="assets/img/UM_CI.png" alt="UM Systems" width="10%"></a>
 
-**Copyright (c) 2021 <a href="http://www.unmong.com">운몽시스템즈(UM Systems)</a>. All rights reserved.**
+**Copyright (c) 2021 <a href="https://academy.unmong.com">운몽시스템즈(UM Systems)</a>. All rights reserved.**
 
 이 소프트웨어는 운몽시스템즈(UM Systems)의 독점 소유이며, 저작권법에 의해 보호됩니다.
 본 소프트웨어의 무단 복제, 배포, 수정, 재배포는 법적으로 금지되어 있습니다.

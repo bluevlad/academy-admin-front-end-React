@@ -19,6 +19,7 @@ function jsxInJsPlugin() {
 }
 
 export default defineConfig({
+  base: "/admin/",
   plugins: [jsxInJsPlugin(), react()],
   resolve: {
     alias: {
@@ -49,6 +50,7 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
+    allowedHosts: ["academy.unmong.com"],
     watch: {
       usePolling: true,
     },
