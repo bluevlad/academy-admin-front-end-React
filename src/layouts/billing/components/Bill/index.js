@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -20,9 +5,12 @@ import PropTypes from "prop-types";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 // Material Dashboard 2 React context
 import { useMaterialUIController } from "context";
@@ -32,7 +20,7 @@ function Bill({ name, company, email, vat, noGutter }) {
   const { darkMode } = controller;
 
   return (
-    <MDBox
+    <Box
       component="li"
       display="flex"
       justifyContent="space-between"
@@ -43,53 +31,53 @@ function Bill({ name, company, email, vat, noGutter }) {
       mb={noGutter ? 0 : 1}
       mt={2}
     >
-      <MDBox width="100%" display="flex" flexDirection="column">
-        <MDBox
+      <Box width="100%" display="flex" flexDirection="column">
+        <Box
           display="flex"
           justifyContent="space-between"
           alignItems={{ xs: "flex-start", sm: "center" }}
           flexDirection={{ xs: "column", sm: "row" }}
           mb={2}
         >
-          <MDTypography variant="button" fontWeight="medium" textTransform="capitalize">
+          <Typography variant="button" fontWeight="medium" textTransform="capitalize">
             {name}
-          </MDTypography>
+          </Typography>
 
-          <MDBox display="flex" alignItems="center" mt={{ xs: 2, sm: 0 }} ml={{ xs: -1.5, sm: 0 }}>
-            <MDBox mr={1}>
-              <MDButton variant="text" color="error">
+          <Box display="flex" alignItems="center" mt={{ xs: 2, sm: 0 }} ml={{ xs: -1.5, sm: 0 }}>
+            <Box mr={1}>
+              <Button variant="text" color="error">
                 <Icon>delete</Icon>&nbsp;delete
-              </MDButton>
-            </MDBox>
-            <MDButton variant="text" color={darkMode ? "white" : "dark"}>
+              </Button>
+            </Box>
+            <Button variant="text" color={darkMode ? "white" : "dark"}>
               <Icon>edit</Icon>&nbsp;edit
-            </MDButton>
-          </MDBox>
-        </MDBox>
-        <MDBox mb={1} lineHeight={0}>
-          <MDTypography variant="caption" color="text">
+            </Button>
+          </Box>
+        </Box>
+        <Box mb={1} lineHeight={0}>
+          <Typography variant="caption" color="text">
             Company Name:&nbsp;&nbsp;&nbsp;
-            <MDTypography variant="caption" fontWeight="medium" textTransform="capitalize">
+            <Typography variant="caption" fontWeight="medium" textTransform="capitalize">
               {company}
-            </MDTypography>
-          </MDTypography>
-        </MDBox>
-        <MDBox mb={1} lineHeight={0}>
-          <MDTypography variant="caption" color="text">
+            </Typography>
+          </Typography>
+        </Box>
+        <Box mb={1} lineHeight={0}>
+          <Typography variant="caption" color="text">
             Email Address:&nbsp;&nbsp;&nbsp;
-            <MDTypography variant="caption" fontWeight="medium">
+            <Typography variant="caption" fontWeight="medium">
               {email}
-            </MDTypography>
-          </MDTypography>
-        </MDBox>
-        <MDTypography variant="caption" color="text">
+            </Typography>
+          </Typography>
+        </Box>
+        <Typography variant="caption" color="text">
           VAT Number:&nbsp;&nbsp;&nbsp;
-          <MDTypography variant="caption" fontWeight="medium">
+          <Typography variant="caption" fontWeight="medium">
             {vat}
-          </MDTypography>
-        </MDTypography>
-      </MDBox>
-    </MDBox>
+          </Typography>
+        </Typography>
+      </Box>
+    </Box>
   );
 }
 

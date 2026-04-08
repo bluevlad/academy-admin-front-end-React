@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -21,8 +6,10 @@ import Card from "@mui/material/Card";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 
 // Images
 import pattern from "assets/images/illustrations/pattern-tree.svg";
@@ -52,7 +39,7 @@ function MasterCard({ color, number, holder, expires }) {
         position: "relative",
       })}
     >
-      <MDBox
+      <Box
         position="absolute"
         top={0}
         left={0}
@@ -64,42 +51,42 @@ function MasterCard({ color, number, holder, expires }) {
           backgroundSize: "cover",
         }}
       />
-      <MDBox position="relative" zIndex={2} p={2}>
-        <MDBox color="white" p={1} lineHeight={0} display="inline-block">
+      <Box position="relative" zIndex={2} p={2}>
+        <Box color="white" p={1} lineHeight={0} display="inline-block">
           <Icon fontSize="default">wifi</Icon>
-        </MDBox>
-        <MDTypography variant="h5" color="white" fontWeight="medium" sx={{ mt: 3, mb: 5, pb: 1 }}>
+        </Box>
+        <Typography variant="h5" color="white" fontWeight="medium" sx={{ mt: 3, mb: 5, pb: 1 }}>
           {num1}&nbsp;&nbsp;&nbsp;{num2}&nbsp;&nbsp;&nbsp;{num3}&nbsp;&nbsp;&nbsp;{num4}
-        </MDTypography>
-        <MDBox display="flex" justifyContent="space-between" alignItems="center">
-          <MDBox display="flex" alignItems="center">
-            <MDBox mr={3} lineHeight={1}>
-              <MDTypography variant="button" color="white" fontWeight="regular" opacity={0.8}>
+        </Typography>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Box display="flex" alignItems="center">
+            <Box mr={3} lineHeight={1}>
+              <Typography variant="button" color="white" fontWeight="regular" opacity={0.8}>
                 Card Holder
-              </MDTypography>
-              <MDTypography
+              </Typography>
+              <Typography
                 variant="h6"
                 color="white"
                 fontWeight="medium"
                 textTransform="capitalize"
               >
                 {holder}
-              </MDTypography>
-            </MDBox>
-            <MDBox lineHeight={1}>
-              <MDTypography variant="button" color="white" fontWeight="regular" opacity={0.8}>
+              </Typography>
+            </Box>
+            <Box lineHeight={1}>
+              <Typography variant="button" color="white" fontWeight="regular" opacity={0.8}>
                 Expires
-              </MDTypography>
-              <MDTypography variant="h6" color="white" fontWeight="medium">
+              </Typography>
+              <Typography variant="h6" color="white" fontWeight="medium">
                 {expires}
-              </MDTypography>
-            </MDBox>
-          </MDBox>
-          <MDBox display="flex" justifyContent="flex-end" width="20%">
-            <MDBox component="img" src={masterCardLogo} alt="master card" width="60%" mt={1} />
-          </MDBox>
-        </MDBox>
-      </MDBox>
+              </Typography>
+            </Box>
+          </Box>
+          <Box display="flex" justifyContent="flex-end" width="20%">
+            <Box component="img" src={masterCardLogo} alt="master card" width="60%" mt={1} />
+          </Box>
+        </Box>
+      </Box>
     </Card>
   );
 }

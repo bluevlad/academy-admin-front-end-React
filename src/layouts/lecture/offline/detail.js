@@ -4,10 +4,14 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDInput from "components/MDInput";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import TextField from "@mui/material/TextField";
+
+import Button from "@mui/material/Button";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -92,28 +96,28 @@ function OfflineLectureDetail() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   {leccode ? "학원 강의 수정" : "학원 강의 등록"}
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={4} pb={3} px={3}>
+                </Typography>
+              </Box>
+              <Box pt={4} pb={3} px={3}>
                 <Grid container spacing={3}>
                   <Grid item xs={12} md={6}>
-                    <MDInput
+                    <TextField
                       label="강좌명"
                       name="subjectTitle"
                       value={formValues.subjectTitle}
@@ -122,7 +126,7 @@ function OfflineLectureDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} md={6}>
-                    <MDInput
+                    <TextField
                       label="강의설명"
                       name="subjectDesc"
                       value={formValues.subjectDesc}
@@ -131,7 +135,7 @@ function OfflineLectureDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} md={4}>
-                    <MDInput
+                    <TextField
                       label="직종 코드"
                       name="categoryCd"
                       value={formValues.categoryCd}
@@ -140,7 +144,7 @@ function OfflineLectureDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} md={4}>
-                    <MDInput
+                    <TextField
                       label="학습형태 코드"
                       name="learningCd"
                       value={formValues.learningCd}
@@ -149,7 +153,7 @@ function OfflineLectureDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} md={4}>
-                    <MDInput
+                    <TextField
                       label="과목 코드"
                       name="subjectSjtCd"
                       value={formValues.subjectSjtCd}
@@ -158,7 +162,7 @@ function OfflineLectureDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} md={4}>
-                    <MDInput
+                    <TextField
                       label="강사 ID/코드"
                       name="subjectTeacher"
                       value={formValues.subjectTeacher}
@@ -167,7 +171,7 @@ function OfflineLectureDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} md={4}>
-                    <MDInput
+                    <TextField
                       label="정가"
                       name="subjectPrice"
                       type="number"
@@ -177,7 +181,7 @@ function OfflineLectureDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} md={4}>
-                    <MDInput
+                    <TextField
                       label="판매가"
                       name="subjectRealPrice"
                       type="number"
@@ -187,7 +191,7 @@ function OfflineLectureDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} md={4}>
-                    <MDInput
+                    <TextField
                       label="수강인원"
                       name="subjectMemberCnt"
                       type="number"
@@ -197,7 +201,7 @@ function OfflineLectureDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} md={4}>
-                    <MDInput
+                    <TextField
                       label="사용여부 (Y/N)"
                       name="subjectIsuse"
                       value={formValues.subjectIsuse}
@@ -206,24 +210,24 @@ function OfflineLectureDetail() {
                     />
                   </Grid>
                 </Grid>
-                <MDBox mt={4} display="flex" justifyContent="flex-end">
-                  <MDButton variant="gradient" color="info" onClick={handleSubmit}>
+                <Box mt={4} display="flex" justifyContent="flex-end">
+                  <Button variant="contained" color="info" onClick={handleSubmit}>
                     저장
-                  </MDButton>
-                  <MDButton
+                  </Button>
+                  <Button
                     variant="outlined"
                     color="secondary"
                     onClick={() => navigate("/lecture/offline")}
                     sx={{ ml: 2 }}
                   >
                     취소
-                  </MDButton>
-                </MDBox>
-              </MDBox>
+                  </Button>
+                </Box>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

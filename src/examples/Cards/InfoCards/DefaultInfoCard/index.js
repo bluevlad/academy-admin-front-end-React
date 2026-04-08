@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // prop-types is library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -22,14 +7,16 @@ import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 
 function DefaultInfoCard({ color, icon, title, description, value }) {
   return (
     <Card>
-      <MDBox p={2} mx={3} display="flex" justifyContent="center">
-        <MDBox
+      <Box p={2} mx={3} display="flex" justifyContent="center">
+        <Box
           display="grid"
           justifyContent="center"
           alignItems="center"
@@ -39,27 +26,27 @@ function DefaultInfoCard({ color, icon, title, description, value }) {
           height="4rem"
           shadow="md"
           borderRadius="lg"
-          variant="gradient"
+          variant="contained"
         >
           <Icon fontSize="default">{icon}</Icon>
-        </MDBox>
-      </MDBox>
-      <MDBox pb={2} px={2} textAlign="center" lineHeight={1.25}>
-        <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
+        </Box>
+      </Box>
+      <Box pb={2} px={2} textAlign="center" lineHeight={1.25}>
+        <Typography variant="h6" fontWeight="medium" textTransform="capitalize">
           {title}
-        </MDTypography>
+        </Typography>
         {description && (
-          <MDTypography variant="caption" color="text" fontWeight="regular">
+          <Typography variant="caption" color="text" fontWeight="regular">
             {description}
-          </MDTypography>
+          </Typography>
         )}
         {description && !value ? null : <Divider />}
         {value && (
-          <MDTypography variant="h5" fontWeight="medium">
+          <Typography variant="h5" fontWeight="medium">
             {value}
-          </MDTypography>
+          </Typography>
         )}
-      </MDBox>
+      </Box>
     </Card>
   );
 }

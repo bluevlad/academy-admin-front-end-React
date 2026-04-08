@@ -6,9 +6,12 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -96,25 +99,25 @@ function GosiDetail() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   {rstNo ? "샘플 사용자 수정" : "샘플 사용자 등록"}
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={4} pb={3} px={3}>
+                </Typography>
+              </Box>
+              <Box pt={4} pb={3} px={3}>
                 <Grid container spacing={3}>
                   <Grid item xs={12} md={6}>
                     <TextField
@@ -179,36 +182,36 @@ function GosiDetail() {
                     </TextField>
                   </Grid>
                   <Grid item xs={12}>
-                    <MDBox display="flex" justifyContent="flex-end">
-                      <MDButton variant="gradient" color="info" onClick={handleSubmit}>
+                    <Box display="flex" justifyContent="flex-end">
+                      <Button variant="contained" color="info" onClick={handleSubmit}>
                         {rstNo ? "수정" : "등록"}
-                      </MDButton>
+                      </Button>
                       {rstNo && (
-                        <MDButton
-                          variant="gradient"
+                        <Button
+                          variant="contained"
                           color="error"
                           onClick={handleDelete}
                           sx={{ ml: 1 }}
                         >
                           삭제
-                        </MDButton>
+                        </Button>
                       )}
-                      <MDButton
+                      <Button
                         variant="outlined"
                         color="secondary"
                         onClick={() => navigate("/exam/gosi")}
                         sx={{ ml: 1 }}
                       >
                         취소
-                      </MDButton>
-                    </MDBox>
+                      </Button>
+                    </Box>
                   </Grid>
                 </Grid>
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

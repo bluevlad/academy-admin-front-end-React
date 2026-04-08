@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState, useEffect } from "react";
 
 // @mui material components
@@ -22,9 +7,12 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDBadge from "components/MDBadge";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Badge from "@mui/material/Badge";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -78,83 +66,83 @@ function Member() {
 
   const rows = memberList.map((member) => ({
     userId: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
+      <Typography variant="caption" color="text" fontWeight="medium">
         {member.userId}
-      </MDTypography>
+      </Typography>
     ),
     userName: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
+      <Typography variant="caption" color="text" fontWeight="medium">
         {member.userName}
-      </MDTypography>
+      </Typography>
     ),
     email: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
+      <Typography variant="caption" color="text" fontWeight="regular">
         {member.email}
-      </MDTypography>
+      </Typography>
     ),
     sex: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
+      <Typography variant="caption" color="text" fontWeight="medium">
         {member.sex === "M" ? "남성" : member.sex === "F" ? "여성" : "-"}
-      </MDTypography>
+      </Typography>
     ),
     birthDay: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
+      <Typography variant="caption" color="text" fontWeight="regular">
         {member.birthDay}
-      </MDTypography>
+      </Typography>
     ),
     userRole: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
+      <Typography variant="caption" color="text" fontWeight="medium">
         {member.userRole}
-      </MDTypography>
+      </Typography>
     ),
     status: (
-      <MDBox ml={-1}>
-        <MDBadge
+      <Box ml={-1}>
+        <Badge
           badgeContent={member.isUse === "Y" ? "활성" : "비활성"}
           color={member.isUse === "Y" ? "success" : "dark"}
-          variant="gradient"
+          variant="contained"
           size="sm"
         />
-      </MDBox>
+      </Box>
     ),
     regDt: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
+      <Typography variant="caption" color="text" fontWeight="regular">
         {member.regDt ? new Date(member.regDt).toLocaleDateString("ko-KR") : "-"}
-      </MDTypography>
+      </Typography>
     ),
     action: (
-      <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+      <Typography component="a" href="#" variant="caption" color="text" fontWeight="medium">
         Edit
-      </MDTypography>
+      </Typography>
     ),
   }));
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   회원 목록
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
+                </Typography>
+              </Box>
+              <Box pt={3}>
                 {loading ? (
-                  <MDBox p={3} textAlign="center">
-                    <MDTypography variant="caption">로딩 중...</MDTypography>
-                  </MDBox>
+                  <Box p={3} textAlign="center">
+                    <Typography variant="caption">로딩 중...</Typography>
+                  </Box>
                 ) : (
                   <>
                     <DataTable
@@ -165,14 +153,14 @@ function Member() {
                       noEndBorder
                     />
                     {paginationInfo && (
-                      <MDBox
+                      <Box
                         p={3}
                         display="flex"
                         justifyContent="space-between"
                         alignItems="center"
                       >
-                        <MDBox>
-                          <MDTypography variant="caption" color="text">
+                        <Box>
+                          <Typography variant="caption" color="text">
                             전체 {paginationInfo.totalRecordCount}건 중{" "}
                             {paginationInfo.firstRecordIndex + 1} -{" "}
                             {Math.min(
@@ -180,8 +168,8 @@ function Member() {
                               paginationInfo.totalRecordCount
                             )}
                             건 표시{" "}
-                          </MDTypography>
-                        </MDBox>
+                          </Typography>
+                        </Box>
                         <Stack spacing={2}>
                           <Pagination
                             count={totalPages}
@@ -193,15 +181,15 @@ function Member() {
                             showLastButton
                           />
                         </Stack>
-                      </MDBox>
+                      </Box>
                     )}
                   </>
                 )}
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

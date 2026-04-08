@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -20,8 +5,10 @@ import PropTypes from "prop-types";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 
 // Timeline context
 import { useTimeline } from "examples/Timeline/context";
@@ -33,8 +20,8 @@ function TimelineItem({ color, icon, title, dateTime, description, lastItem }) {
   const isDark = useTimeline();
 
   return (
-    <MDBox position="relative" mb={3} sx={(theme) => timelineItem(theme, { lastItem, isDark })}>
-      <MDBox
+    <Box position="relative" mb={3} sx={(theme) => timelineItem(theme, { lastItem, isDark })}>
+      <Box
         display="flex"
         justifyContent="center"
         alignItems="center"
@@ -50,25 +37,25 @@ function TimelineItem({ color, icon, title, dateTime, description, lastItem }) {
         sx={{ fontSize: ({ typography: { size } }) => size.sm }}
       >
         <Icon fontSize="inherit">{icon}</Icon>
-      </MDBox>
-      <MDBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem">
-        <MDTypography variant="button" fontWeight="medium" color={isDark ? "white" : "dark"}>
+      </Box>
+      <Box ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem">
+        <Typography variant="button" fontWeight="medium" color={isDark ? "white" : "dark"}>
           {title}
-        </MDTypography>
-        <MDBox mt={0.5}>
-          <MDTypography variant="caption" color={isDark ? "secondary" : "text"}>
+        </Typography>
+        <Box mt={0.5}>
+          <Typography variant="caption" color={isDark ? "secondary" : "text"}>
             {dateTime}
-          </MDTypography>
-        </MDBox>
-        <MDBox mt={2} mb={1.5}>
+          </Typography>
+        </Box>
+        <Box mt={2} mb={1.5}>
           {description ? (
-            <MDTypography variant="button" color={isDark ? "white" : "dark"}>
+            <Typography variant="button" color={isDark ? "white" : "dark"}>
               {description}
-            </MDTypography>
+            </Typography>
           ) : null}
-        </MDBox>
-      </MDBox>
-    </MDBox>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

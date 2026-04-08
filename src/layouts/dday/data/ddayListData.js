@@ -2,8 +2,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
 
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 import { Link } from "react-router-dom";
 
 export default function data(ddayList = []) {
@@ -16,12 +18,12 @@ export default function data(ddayList = []) {
 
     rows: ddayList.map((item) => ({
       category: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.DDAY_CATEGORY_NM || item.DDAY_CATEGORY}
-        </MDTypography>
+        </Typography>
       ),
       name: (
-        <MDTypography
+        <Typography
           component={Link}
           to={`/dday/detail?ddayIdx=${item.DDAY_IDX}`}
           variant="button"
@@ -29,12 +31,12 @@ export default function data(ddayList = []) {
           fontWeight="medium"
         >
           {item.DDAY_NAME}
-        </MDTypography>
+        </Typography>
       ),
       date: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.DDAY_DATE}
-        </MDTypography>
+        </Typography>
       ),
     })),
   };

@@ -5,10 +5,14 @@ import Icon from "@mui/material/Icon";
 import { useNavigate } from "react-router-dom";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
-import MDInput from "components/MDInput";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
+import TextField from "@mui/material/TextField";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -43,7 +47,7 @@ function EventList() {
         data?.map((item) => ({
           eventNo: item.EVENT_NO,
           eventTitle: (
-            <MDTypography
+            <Typography
               component="a"
               href="#"
               variant="caption"
@@ -56,22 +60,22 @@ function EventList() {
               sx={{ cursor: "pointer" }}
             >
               {item.EVENT_TITLE}
-            </MDTypography>
+            </Typography>
           ),
           period: (
-            <MDTypography variant="caption" color="text" fontWeight="medium">
+            <Typography variant="caption" color="text" fontWeight="medium">
               {item.START_DT && item.END_DT ? `${item.START_DT} ~ ${item.END_DT}` : "기간 미설정"}
-            </MDTypography>
+            </Typography>
           ),
           useYn: (
-            <MDTypography variant="caption" color="text" fontWeight="medium">
+            <Typography variant="caption" color="text" fontWeight="medium">
               {item.USE_YN === "Y" ? "사용" : "미사용"}
-            </MDTypography>
+            </Typography>
           ),
           regDt: (
-            <MDTypography variant="caption" color="text" fontWeight="medium">
+            <Typography variant="caption" color="text" fontWeight="medium">
               {item.REG_DT}
-            </MDTypography>
+            </Typography>
           ),
         })) || [],
     };
@@ -103,16 +107,16 @@ function EventList() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
@@ -120,19 +124,19 @@ function EventList() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   이벤트 관리
-                </MDTypography>
-                <MDButton variant="gradient" color="dark" onClick={() => navigate("/event/detail")}>
+                </Typography>
+                <Button variant="contained" color="dark" onClick={() => navigate("/event/detail")}>
                   <Icon sx={{ fontWeight: "bold" }}>add</Icon>
                   &nbsp;등록
-                </MDButton>
-              </MDBox>
+                </Button>
+              </Box>
 
-              <MDBox p={3}>
+              <Box p={3}>
                 <Grid container spacing={2} mb={2} alignItems="center">
                   <Grid item xs={12} md={6}>
-                    <MDInput
+                    <TextField
                       label="이벤트 제목"
                       value={searchParams.searchEventTitle}
                       onChange={(e) =>
@@ -145,9 +149,9 @@ function EventList() {
                     />
                   </Grid>
                   <Grid item xs={12} md={2}>
-                    <MDButton variant="gradient" color="info" onClick={handleSearch} fullWidth>
+                    <Button variant="contained" color="info" onClick={handleSearch} fullWidth>
                       검색
-                    </MDButton>
+                    </Button>
                   </Grid>
                 </Grid>
 
@@ -158,11 +162,11 @@ function EventList() {
                   showTotalEntries={false}
                   noEndBorder
                 />
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

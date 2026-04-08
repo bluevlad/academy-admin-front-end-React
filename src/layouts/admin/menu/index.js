@@ -30,9 +30,12 @@ import Tooltip from "@mui/material/Tooltip";
 import Chip from "@mui/material/Chip";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -249,9 +252,9 @@ function AdminMenu() {
               bgcolor: !isUse ? "action.disabledBackground" : "transparent",
             }}
             secondaryAction={
-              <MDBox display="flex" gap={0.5}>
+              <Box display="flex" gap={0.5}>
                 <Tooltip title="하위 메뉴 추가">
-                  <MDButton
+                  <Button
                     variant="text"
                     color="info"
                     size="small"
@@ -259,10 +262,10 @@ function AdminMenu() {
                     onClick={() => handleAddChild(node)}
                   >
                     <Icon fontSize="small">add_circle</Icon>
-                  </MDButton>
+                  </Button>
                 </Tooltip>
                 <Tooltip title="수정">
-                  <MDButton
+                  <Button
                     variant="text"
                     color="dark"
                     size="small"
@@ -270,10 +273,10 @@ function AdminMenu() {
                     onClick={() => handleOpenDialog("edit", node)}
                   >
                     <Icon fontSize="small">edit</Icon>
-                  </MDButton>
+                  </Button>
                 </Tooltip>
                 <Tooltip title="삭제">
-                  <MDButton
+                  <Button
                     variant="text"
                     color="error"
                     size="small"
@@ -281,9 +284,9 @@ function AdminMenu() {
                     onClick={() => handleDelete(node)}
                   >
                     <Icon fontSize="small">delete</Icon>
-                  </MDButton>
+                  </Button>
                 </Tooltip>
-              </MDBox>
+              </Box>
             }
           >
             <ListItemButton onClick={() => hasChildren && handleToggle(nodeId)}>
@@ -296,25 +299,25 @@ function AdminMenu() {
               </ListItemIcon>
               <ListItemText
                 primary={
-                  <MDBox display="flex" alignItems="center" gap={1}>
-                    <MDTypography variant="button" fontWeight="medium">
+                  <Box display="flex" alignItems="center" gap={1}>
+                    <Typography variant="button" fontWeight="medium">
                       {menuTitle}
-                    </MDTypography>
+                    </Typography>
                     {menuUrl && (
-                      <MDTypography variant="caption" color="text">
+                      <Typography variant="caption" color="text">
                         ({menuUrl})
-                      </MDTypography>
+                      </Typography>
                     )}
                     {!isUse && (
                       <Chip label="미사용" size="small" color="error" variant="outlined" />
                     )}
-                  </MDBox>
+                  </Box>
                 }
                 secondary={
-                  <MDTypography variant="caption" color="text">
+                  <Typography variant="caption" color="text">
                     ID: {node.menuId || nodeId} | Depth: {node.menuDepth || level}
                     {node.menuUpperId && ` | 상위: ${node.menuUpperId}`}
-                  </MDTypography>
+                  </Typography>
                 }
               />
               {hasChildren && (isOpen ? <ExpandLess /> : <ExpandMore />)}
@@ -363,65 +366,65 @@ function AdminMenu() {
 
   const rows = flatMenuList.map((menu, index) => ({
     menuNo: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
+      <Typography variant="caption" color="text" fontWeight="medium">
         {menu.menuNo || "-"}
-      </MDTypography>
+      </Typography>
     ),
     menuId: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
+      <Typography variant="caption" color="text" fontWeight="medium">
         {menu.menuId || "-"}
-      </MDTypography>
+      </Typography>
     ),
     menuTitle: (
-      <MDBox display="flex" alignItems="center">
-        <MDBox ml={menu.level * 2}>
-          <MDTypography variant="caption" color="text" fontWeight="medium">
+      <Box display="flex" alignItems="center">
+        <Box ml={menu.level * 2}>
+          <Typography variant="caption" color="text" fontWeight="medium">
             {"　".repeat(menu.level)}
             {menu.level > 0 && "└─ "}
             {menu.menuTitle || menu.menuNm || menu.name || "-"}
-          </MDTypography>
-        </MDBox>
-      </MDBox>
+          </Typography>
+        </Box>
+      </Box>
     ),
     menuUrl: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
+      <Typography variant="caption" color="text" fontWeight="regular">
         {menu.menuUrl || "-"}
-      </MDTypography>
+      </Typography>
     ),
     menuIcon: (
-      <MDBox display="flex" justifyContent="center">
+      <Box display="flex" justifyContent="center">
         {menu.menuIcon ? (
           <Icon fontSize="small">{menu.menuIcon}</Icon>
         ) : (
-          <MDTypography variant="caption" color="text">
+          <Typography variant="caption" color="text">
             -
-          </MDTypography>
+          </Typography>
         )}
-      </MDBox>
+      </Box>
     ),
     menuDepth: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
+      <Typography variant="caption" color="text" fontWeight="medium">
         {menu.menuDepth !== undefined ? menu.menuDepth : menu.level}
-      </MDTypography>
+      </Typography>
     ),
     menuUpperId: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
+      <Typography variant="caption" color="text" fontWeight="medium">
         {menu.menuUpperId || "-"}
-      </MDTypography>
+      </Typography>
     ),
     isUse: (
-      <MDTypography
+      <Typography
         variant="caption"
         color={menu.isUse === "Y" ? "success" : "error"}
         fontWeight="medium"
       >
         {menu.isUse === "Y" ? "사용" : "미사용"}
-      </MDTypography>
+      </Typography>
     ),
     action: (
-      <MDBox display="flex" justifyContent="center" gap={0.5}>
+      <Box display="flex" justifyContent="center" gap={0.5}>
         <Tooltip title="하위 메뉴 추가">
-          <MDButton
+          <Button
             variant="text"
             color="info"
             size="small"
@@ -429,10 +432,10 @@ function AdminMenu() {
             onClick={() => handleAddChild(menu)}
           >
             <Icon fontSize="small">add_circle</Icon>
-          </MDButton>
+          </Button>
         </Tooltip>
         <Tooltip title="수정">
-          <MDButton
+          <Button
             variant="text"
             color="dark"
             size="small"
@@ -440,10 +443,10 @@ function AdminMenu() {
             onClick={() => handleOpenDialog("edit", menu)}
           >
             <Icon fontSize="small">edit</Icon>
-          </MDButton>
+          </Button>
         </Tooltip>
         <Tooltip title="삭제">
-          <MDButton
+          <Button
             variant="text"
             color="error"
             size="small"
@@ -451,35 +454,35 @@ function AdminMenu() {
             onClick={() => handleDelete(menu)}
           >
             <Icon fontSize="small">delete</Icon>
-          </MDButton>
+          </Button>
         </Tooltip>
-      </MDBox>
+      </Box>
     ),
   }));
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDBox display="flex" justifyContent="space-between" alignItems="center">
-                  <MDTypography variant="h6" color="white">
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                  <Typography variant="h6" color="white">
                     관리자 메뉴 관리
-                  </MDTypography>
-                  <MDBox display="flex" gap={1}>
-                    <MDButton
+                  </Typography>
+                  <Box display="flex" gap={1}>
+                    <Button
                       variant="contained"
                       color="white"
                       size="small"
@@ -487,8 +490,8 @@ function AdminMenu() {
                     >
                       <Icon>add</Icon>
                       &nbsp;메뉴 추가
-                    </MDButton>
-                    <MDButton
+                    </Button>
+                    <Button
                       variant={viewMode === "tree" ? "contained" : "outlined"}
                       color="white"
                       size="small"
@@ -496,8 +499,8 @@ function AdminMenu() {
                     >
                       <Icon>account_tree</Icon>
                       &nbsp;트리뷰
-                    </MDButton>
-                    <MDButton
+                    </Button>
+                    <Button
                       variant={viewMode === "table" ? "contained" : "outlined"}
                       color="white"
                       size="small"
@@ -505,19 +508,19 @@ function AdminMenu() {
                     >
                       <Icon>table_view</Icon>
                       &nbsp;테이블뷰
-                    </MDButton>
-                  </MDBox>
-                </MDBox>
-              </MDBox>
-              <MDBox pt={3} pb={3} px={3}>
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
+              <Box pt={3} pb={3} px={3}>
                 {loading ? (
-                  <MDBox p={3} textAlign="center">
-                    <MDTypography variant="caption">로딩 중...</MDTypography>
-                  </MDBox>
+                  <Box p={3} textAlign="center">
+                    <Typography variant="caption">로딩 중...</Typography>
+                  </Box>
                 ) : (
                   <>
                     {viewMode === "tree" ? (
-                      <MDBox>
+                      <Box>
                         {menuTree.length > 0 ? (
                           <List
                             sx={{ width: "100%", bgcolor: "background.paper" }}
@@ -527,13 +530,13 @@ function AdminMenu() {
                             {renderTreeItems(menuTree)}
                           </List>
                         ) : (
-                          <MDBox p={3} textAlign="center">
-                            <MDTypography variant="caption" color="text">
+                          <Box p={3} textAlign="center">
+                            <Typography variant="caption" color="text">
                               메뉴 데이터가 없습니다.
-                            </MDTypography>
-                          </MDBox>
+                            </Typography>
+                          </Box>
                         )}
-                      </MDBox>
+                      </Box>
                     ) : (
                       <DataTable
                         table={{ columns, rows }}
@@ -545,24 +548,24 @@ function AdminMenu() {
                     )}
                   </>
                 )}
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
 
       {/* Add/Edit Dialog */}
       <Dialog open={dialogOpen} onClose={handleCloseDialog} maxWidth="md" fullWidth>
         <DialogTitle>
           {dialogMode === "add" ? "메뉴 추가" : "메뉴 수정"}
           {currentMenu && dialogMode === "add" && (
-            <MDTypography variant="caption" color="text" display="block">
+            <Typography variant="caption" color="text" display="block">
               상위 메뉴: {currentMenu.menuTitle || currentMenu.menuNm}
-            </MDTypography>
+            </Typography>
           )}
         </DialogTitle>
         <DialogContent>
-          <MDBox component="form" pt={2}>
+          <Box component="form" pt={2}>
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
                 <TextField
@@ -674,15 +677,15 @@ function AdminMenu() {
                 </FormControl>
               </Grid>
             </Grid>
-          </MDBox>
+          </Box>
         </DialogContent>
         <DialogActions>
-          <MDButton onClick={handleCloseDialog} color="secondary">
+          <Button onClick={handleCloseDialog} color="secondary">
             취소
-          </MDButton>
-          <MDButton onClick={handleSubmit} color="info" variant="gradient">
+          </Button>
+          <Button onClick={handleSubmit} color="info" variant="contained">
             {dialogMode === "add" ? "추가" : "수정"}
-          </MDButton>
+          </Button>
         </DialogActions>
       </Dialog>
 

@@ -1,16 +1,12 @@
 {
-  "name": "material-dashboard-2-react",
-  "version": "2.2.0",
+  "name": "academy-admin-frontend",
+  "version": "3.0.0",
   "private": true,
-  "author": "Creative Tim",
-  "license": "See license in https://www.creative-tim.com/license",
-  "description": "React version of Material Dashboard 2 by Creative Tim",
-  "bugs": {
-    "url": "https://github.com/creativetimofficial/material-dashboard-react/issues"
-  },
+  "license": "MIT",
+  "description": "Academy Admin Frontend - React 18 + MUI 6 + Vite 6",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creativetimofficial/material-dashboard-react.git"
+    "url": "git+https://github.com/bluevlad/academy-front-end-React-material-dashboard.git"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

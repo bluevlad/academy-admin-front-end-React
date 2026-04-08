@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState } from "react";
 
 // @mui material components
@@ -22,8 +7,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 import DataTable from "examples/Tables/DataTable";
 
 // Data
@@ -59,12 +46,12 @@ function Projects() {
 
   return (
     <Card>
-      <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-        <MDBox>
-          <MDTypography variant="h6" gutterBottom>
+      <Box display="flex" justifyContent="space-between" alignItems="center" p={3}>
+        <Box>
+          <Typography variant="h6" gutterBottom>
             المشاريع
-          </MDTypography>
-          <MDBox display="flex" alignItems="center" lineHeight={0}>
+          </Typography>
+          <Box display="flex" alignItems="center" lineHeight={0}>
             <Icon
               sx={{
                 fontWeight: "bold",
@@ -74,19 +61,19 @@ function Projects() {
             >
               done
             </Icon>
-            <MDTypography variant="button" fontWeight="regular" color="text">
+            <Typography variant="button" fontWeight="regular" color="text">
               &nbsp;<strong>30 انتهى</strong> هذا الشهر
-            </MDTypography>
-          </MDBox>
-        </MDBox>
-        <MDBox color="text" px={2}>
+            </Typography>
+          </Box>
+        </Box>
+        <Box color="text" px={2}>
           <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small" onClick={openMenu}>
             more_vert
           </Icon>
-        </MDBox>
+        </Box>
         {renderMenu}
-      </MDBox>
-      <MDBox>
+      </Box>
+      <Box>
         <DataTable
           table={{ columns, rows }}
           showTotalEntries={false}
@@ -94,7 +81,7 @@ function Projects() {
           noEndBorder
           entriesPerPage={false}
         />
-      </MDBox>
+      </Box>
     </Card>
   );
 }

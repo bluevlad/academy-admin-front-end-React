@@ -4,8 +4,10 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 
 function ModalPopup({
   open,
@@ -31,11 +33,11 @@ function ModalPopup({
     >
       {(title || showClose) && (
         <DialogTitle>
-          <MDBox display="flex" justifyContent="space-between" alignItems="center">
+          <Box display="flex" justifyContent="space-between" alignItems="center">
             {title && (
-              <MDTypography variant="h6" fontWeight="medium">
+              <Typography variant="h6" fontWeight="medium">
                 {title}
-              </MDTypography>
+              </Typography>
             )}
             {showClose && (
               <IconButton
@@ -46,7 +48,7 @@ function ModalPopup({
                 ✕
               </IconButton>
             )}
-          </MDBox>
+          </Box>
         </DialogTitle>
       )}
 

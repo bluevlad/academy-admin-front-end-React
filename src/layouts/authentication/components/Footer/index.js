@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -22,8 +7,10 @@ import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 
 // Material Dashboard 2 React base styles
 import typography from "assets/theme/base/typography";
@@ -32,9 +19,9 @@ function Footer({ light }) {
   const { size } = typography;
 
   return (
-    <MDBox position="absolute" width="100%" bottom={0} py={4}>
+    <Box position="absolute" width="100%" bottom={0} py={4}>
       <Container>
-        <MDBox
+        <Box
           width="100%"
           display="flex"
           flexDirection={{ xs: "column", lg: "row" }}
@@ -42,7 +29,7 @@ function Footer({ light }) {
           alignItems="center"
           px={1.5}
         >
-          <MDBox
+          <Box
             display="flex"
             justifyContent="center"
             alignItems="center"
@@ -51,20 +38,20 @@ function Footer({ light }) {
             fontSize={size.sm}
           >
             &copy; {new Date().getFullYear()}, made with
-            <MDBox fontSize={size.md} color={light ? "white" : "dark"} mb={-0.5} mx={0.25}>
+            <Box fontSize={size.md} color={light ? "white" : "dark"} mb={-0.5} mx={0.25}>
               <Icon color="inherit" fontSize="inherit">
                 favorite
               </Icon>
-            </MDBox>
+            </Box>
             by
             <Link href="https://www.creative-tim.com/" target="_blank">
-              <MDTypography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
+              <Typography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
                 &nbsp;Creative Tim&nbsp;
-              </MDTypography>
+              </Typography>
             </Link>
             for a better web.
-          </MDBox>
-          <MDBox
+          </Box>
+          <Box
             component="ul"
             sx={({ breakpoints }) => ({
               display: "flex",
@@ -81,54 +68,54 @@ function Footer({ light }) {
               },
             })}
           >
-            <MDBox component="li" pr={2} lineHeight={1}>
+            <Box component="li" pr={2} lineHeight={1}>
               <Link href="https://www.creative-tim.com/" target="_blank">
-                <MDTypography
+                <Typography
                   variant="button"
                   fontWeight="regular"
                   color={light ? "white" : "dark"}
                 >
                   Creative Tim
-                </MDTypography>
+                </Typography>
               </Link>
-            </MDBox>
-            <MDBox component="li" px={2} lineHeight={1}>
+            </Box>
+            <Box component="li" px={2} lineHeight={1}>
               <Link href="https://www.creative-tim.com/presentation" target="_blank">
-                <MDTypography
+                <Typography
                   variant="button"
                   fontWeight="regular"
                   color={light ? "white" : "dark"}
                 >
                   About Us
-                </MDTypography>
+                </Typography>
               </Link>
-            </MDBox>
-            <MDBox component="li" px={2} lineHeight={1}>
+            </Box>
+            <Box component="li" px={2} lineHeight={1}>
               <Link href="https://www.creative-tim.com/blog" target="_blank">
-                <MDTypography
+                <Typography
                   variant="button"
                   fontWeight="regular"
                   color={light ? "white" : "dark"}
                 >
                   Blog
-                </MDTypography>
+                </Typography>
               </Link>
-            </MDBox>
-            <MDBox component="li" pl={2} lineHeight={1}>
+            </Box>
+            <Box component="li" pl={2} lineHeight={1}>
               <Link href="https://www.creative-tim.com/license" target="_blank">
-                <MDTypography
+                <Typography
                   variant="button"
                   fontWeight="regular"
                   color={light ? "white" : "dark"}
                 >
                   License
-                </MDTypography>
+                </Typography>
               </Link>
-            </MDBox>
-          </MDBox>
-        </MDBox>
+            </Box>
+          </Box>
+        </Box>
       </Container>
-    </MDBox>
+    </Box>
   );
 }
 

@@ -6,9 +6,12 @@ import Stack from "@mui/material/Stack";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDBadge from "components/MDBadge";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Badge from "@mui/material/Badge";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -63,83 +66,83 @@ function Exam() {
 
   const rows = examList.map((exam) => ({
     exam_nm: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
+      <Typography variant="caption" color="text" fontWeight="medium">
         {exam.exam_nm}
-      </MDTypography>
+      </Typography>
     ),
     exam_year: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
+      <Typography variant="caption" color="text" fontWeight="regular">
         {exam.exam_year}
-      </MDTypography>
+      </Typography>
     ),
     exam_round: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
+      <Typography variant="caption" color="text" fontWeight="regular">
         {exam.exam_round}회
-      </MDTypography>
+      </Typography>
     ),
     exam_period: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
+      <Typography variant="caption" color="text" fontWeight="regular">
         {exam.exam_period}
-      </MDTypography>
+      </Typography>
     ),
     exam_time: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
+      <Typography variant="caption" color="text" fontWeight="regular">
         {exam.exam_time}분
-      </MDTypography>
+      </Typography>
     ),
     isUse: (
-      <MDBox ml={-1}>
-        <MDBadge
+      <Box ml={-1}>
+        <Badge
           badgeContent={exam.isUse === "Y" ? "사용" : "미사용"}
           color={exam.isUse === "Y" ? "success" : "dark"}
-          variant="gradient"
+          variant="contained"
           size="sm"
         />
-      </MDBox>
+      </Box>
     ),
     use_flag: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
+      <Typography variant="caption" color="text" fontWeight="regular">
         {exam.use_flag === "Y" ? "응시가능" : "응시불가"}
-      </MDTypography>
+      </Typography>
     ),
     reg_dt: (
-      <MDTypography variant="caption" color="text" fontWeight="regular">
+      <Typography variant="caption" color="text" fontWeight="regular">
         {exam.reg_dt ? new Date(exam.reg_dt).toLocaleDateString("ko-KR") : "-"}
-      </MDTypography>
+      </Typography>
     ),
     action: (
-      <MDTypography component="a" href="#" color="text">
+      <Typography component="a" href="#" color="text">
         <Icon>more_vert</Icon>
-      </MDTypography>
+      </Typography>
     ),
   }));
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   모의고사 목록
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
+                </Typography>
+              </Box>
+              <Box pt={3}>
                 {loading ? (
-                  <MDBox p={3} textAlign="center">
-                    <MDTypography variant="caption">로딩 중...</MDTypography>
-                  </MDBox>
+                  <Box p={3} textAlign="center">
+                    <Typography variant="caption">로딩 중...</Typography>
+                  </Box>
                 ) : (
                   <>
                     <DataTable
@@ -150,14 +153,14 @@ function Exam() {
                       noEndBorder
                     />
                     {paginationInfo && (
-                      <MDBox
+                      <Box
                         p={3}
                         display="flex"
                         justifyContent="space-between"
                         alignItems="center"
                       >
-                        <MDBox>
-                          <MDTypography variant="caption" color="text">
+                        <Box>
+                          <Typography variant="caption" color="text">
                             전체 {paginationInfo.totalRecordCount}건 중{" "}
                             {paginationInfo.firstRecordIndex + 1} -{" "}
                             {Math.min(
@@ -165,8 +168,8 @@ function Exam() {
                               paginationInfo.totalRecordCount
                             )}
                             건 표시{" "}
-                          </MDTypography>
-                        </MDBox>
+                          </Typography>
+                        </Box>
                         <Stack spacing={2}>
                           <Pagination
                             count={totalPages}
@@ -178,15 +181,15 @@ function Exam() {
                             showLastButton
                           />
                         </Stack>
-                      </MDBox>
+                      </Box>
                     )}
                   </>
                 )}
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

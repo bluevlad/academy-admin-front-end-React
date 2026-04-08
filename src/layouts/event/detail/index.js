@@ -10,10 +10,13 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
-import MDInput from "components/MDInput";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -111,16 +114,16 @@ function EventDetail() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
@@ -128,14 +131,14 @@ function EventDetail() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   {eventNo ? "이벤트 수정" : "이벤트 등록"}
-                </MDTypography>
-              </MDBox>
-              <MDBox p={3}>
+                </Typography>
+              </Box>
+              <Box p={3}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <MDInput
+                    <TextField
                       label="제목"
                       name="eventTitle"
                       value={form.eventTitle}
@@ -181,7 +184,7 @@ function EventDetail() {
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
-                    <MDInput
+                    <TextField
                       label="내용"
                       name="eventContent"
                       value={form.eventContent}
@@ -192,28 +195,28 @@ function EventDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} display="flex" justifyContent="flex-end" gap={1}>
-                    <MDButton
+                    <Button
                       variant="outlined"
                       color="secondary"
                       onClick={() => navigate("/event")}
                     >
                       목록
-                    </MDButton>
+                    </Button>
                     {eventNo && (
-                      <MDButton variant="outlined" color="error" onClick={handleDelete}>
+                      <Button variant="outlined" color="error" onClick={handleDelete}>
                         삭제
-                      </MDButton>
+                      </Button>
                     )}
-                    <MDButton variant="gradient" color="info" onClick={handleSave}>
+                    <Button variant="contained" color="info" onClick={handleSave}>
                       저장
-                    </MDButton>
+                    </Button>
                   </Grid>
                 </Grid>
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

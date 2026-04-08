@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -20,7 +5,8 @@ import PropTypes from "prop-types";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
+import Box from "@mui/material/Box";
+
 
 // Material Dashboard 2 React contexts
 import { useMaterialUIController } from "context";
@@ -30,7 +16,7 @@ function DataTableHeadCell({ width, children, sorted, align, ...rest }) {
   const { darkMode } = controller;
 
   return (
-    <MDBox
+    <Box
       component="th"
       width={width}
       py={1.5}
@@ -39,7 +25,7 @@ function DataTableHeadCell({ width, children, sorted, align, ...rest }) {
         borderBottom: `${borderWidth[1]} solid ${light.main}`,
       })}
     >
-      <MDBox
+      <Box
         {...rest}
         position="relative"
         textAlign={align}
@@ -55,7 +41,7 @@ function DataTableHeadCell({ width, children, sorted, align, ...rest }) {
       >
         {children}
         {sorted && (
-          <MDBox
+          <Box
             position="absolute"
             top={0}
             right={align !== "right" ? "16px" : 0}
@@ -64,26 +50,26 @@ function DataTableHeadCell({ width, children, sorted, align, ...rest }) {
               fontSize: size.lg,
             })}
           >
-            <MDBox
+            <Box
               position="absolute"
               top={-6}
               color={sorted === "asce" ? "text" : "secondary"}
               opacity={sorted === "asce" ? 1 : 0.5}
             >
               <Icon>arrow_drop_up</Icon>
-            </MDBox>
-            <MDBox
+            </Box>
+            <Box
               position="absolute"
               top={0}
               color={sorted === "desc" ? "text" : "secondary"}
               opacity={sorted === "desc" ? 1 : 0.5}
             >
               <Icon>arrow_drop_down</Icon>
-            </MDBox>
-          </MDBox>
+            </Box>
+          </Box>
         )}
-      </MDBox>
-    </MDBox>
+      </Box>
+    </Box>
   );
 }
 

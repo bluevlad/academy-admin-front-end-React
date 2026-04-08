@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useMemo, useEffect, useState } from "react";
 
 // prop-types is a library for typechecking of props
@@ -30,10 +15,14 @@ import Icon from "@mui/material/Icon";
 import Autocomplete from "@mui/material/Autocomplete";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDInput from "components/MDInput";
-import MDPagination from "components/MDPagination";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import TextField from "@mui/material/TextField";
+
+import Pagination from "@mui/material/Pagination";
+
 
 // Material Dashboard 2 React example components
 import DataTableHeadCell from "examples/Tables/DataTable/DataTableHeadCell";
@@ -88,14 +77,14 @@ function DataTable({
 
   // Render the paginations
   const renderPagination = pageOptions.map((option) => (
-    <MDPagination
+    <Pagination
       item
       key={option}
       onClick={() => gotoPage(Number(option))}
       active={pageIndex === option}
     >
       {option + 1}
-    </MDPagination>
+    </Pagination>
   ));
 
   // Handler for the input to set the pagination index
@@ -148,9 +137,9 @@ function DataTable({
   return (
     <TableContainer sx={{ boxShadow: "none" }}>
       {entriesPerPage || canSearch ? (
-        <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+        <Box display="flex" justifyContent="space-between" alignItems="center" p={3}>
           {entriesPerPage && (
-            <MDBox display="flex" alignItems="center">
+            <Box display="flex" alignItems="center">
               <Autocomplete
                 disableClearable
                 value={pageSize.toString()}
@@ -160,16 +149,16 @@ function DataTable({
                 }}
                 size="small"
                 sx={{ width: "5rem" }}
-                renderInput={(params) => <MDInput {...params} />}
+                renderInput={(params) => <TextField {...params} />}
               />
-              <MDTypography variant="caption" color="secondary">
+              <Typography variant="caption" color="secondary">
                 &nbsp;&nbsp;entries per page
-              </MDTypography>
-            </MDBox>
+              </Typography>
+            </Box>
           )}
           {canSearch && (
-            <MDBox width="12rem" ml="auto">
-              <MDInput
+            <Box width="12rem" ml="auto">
+              <TextField
                 placeholder="Search..."
                 value={search}
                 size="small"
@@ -179,12 +168,12 @@ function DataTable({
                   onSearchChange(currentTarget.value);
                 }}
               />
-            </MDBox>
+            </Box>
           )}
-        </MDBox>
+        </Box>
       ) : null}
       <Table {...getTableProps()}>
-        <MDBox component="thead">
+        <Box component="thead">
           {headerGroups.map((headerGroup, key) => (
             <TableRow key={key} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column, idx) => (
@@ -200,7 +189,7 @@ function DataTable({
               ))}
             </TableRow>
           ))}
-        </MDBox>
+        </Box>
         <TableBody {...getTableBodyProps()}>
           {page.map((row, key) => {
             prepareRow(row);
@@ -222,7 +211,7 @@ function DataTable({
         </TableBody>
       </Table>
 
-      <MDBox
+      <Box
         display="flex"
         flexDirection={{ xs: "column", sm: "row" }}
         justifyContent="space-between"
@@ -230,41 +219,41 @@ function DataTable({
         p={!showTotalEntries && pageOptions.length === 1 ? 0 : 3}
       >
         {showTotalEntries && (
-          <MDBox mb={{ xs: 3, sm: 0 }}>
-            <MDTypography variant="button" color="secondary" fontWeight="regular">
+          <Box mb={{ xs: 3, sm: 0 }}>
+            <Typography variant="button" color="secondary" fontWeight="regular">
               Showing {entriesStart} to {entriesEnd} of {rows.length} entries
-            </MDTypography>
-          </MDBox>
+            </Typography>
+          </Box>
         )}
         {pageOptions.length > 1 && (
-          <MDPagination
+          <Pagination
             variant={pagination.variant ? pagination.variant : "gradient"}
             color={pagination.color ? pagination.color : "info"}
           >
             {canPreviousPage && (
-              <MDPagination item onClick={() => previousPage()}>
+              <Pagination item onClick={() => previousPage()}>
                 <Icon sx={{ fontWeight: "bold" }}>chevron_left</Icon>
-              </MDPagination>
+              </Pagination>
             )}
             {renderPagination.length > 6 ? (
-              <MDBox width="5rem" mx={1}>
-                <MDInput
+              <Box width="5rem" mx={1}>
+                <TextField
                   inputProps={{ type: "number", min: 1, max: customizedPageOptions.length }}
                   value={customizedPageOptions[pageIndex]}
                   onChange={(handleInputPagination, handleInputPaginationValue)}
                 />
-              </MDBox>
+              </Box>
             ) : (
               renderPagination
             )}
             {canNextPage && (
-              <MDPagination item onClick={() => nextPage()}>
+              <Pagination item onClick={() => nextPage()}>
                 <Icon sx={{ fontWeight: "bold" }}>chevron_right</Icon>
-              </MDPagination>
+              </Pagination>
             )}
-          </MDPagination>
+          </Pagination>
         )}
-      </MDBox>
+      </Box>
     </TableContainer>
   );
 }

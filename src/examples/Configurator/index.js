@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState, useEffect } from "react";
 
 // react-github-btn
@@ -30,9 +15,12 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 // Custom styles for the Configurator
 import ConfiguratorRoot from "examples/Configurator/ConfiguratorRoot";
@@ -129,7 +117,7 @@ function Configurator() {
 
   return (
     <ConfiguratorRoot variant="permanent" ownerState={{ openConfigurator }}>
-      <MDBox
+      <Box
         display="flex"
         justifyContent="space-between"
         alignItems="baseline"
@@ -137,12 +125,12 @@ function Configurator() {
         pb={0.5}
         px={3}
       >
-        <MDBox>
-          <MDTypography variant="h5">Material UI Configurator</MDTypography>
-          <MDTypography variant="body2" color="text">
+        <Box>
+          <Typography variant="h5">Material UI Configurator</Typography>
+          <Typography variant="body2" color="text">
             See our dashboard options.
-          </MDTypography>
-        </MDBox>
+          </Typography>
+        </Box>
 
         <Icon
           sx={({ typography: { size }, palette: { dark, white } }) => ({
@@ -157,15 +145,15 @@ function Configurator() {
         >
           close
         </Icon>
-      </MDBox>
+      </Box>
 
       <Divider />
 
-      <MDBox pt={0.5} pb={3} px={3}>
-        <MDBox>
-          <MDTypography variant="h6">Sidenav Colors</MDTypography>
+      <Box pt={0.5} pb={3} px={3}>
+        <Box>
+          <Typography variant="h6">Sidenav Colors</Typography>
 
-          <MDBox mb={0.5}>
+          <Box mb={0.5}>
             {sidenavColors.map((color) => (
               <IconButton
                 key={color}
@@ -205,25 +193,25 @@ function Configurator() {
                 onClick={() => setSidenavColor(dispatch, color)}
               />
             ))}
-          </MDBox>
-        </MDBox>
+          </Box>
+        </Box>
 
-        <MDBox mt={3} lineHeight={1}>
-          <MDTypography variant="h6">Sidenav Type</MDTypography>
-          <MDTypography variant="button" color="text">
+        <Box mt={3} lineHeight={1}>
+          <Typography variant="h6">Sidenav Type</Typography>
+          <Typography variant="button" color="text">
             Choose between different sidenav types.
-          </MDTypography>
+          </Typography>
 
-          <MDBox
+          <Box
             sx={{
               display: "flex",
               mt: 2,
               mr: 1,
             }}
           >
-            <MDButton
+            <Button
               color="dark"
-              variant="gradient"
+              variant="contained"
               onClick={handleDarkSidenav}
               disabled={disabled}
               fullWidth
@@ -234,11 +222,11 @@ function Configurator() {
               }
             >
               Dark
-            </MDButton>
-            <MDBox sx={{ mx: 1, width: "8rem", minWidth: "8rem" }}>
-              <MDButton
+            </Button>
+            <Box sx={{ mx: 1, width: "8rem", minWidth: "8rem" }}>
+              <Button
                 color="dark"
-                variant="gradient"
+                variant="contained"
                 onClick={handleTransparentSidenav}
                 disabled={disabled}
                 fullWidth
@@ -249,11 +237,11 @@ function Configurator() {
                 }
               >
                 Transparent
-              </MDButton>
-            </MDBox>
-            <MDButton
+              </Button>
+            </Box>
+            <Button
               color="dark"
-              variant="gradient"
+              variant="contained"
               onClick={handleWhiteSidenav}
               disabled={disabled}
               fullWidth
@@ -264,29 +252,29 @@ function Configurator() {
               }
             >
               White
-            </MDButton>
-          </MDBox>
-        </MDBox>
-        <MDBox
+            </Button>
+          </Box>
+        </Box>
+        <Box
           display="flex"
           justifyContent="space-between"
           alignItems="center"
           mt={3}
           lineHeight={1}
         >
-          <MDTypography variant="h6">Navbar Fixed</MDTypography>
+          <Typography variant="h6">Navbar Fixed</Typography>
 
           <Switch checked={fixedNavbar} onChange={handleFixedNavbar} />
-        </MDBox>
+        </Box>
         <Divider />
-        <MDBox display="flex" justifyContent="space-between" alignItems="center" lineHeight={1}>
-          <MDTypography variant="h6">Light / Dark</MDTypography>
+        <Box display="flex" justifyContent="space-between" alignItems="center" lineHeight={1}>
+          <Typography variant="h6">Light / Dark</Typography>
 
           <Switch checked={darkMode} onChange={handleDarkMode} />
-        </MDBox>
+        </Box>
         <Divider />
-        <MDBox mt={3} mb={2}>
-          <MDButton
+        <Box mt={3} mb={2}>
+          <Button
             component={Link}
             href="https://www.creative-tim.com/learning-lab/react/quick-start/material-dashboard/"
             target="_blank"
@@ -296,9 +284,9 @@ function Configurator() {
             fullWidth
           >
             view documentation
-          </MDButton>
-        </MDBox>
-        <MDBox display="flex" justifyContent="center">
+          </Button>
+        </Box>
+        <Box display="flex" justifyContent="center">
           <GitHubButton
             href="https://github.com/creativetimofficial/material-dashboard-react"
             data-icon="octicon-star"
@@ -308,15 +296,15 @@ function Configurator() {
           >
             Star
           </GitHubButton>
-        </MDBox>
-        <MDBox mt={2} textAlign="center">
-          <MDBox mb={0.5}>
-            <MDTypography variant="h6">Thank you for sharing!</MDTypography>
-          </MDBox>
+        </Box>
+        <Box mt={2} textAlign="center">
+          <Box mb={0.5}>
+            <Typography variant="h6">Thank you for sharing!</Typography>
+          </Box>
 
-          <MDBox display="flex" justifyContent="center">
-            <MDBox mr={1.5}>
-              <MDButton
+          <Box display="flex" justifyContent="center">
+            <Box mr={1.5}>
+              <Button
                 component={Link}
                 href="//twitter.com/intent/tweet?text=Check%20Material%20Dashboard%20React%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23react%20%mui&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fmaterial-dashboard-react"
                 target="_blank"
@@ -325,9 +313,9 @@ function Configurator() {
               >
                 <TwitterIcon />
                 &nbsp; Tweet
-              </MDButton>
-            </MDBox>
-            <MDButton
+              </Button>
+            </Box>
+            <Button
               component={Link}
               href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-dashboard-react"
               target="_blank"
@@ -336,10 +324,10 @@ function Configurator() {
             >
               <FacebookIcon />
               &nbsp; Share
-            </MDButton>
-          </MDBox>
-        </MDBox>
-      </MDBox>
+            </Button>
+          </Box>
+        </Box>
+      </Box>
     </ConfiguratorRoot>
   );
 }

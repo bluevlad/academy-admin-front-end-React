@@ -2,10 +2,14 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDInput from "components/MDInput";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import TextField from "@mui/material/TextField";
+
+import Button from "@mui/material/Button";
+
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 import { register } from "api/login";
@@ -34,8 +38,8 @@ function Cover() {
   return (
     <CoverLayout image={bgImage}>
       <Card>
-        <MDBox
-          variant="gradient"
+        <Box
+          variant="contained"
           bgColor="info"
           borderRadius="lg"
           coloredShadow="success"
@@ -45,17 +49,17 @@ function Cover() {
           mb={1}
           textAlign="center"
         >
-          <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
+          <Typography variant="h4" fontWeight="medium" color="white" mt={1}>
             Join us today
-          </MDTypography>
-          <MDTypography display="block" variant="button" color="white" my={1}>
+          </Typography>
+          <Typography display="block" variant="button" color="white" my={1}>
             Enter your details to register
-          </MDTypography>
-        </MDBox>
-        <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form" onSubmit={handleSubmit}>
-            <MDBox mb={2}>
-              <MDInput
+          </Typography>
+        </Box>
+        <Box pt={4} pb={3} px={3}>
+          <Box component="form" role="form" onSubmit={handleSubmit}>
+            <Box mb={2}>
+              <TextField
                 type="text"
                 label="Name"
                 variant="standard"
@@ -63,9 +67,9 @@ function Cover() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput
+            </Box>
+            <Box mb={2}>
+              <TextField
                 type="text"
                 label="ID"
                 variant="standard"
@@ -73,9 +77,9 @@ function Cover() {
                 value={id}
                 onChange={(e) => setId(e.target.value)}
               />
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput
+            </Box>
+            <Box mb={2}>
+              <TextField
                 type="email"
                 label="Email"
                 variant="standard"
@@ -83,9 +87,9 @@ function Cover() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput
+            </Box>
+            <Box mb={2}>
+              <TextField
                 type="password"
                 label="Password"
                 variant="standard"
@@ -93,64 +97,62 @@ function Cover() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </MDBox>
-            <MDBox display="flex" alignItems="center" ml={-1}>
+            </Box>
+            <Box display="flex" alignItems="center" ml={-1}>
               <Checkbox />
-              <MDTypography
+              <Typography
                 variant="button"
                 fontWeight="regular"
                 color="text"
                 sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
               >
                 &nbsp;&nbsp;I agree the&nbsp;
-              </MDTypography>
-              <MDTypography
+              </Typography>
+              <Typography
                 component="a"
                 href="#"
                 variant="button"
                 fontWeight="bold"
                 color="info"
-                textGradient
               >
                 Terms and Conditions
-              </MDTypography>
-            </MDBox>
+              </Typography>
+            </Box>
             {error && (
-              <MDBox mt={2} mb={1}>
-                <MDTypography variant="caption" color="error">
+              <Box mt={2} mb={1}>
+                <Typography variant="caption" color="error">
                   {error}
-                </MDTypography>
-              </MDBox>
+                </Typography>
+              </Box>
             )}
             {success && (
-              <MDBox mt={2} mb={1}>
-                <MDTypography variant="caption" color="success">
+              <Box mt={2} mb={1}>
+                <Typography variant="caption" color="success">
                   Registration successful! Redirecting...
-                </MDTypography>
-              </MDBox>
+                </Typography>
+              </Box>
             )}
-            <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth type="submit">
+            <Box mt={4} mb={1}>
+              <Button variant="contained" color="info" fullWidth type="submit">
                 sign up
-              </MDButton>
-            </MDBox>
-            <MDBox mt={3} mb={1} textAlign="center">
-              <MDTypography variant="button" color="text">
+              </Button>
+            </Box>
+            <Box mt={3} mb={1} textAlign="center">
+              <Typography variant="button" color="text">
                 Already have an account?{" "}
-                <MDTypography
+                <Typography
                   component={Link}
                   to="/authentication/sign-in"
                   variant="button"
                   color="info"
                   fontWeight="medium"
-                  textGradient
                 >
                   Sign In
-                </MDTypography>
-              </MDTypography>
-            </MDBox>
-          </MDBox>
-        </MDBox>
+                </Typography>
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
       </Card>
     </CoverLayout>
   );

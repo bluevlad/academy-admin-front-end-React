@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState, useEffect } from "react";
 
 // prop-types is a library for typechecking of props.
@@ -27,9 +12,12 @@ import Tab from "@mui/material/Tab";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDAvatar from "components/MDAvatar";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Avatar from "@mui/material/Avatar";
+
 
 // Material Dashboard 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
@@ -65,8 +53,8 @@ function Header({ children, user }) {
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
 
   return (
-    <MDBox position="relative" mb={5}>
-      <MDBox
+    <Box position="relative" mb={5}>
+      <Box
         display="flex"
         alignItems="center"
         position="relative"
@@ -94,21 +82,21 @@ function Header({ children, user }) {
       >
         <Grid container spacing={3} alignItems="center">
           <Grid item>
-            <MDAvatar src={user?.pic || burceMars} alt="profile-image" size="xl" shadow="sm" />
+            <Avatar src={user?.pic || burceMars} alt="profile-image" size="xl" shadow="sm" />
           </Grid>
           <Grid item>
-            <MDBox height="100%" mt={0.5} lineHeight={1}>
-              <MDTypography variant="h5" fontWeight="medium">
+            <Box height="100%" mt={0.5} lineHeight={1}>
+              <Typography variant="h5" fontWeight="medium">
                 {user?.userNm || user?.userId || "Guest"}
-              </MDTypography>
-              <MDTypography variant="button" color="text" fontWeight="regular">
+              </Typography>
+              <Typography variant="button" color="text" fontWeight="regular">
                 {user?.userRole === "ROLE_ADMIN"
                   ? "Administrator"
                   : user?.userRole === "ROLE_USER"
                   ? "Member"
                   : user?.userRole || "Guest"}
-              </MDTypography>
-            </MDBox>
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
             <AppBar position="static">
@@ -143,7 +131,7 @@ function Header({ children, user }) {
         </Grid>
         {children}
       </Card>
-    </MDBox>
+    </Box>
   );
 }
 

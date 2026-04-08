@@ -10,10 +10,14 @@ import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
-import MDInput from "components/MDInput";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
+import TextField from "@mui/material/TextField";
+
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
@@ -205,35 +209,35 @@ function CounselWrite() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   상담일정 {isEdit ? "수정" : "등록"}
-                </MDTypography>
-              </MDBox>
+                </Typography>
+              </Box>
 
-              <MDBox p={3}>
+              <Box p={3}>
                 <table className="table01" style={{ width: "100%", borderCollapse: "collapse", marginBottom: "20px" }}>
                   <tbody>
                     <tr>
                       <th style={{ width: "20%", padding: "10px", borderBottom: "1px solid #ddd" }}>상담직종</th>
                       <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
                         {isEdit ? (
-                          <MDTypography variant="body2">{catNm}</MDTypography>
+                          <Typography variant="body2">{catNm}</Typography>
                         ) : (
-                          <MDBox display="flex" flexWrap="wrap">
+                          <Box display="flex" flexWrap="wrap">
                             {categories.map(c => (
                               <FormControlLabel
                                 key={c.code}
@@ -241,8 +245,8 @@ function CounselWrite() {
                                 label={c.name}
                               />
                             ))}
-                            {categories.length === 0 && <MDTypography variant="caption">직종 코드 로드 필요</MDTypography>}
-                          </MDBox>
+                            {categories.length === 0 && <Typography variant="caption">직종 코드 로드 필요</Typography>}
+                          </Box>
                         )}
                       </td>
                     </tr>
@@ -250,13 +254,13 @@ function CounselWrite() {
                       <th style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>상담일정</th>
                       <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
                         {isEdit ? (
-                          <MDTypography variant="body2">{date}</MDTypography>
+                          <Typography variant="body2">{date}</Typography>
                         ) : (
-                          <MDBox display="flex" alignItems="center">
-                            <MDInput name="SDate" label="시작일" value={insertData.SDate} onChange={handleInsertChange} sx={{ width: 150 }} />
+                          <Box display="flex" alignItems="center">
+                            <TextField name="SDate" label="시작일" value={insertData.SDate} onChange={handleInsertChange} sx={{ width: 150 }} />
                             <span style={{ margin: "0 10px" }}>~</span>
-                            <MDInput name="EDate" label="종료일" value={insertData.EDate} onChange={handleInsertChange} sx={{ width: 150 }} />
-                          </MDBox>
+                            <TextField name="EDate" label="종료일" value={insertData.EDate} onChange={handleInsertChange} sx={{ width: 150 }} />
+                          </Box>
                         )}
                       </td>
                     </tr>
@@ -265,9 +269,9 @@ function CounselWrite() {
                         <tr>
                           <th style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>상담인원</th>
                           <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
-                            <MDBox display="flex" alignItems="center">
-                              <MDInput name="REQ_CNT" value={insertData.REQ_CNT} onChange={handleInsertChange} sx={{ width: 100 }} /> &nbsp;명
-                            </MDBox>
+                            <Box display="flex" alignItems="center">
+                              <TextField name="REQ_CNT" value={insertData.REQ_CNT} onChange={handleInsertChange} sx={{ width: 100 }} /> &nbsp;명
+                            </Box>
                           </td>
                           <th style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>상담신청대상</th>
                           <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
@@ -310,7 +314,7 @@ function CounselWrite() {
                                   ) : (
                                     <>
                                       <td style={{ padding: "8px", textAlign: "center" }}>
-                                        <MDInput value={item.MAX_USR} onChange={(e) => handleTableChange(index, 'MAX_USR', e.target.value)} sx={{ width: 60 }} />
+                                        <TextField value={item.MAX_USR} onChange={(e) => handleTableChange(index, 'MAX_USR', e.target.value)} sx={{ width: 60 }} />
                                       </td>
                                       <td style={{ padding: "8px", textAlign: "center" }}>
                                         <Select value={item.REQ_TYPE} onChange={(e) => handleTableChange(index, 'REQ_TYPE', e.target.value)} sx={{ height: 30 }}>
@@ -336,21 +340,21 @@ function CounselWrite() {
                   </tbody>
                 </table>
 
-                <MDBox display="flex" justifyContent="center">
-                  <MDButton variant="gradient" color="info" onClick={isEdit ? handleSubmitUpdate : handleSubmitInsert}>
+                <Box display="flex" justifyContent="center">
+                  <Button variant="contained" color="info" onClick={isEdit ? handleSubmitUpdate : handleSubmitInsert}>
                     {isEdit ? "수정" : "등록"}
-                  </MDButton>
-                  <MDBox ml={1}>
-                    <MDButton variant="outlined" color="dark" onClick={() => navigate("/counsel")}>
+                  </Button>
+                  <Box ml={1}>
+                    <Button variant="outlined" color="dark" onClick={() => navigate("/counsel")}>
                       목록
-                    </MDButton>
-                  </MDBox>
-                </MDBox>
-              </MDBox>
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

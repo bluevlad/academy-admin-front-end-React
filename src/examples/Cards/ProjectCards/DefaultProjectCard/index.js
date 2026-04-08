@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // react-router-dom components
 import { Link } from "react-router-dom";
 
@@ -25,15 +10,19 @@ import CardMedia from "@mui/material/CardMedia";
 import Tooltip from "@mui/material/Tooltip";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
-import MDAvatar from "components/MDAvatar";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
+import Avatar from "@mui/material/Avatar";
+
 
 function DefaultProjectCard({ image, label, title, description, action, authors }) {
   const renderAuthors = authors.map(({ image: media, name }) => (
     <Tooltip key={name} title={name} placement="bottom">
-      <MDAvatar
+      <Avatar
         src={media}
         alt={name}
         size="xs"
@@ -61,7 +50,7 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
         overflow: "visible",
       }}
     >
-      <MDBox position="relative" width="100.25%" shadow="xl" borderRadius="xl">
+      <Box position="relative" width="100.25%" shadow="xl" borderRadius="xl">
         <CardMedia
           src={image}
           component="img"
@@ -74,23 +63,23 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
             objectPosition: "center",
           }}
         />
-      </MDBox>
-      <MDBox mt={1} mx={0.5}>
-        <MDTypography variant="button" fontWeight="regular" color="text" textTransform="capitalize">
+      </Box>
+      <Box mt={1} mx={0.5}>
+        <Typography variant="button" fontWeight="regular" color="text" textTransform="capitalize">
           {label}
-        </MDTypography>
-        <MDBox mb={1}>
+        </Typography>
+        <Box mb={1}>
           {action.type === "internal" ? (
-            <MDTypography
+            <Typography
               component={Link}
               to={action.route}
               variant="h5"
               textTransform="capitalize"
             >
               {title}
-            </MDTypography>
+            </Typography>
           ) : (
-            <MDTypography
+            <Typography
               component="a"
               href={action.route}
               target="_blank"
@@ -99,17 +88,17 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
               textTransform="capitalize"
             >
               {title}
-            </MDTypography>
+            </Typography>
           )}
-        </MDBox>
-        <MDBox mb={3} lineHeight={0}>
-          <MDTypography variant="button" fontWeight="light" color="text">
+        </Box>
+        <Box mb={3} lineHeight={0}>
+          <Typography variant="button" fontWeight="light" color="text">
             {description}
-          </MDTypography>
-        </MDBox>
-        <MDBox display="flex" justifyContent="space-between" alignItems="center">
+          </Typography>
+        </Box>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
           {action.type === "internal" ? (
-            <MDButton
+            <Button
               component={Link}
               to={action.route}
               variant="outlined"
@@ -117,9 +106,9 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
               color={action.color}
             >
               {action.label}
-            </MDButton>
+            </Button>
           ) : (
-            <MDButton
+            <Button
               component="a"
               href={action.route}
               target="_blank"
@@ -129,11 +118,11 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
               color={action.color}
             >
               {action.label}
-            </MDButton>
+            </Button>
           )}
-          <MDBox display="flex">{renderAuthors}</MDBox>
-        </MDBox>
-      </MDBox>
+          <Box display="flex">{renderAuthors}</Box>
+        </Box>
+      </Box>
     </Card>
   );
 }

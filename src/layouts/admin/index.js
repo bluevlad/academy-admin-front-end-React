@@ -9,7 +9,8 @@ import Tab from "@mui/material/Tab";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
+import Box from "@mui/material/Box";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -30,10 +31,10 @@ function Admin() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox py={3}>
+      <Box py={3}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <MDBox mb={3}>
+            <Box mb={3}>
               <AppBar position="static">
                 <Tabs orientation="horizontal" value={tabValue} onChange={handleSetTabValue}>
                   <Tab
@@ -70,17 +71,17 @@ function Admin() {
                   />
                 </Tabs>
               </AppBar>
-            </MDBox>
+            </Box>
 
-            <MDBox>
+            <Box>
               {tabValue === 0 && <AdminAuth />}
               {tabValue === 1 && <AdminCode />}
               {tabValue === 2 && <Menu />}
               {tabValue === 3 && <AdminBanner />}
-            </MDBox>
+            </Box>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

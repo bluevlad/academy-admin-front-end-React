@@ -1,23 +1,9 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // @mui material components
 import Grid from "@mui/material/Grid";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
+import Box from "@mui/material/Box";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -41,10 +27,10 @@ function Dashboard() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox py={3}>
+      <Box py={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
+            <Box mb={1.5}>
               <ComplexStatisticsCard
                 color="dark"
                 icon="weekend"
@@ -56,10 +42,10 @@ function Dashboard() {
                   label: "than lask week",
                 }}
               />
-            </MDBox>
+            </Box>
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
+            <Box mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
                 title="Today's Users"
@@ -70,10 +56,10 @@ function Dashboard() {
                   label: "than last month",
                 }}
               />
-            </MDBox>
+            </Box>
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
+            <Box mb={1.5}>
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
@@ -85,10 +71,10 @@ function Dashboard() {
                   label: "than yesterday",
                 }}
               />
-            </MDBox>
+            </Box>
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
+            <Box mb={1.5}>
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
@@ -100,13 +86,13 @@ function Dashboard() {
                   label: "Just updated",
                 }}
               />
-            </MDBox>
+            </Box>
           </Grid>
         </Grid>
-        <MDBox mt={4.5}>
+        <Box mt={4.5}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
+              <Box mb={3}>
                 <ReportsBarChart
                   color="info"
                   title="website views"
@@ -114,10 +100,10 @@ function Dashboard() {
                   date="campaign sent 2 days ago"
                   chart={reportsBarChartData}
                 />
-              </MDBox>
+              </Box>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
+              <Box mb={3}>
                 <ReportsLineChart
                   color="success"
                   title="daily sales"
@@ -129,10 +115,10 @@ function Dashboard() {
                   date="updated 4 min ago"
                   chart={sales}
                 />
-              </MDBox>
+              </Box>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
+              <Box mb={3}>
                 <ReportsLineChart
                   color="dark"
                   title="completed tasks"
@@ -140,11 +126,11 @@ function Dashboard() {
                   date="just updated"
                   chart={tasks}
                 />
-              </MDBox>
+              </Box>
             </Grid>
           </Grid>
-        </MDBox>
-        <MDBox>
+        </Box>
+        <Box>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={8}>
               <Projects />
@@ -153,8 +139,8 @@ function Dashboard() {
               <OrdersOverview />
             </Grid>
           </Grid>
-        </MDBox>
-      </MDBox>
+        </Box>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

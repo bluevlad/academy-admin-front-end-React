@@ -5,10 +5,14 @@ import Icon from "@mui/material/Icon";
 import { useNavigate } from "react-router-dom";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
-import MDInput from "components/MDInput";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
+import TextField from "@mui/material/TextField";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -42,7 +46,7 @@ function NoteList() {
         data?.map((item) => ({
           noteNo: item.NOTE_NO,
           noteContent: (
-            <MDTypography
+            <Typography
               component="a"
               href="#"
               variant="caption"
@@ -57,22 +61,22 @@ function NoteList() {
               {item.NOTE_CONTENT?.length > 20
                 ? item.NOTE_CONTENT.substring(0, 20) + "..."
                 : item.NOTE_CONTENT}
-            </MDTypography>
+            </Typography>
           ),
           recvId: (
-            <MDTypography variant="caption" color="text" fontWeight="medium">
+            <Typography variant="caption" color="text" fontWeight="medium">
               {item.RECV_ID}
-            </MDTypography>
+            </Typography>
           ),
           readYn: (
-            <MDTypography variant="caption" color="text" fontWeight="medium">
+            <Typography variant="caption" color="text" fontWeight="medium">
               {item.READ_YN === "Y" ? "읽음" : "안읽음"}
-            </MDTypography>
+            </Typography>
           ),
           sendDt: (
-            <MDTypography variant="caption" color="text" fontWeight="medium">
+            <Typography variant="caption" color="text" fontWeight="medium">
               {item.SEND_DT}
-            </MDTypography>
+            </Typography>
           ),
         })) || [],
     };
@@ -103,16 +107,16 @@ function NoteList() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
@@ -120,23 +124,23 @@ function NoteList() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   쪽지 관리
-                </MDTypography>
-                <MDButton
-                  variant="gradient"
+                </Typography>
+                <Button
+                  variant="contained"
                   color="dark"
                   onClick={() => navigate("/note/detail")}
                 >
                   <Icon sx={{ fontWeight: "bold" }}>add</Icon>
                   &nbsp;보내기
-                </MDButton>
-              </MDBox>
+                </Button>
+              </Box>
 
-              <MDBox p={3}>
+              <Box p={3}>
                 <Grid container spacing={2} mb={2} alignItems="center">
                   <Grid item xs={12} md={6}>
-                    <MDInput
+                    <TextField
                       label="내용 검색"
                       value={searchParams.searchNoteContent}
                       onChange={(e) =>
@@ -149,9 +153,9 @@ function NoteList() {
                     />
                   </Grid>
                   <Grid item xs={12} md={2}>
-                    <MDButton variant="gradient" color="info" onClick={handleSearch} fullWidth>
+                    <Button variant="contained" color="info" onClick={handleSearch} fullWidth>
                       검색
-                    </MDButton>
+                    </Button>
                   </Grid>
                 </Grid>
 
@@ -162,11 +166,11 @@ function NoteList() {
                   showTotalEntries={false}
                   noEndBorder
                 />
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

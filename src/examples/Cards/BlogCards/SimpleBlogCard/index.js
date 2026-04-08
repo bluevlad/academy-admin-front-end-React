@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // react-router components
 import { Link } from "react-router-dom";
 
@@ -24,15 +9,18 @@ import Card from "@mui/material/Card";
 import MuiLink from "@mui/material/Link";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 function SimpleBlogCard({ image, title, description, action }) {
   return (
     <Card>
-      <MDBox position="relative" borderRadius="lg" mt={-3} mx={2}>
-        <MDBox
+      <Box position="relative" borderRadius="lg" mt={-3} mx={2}>
+        <Box
           component="img"
           src={image}
           alt={title}
@@ -43,7 +31,7 @@ function SimpleBlogCard({ image, title, description, action }) {
           position="relative"
           zIndex={1}
         />
-        <MDBox
+        <Box
           borderRadius="lg"
           shadow="md"
           width="100%"
@@ -58,26 +46,26 @@ function SimpleBlogCard({ image, title, description, action }) {
             backgroundSize: "cover",
           }}
         />
-      </MDBox>
-      <MDBox p={3}>
-        <MDTypography display="inline" variant="h3" textTransform="capitalize" fontWeight="bold">
+      </Box>
+      <Box p={3}>
+        <Typography display="inline" variant="h3" textTransform="capitalize" fontWeight="bold">
           {title}
-        </MDTypography>
-        <MDBox mt={2} mb={3}>
-          <MDTypography variant="body2" component="p" color="text">
+        </Typography>
+        <Box mt={2} mb={3}>
+          <Typography variant="body2" component="p" color="text">
             {description}
-          </MDTypography>
-        </MDBox>
+          </Typography>
+        </Box>
         {action.type === "external" ? (
           <MuiLink href={action.route} target="_blank" rel="noreferrer">
-            <MDButton color={action.color ? action.color : "dark"}>{action.label}</MDButton>
+            <Button color={action.color ? action.color : "dark"}>{action.label}</Button>
           </MuiLink>
         ) : (
           <Link to={action.route}>
-            <MDButton color={action.color ? action.color : "dark"}>{action.label}</MDButton>
+            <Button color={action.color ? action.color : "dark"}>{action.label}</Button>
           </Link>
         )}
-      </MDBox>
+      </Box>
     </Card>
   );
 }

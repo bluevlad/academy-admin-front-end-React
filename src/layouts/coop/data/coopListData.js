@@ -2,9 +2,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
 
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 export default function data(coopList = [], onEdit, onDelete, onManageIp) {
   return {
@@ -20,44 +23,44 @@ export default function data(coopList = [], onEdit, onDelete, onManageIp) {
 
     rows: coopList.map((item) => ({
       coopId: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.COOP_CD}
-        </MDTypography>
+        </Typography>
       ),
       coopNm: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.COOP_NM}
-        </MDTypography>
+        </Typography>
       ),
       discount: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.DISCOUNT_PER}
-        </MDTypography>
+        </Typography>
       ),
       desc: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.COOP_DESC}
-        </MDTypography>
+        </Typography>
       ),
       ipCount: (
-        <MDButton variant="text" color="info" size="small" onClick={() => onManageIp(item)}>
+        <Button variant="text" color="info" size="small" onClick={() => onManageIp(item)}>
           {item.IP_CNT || 0}
-        </MDButton>
+        </Button>
       ),
       regDate: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.REG_DT}
-        </MDTypography>
+        </Typography>
       ),
       action: (
-        <MDBox display="flex" justifyContent="center">
-          <MDButton variant="text" color="info" size="small" onClick={() => onEdit(item)}>
+        <Box display="flex" justifyContent="center">
+          <Button variant="text" color="info" size="small" onClick={() => onEdit(item)}>
             수정
-          </MDButton>
-          <MDButton variant="text" color="error" size="small" onClick={() => onDelete(item)}>
+          </Button>
+          <Button variant="text" color="error" size="small" onClick={() => onDelete(item)}>
             삭제
-          </MDButton>
-        </MDBox>
+          </Button>
+        </Box>
       ),
     })),
   };

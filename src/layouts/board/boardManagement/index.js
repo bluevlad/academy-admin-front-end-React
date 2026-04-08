@@ -15,9 +15,12 @@ import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 
 // MD Components
-import MDBox from "components/MDBox";
-import MDButton from "components/MDButton";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Button from "@mui/material/Button";
+
+import Typography from "@mui/material/Typography";
+
 
 // Layout
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -207,14 +210,14 @@ function BoardManagement() {
         header: "관리",
         size: 90,
         cell: ({ row }) => (
-          <MDBox display="flex" justifyContent="center">
+          <Box display="flex" justifyContent="center">
             <IconButton size="small" color="info" onClick={() => handleOpenDialog("edit", row.original)}>
               <Icon fontSize="small">edit</Icon>
             </IconButton>
             <IconButton size="small" color="error" onClick={() => handleDelete(row.original.boardMngSeq)}>
               <Icon fontSize="small">delete</Icon>
             </IconButton>
-          </MDBox>
+          </Box>
         ),
       },
     ],
@@ -224,16 +227,16 @@ function BoardManagement() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
@@ -241,19 +244,19 @@ function BoardManagement() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   게시판 관리
-                </MDTypography>
-                <MDButton
+                </Typography>
+                <Button
                   variant="contained"
                   color="white"
                   size="small"
                   onClick={() => handleOpenDialog("add")}
                 >
                   <Icon>add</Icon>&nbsp;등록
-                </MDButton>
-              </MDBox>
-              <MDBox p={2}>
+                </Button>
+              </Box>
+              <Box p={2}>
                 <ServerDataTable
                   columns={columns}
                   data={boardMngList}
@@ -261,17 +264,17 @@ function BoardManagement() {
                   onPageChange={(page) => setCurrentPage(page)}
                   loading={loading}
                 />
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
 
       {/* 등록/수정 Dialog - React Hook Form + Zod */}
       <Dialog open={dialogOpen} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
         <DialogTitle>{dialogMode === "add" ? "게시판 등록" : "게시판 수정"}</DialogTitle>
         <DialogContent>
-          <MDBox component="form" pt={2}>
+          <Box component="form" pt={2}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <FormTextField
@@ -301,20 +304,20 @@ function BoardManagement() {
                 <FormSelect control={control} name="commentYn" label="댓글 여부" options={YN_OPTIONS} />
               </Grid>
             </Grid>
-          </MDBox>
+          </Box>
         </DialogContent>
         <DialogActions>
-          <MDButton onClick={handleCloseDialog} color="secondary">
+          <Button onClick={handleCloseDialog} color="secondary">
             취소
-          </MDButton>
-          <MDButton
+          </Button>
+          <Button
             onClick={handleSubmit(onSubmit)}
             color="info"
-            variant="gradient"
+            variant="contained"
             disabled={isSubmitting}
           >
             {dialogMode === "add" ? "등록" : "수정"}
-          </MDButton>
+          </Button>
         </DialogActions>
       </Dialog>
       <Footer />

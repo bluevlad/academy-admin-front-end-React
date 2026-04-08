@@ -15,9 +15,12 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDButton from "components/MDButton";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Button from "@mui/material/Button";
+
+import Typography from "@mui/material/Typography";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -127,42 +130,42 @@ function BoardViewManagement() {
 
   const rows = boardCodeList.map((item) => ({
     boardMngSeq: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
+      <Typography variant="caption" color="text" fontWeight="medium">
         {item.boardMngSeq}
-      </MDTypography>
+      </Typography>
     ),
     categoryCode: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
+      <Typography variant="caption" color="text" fontWeight="medium">
         {item.categoryCode}
-      </MDTypography>
+      </Typography>
     ),
     categoryName: (
-      <MDTypography variant="caption" color="text">
+      <Typography variant="caption" color="text">
         {item.categoryName}
-      </MDTypography>
+      </Typography>
     ),
     action: (
-      <MDBox display="flex" justifyContent="center">
-        <MDButton variant="text" color="error" iconOnly onClick={() => handleDelete(item)}>
+      <Box display="flex" justifyContent="center">
+        <Button variant="text" color="error" iconOnly onClick={() => handleDelete(item)}>
           <Icon>delete</Icon>
-        </MDButton>
-      </MDBox>
+        </Button>
+      </Box>
     ),
   }));
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="dark"
                 borderRadius="lg"
                 coloredShadow="dark"
@@ -170,14 +173,14 @@ function BoardViewManagement() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   게시판 카테고리(View) 관리
-                </MDTypography>
-                <MDButton variant="contained" color="white" size="small" onClick={handleOpenDialog}>
+                </Typography>
+                <Button variant="contained" color="white" size="small" onClick={handleOpenDialog}>
                   <Icon>add</Icon>&nbsp;등록
-                </MDButton>
-              </MDBox>
-              <MDBox p={3}>
+                </Button>
+              </Box>
+              <Box p={3}>
                 <Grid container spacing={3} mb={3}>
                   <Grid item xs={12} md={4}>
                     <FormControl fullWidth>
@@ -195,9 +198,9 @@ function BoardViewManagement() {
                 </Grid>
 
                 {loading ? (
-                  <MDBox p={3} textAlign="center">
-                    <MDTypography variant="caption">로딩 중...</MDTypography>
-                  </MDBox>
+                  <Box p={3} textAlign="center">
+                    <Typography variant="caption">로딩 중...</Typography>
+                  </Box>
                 ) : (
                   <DataTable
                     table={{ columns, rows }}
@@ -207,16 +210,16 @@ function BoardViewManagement() {
                     noEndBorder
                   />
                 )}
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
 
       <Dialog open={dialogOpen} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
         <DialogTitle>카테고리 등록</DialogTitle>
         <DialogContent>
-          <MDBox component="form" pt={2}>
+          <Box component="form" pt={2}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <FormControl fullWidth>
@@ -254,15 +257,15 @@ function BoardViewManagement() {
                 />
               </Grid>
             </Grid>
-          </MDBox>
+          </Box>
         </DialogContent>
         <DialogActions>
-          <MDButton onClick={handleCloseDialog} color="secondary">
+          <Button onClick={handleCloseDialog} color="secondary">
             취소
-          </MDButton>
-          <MDButton onClick={handleSubmit} color="info" variant="gradient">
+          </Button>
+          <Button onClick={handleSubmit} color="info" variant="contained">
             등록
-          </MDButton>
+          </Button>
         </DialogActions>
       </Dialog>
       <Footer />

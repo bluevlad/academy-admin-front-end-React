@@ -2,9 +2,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
 
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 import Checkbox from "@mui/material/Checkbox";
 
 export default function data(scheduleList = [], onView, onEdit, onSelect) {
@@ -26,17 +29,17 @@ export default function data(scheduleList = [], onView, onEdit, onSelect) {
         />
       ),
       no: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {index + 1}
-        </MDTypography>
+        </Typography>
       ),
       category: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.CAT_NM}
-        </MDTypography>
+        </Typography>
       ),
       date: (
-        <MDTypography
+        <Typography
           variant="caption"
           color="info"
           fontWeight="medium"
@@ -44,10 +47,10 @@ export default function data(scheduleList = [], onView, onEdit, onSelect) {
           onClick={() => onView(item)}
         >
           {item.SCH_DAY} ({item.WEEK})
-        </MDTypography>
+        </Typography>
       ),
       status: (
-        <MDTypography
+        <Typography
           variant="caption"
           color={(item.MAX_USR - item.REQ_CNT) <= 0 ? "error" : "text"}
           fontWeight="medium"
@@ -55,12 +58,12 @@ export default function data(scheduleList = [], onView, onEdit, onSelect) {
           onClick={() => onView(item)}
         >
           {item.REQ_CNT} / {item.MAX_USR}
-        </MDTypography>
+        </Typography>
       ),
       edit: (
-        <MDButton variant="text" color="dark" size="small" onClick={() => onEdit(item)}>
+        <Button variant="text" color="dark" size="small" onClick={() => onEdit(item)}>
           수정
-        </MDButton>
+        </Button>
       ),
     })),
   };

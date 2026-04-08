@@ -4,9 +4,12 @@
 /* eslint-disable react/function-component-definition */
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDBadge from "components/MDBadge";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Badge from "@mui/material/Badge";
+
 
 // Router
 import { Link } from "react-router-dom";
@@ -50,54 +53,54 @@ export default function data(bookList = []) {
 
     rows: bookList.map((item, index) => ({
       no: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {index + 1}
-        </MDTypography>
+        </Typography>
       ),
       rscId: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.RSC_ID}
-        </MDTypography>
+        </Typography>
       ),
       categoryNm: (
-        <MDBox display="flex" flexDirection="column">
-          <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Box display="flex" flexDirection="column">
+          <Typography variant="caption" color="text" fontWeight="medium">
             {item.CATEGORY_NM}
-          </MDTypography>
-          <MDTypography variant="caption" color="text" fontWeight="light">
+          </Typography>
+          <Typography variant="caption" color="text" fontWeight="light">
             {item.LEARNING_NM}
-          </MDTypography>
-        </MDBox>
+          </Typography>
+        </Box>
       ),
       bookNm: (
-        <MDTypography variant="button" color="text" fontWeight="bold">
+        <Typography variant="button" color="text" fontWeight="bold">
           {item.BOOK_NM}
-        </MDTypography>
+        </Typography>
       ),
       author: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.BOOK_AUTHOR}
-        </MDTypography>
+        </Typography>
       ),
       publisher: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.BOOK_PUBLISHERS}
-        </MDTypography>
+        </Typography>
       ),
       stock: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.BOOK_STOCK}
-        </MDTypography>
+        </Typography>
       ),
       status: (
-        <MDBox ml={-1}>
-          <MDBadge badgeContent={getCoverTypeLabel(item.COVER_TYPE)} color={getBadgeColor(item.COVER_TYPE)} variant="gradient" size="sm" />
-        </MDBox>
+        <Box ml={-1}>
+          <Badge badgeContent={getCoverTypeLabel(item.COVER_TYPE)} color={getBadgeColor(item.COVER_TYPE)} variant="contained" size="sm" />
+        </Box>
       ),
       action: (
-        <MDTypography component={Link} to={`/book/write?seq=${item.SEQ}&rscId=${item.RSC_ID}`} variant="caption" color="info" fontWeight="medium">
+        <Typography component={Link} to={`/book/write?seq=${item.SEQ}&rscId=${item.RSC_ID}`} variant="caption" color="info" fontWeight="medium">
           Edit
-        </MDTypography>
+        </Typography>
       ),
     })),
   };

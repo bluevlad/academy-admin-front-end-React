@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -21,8 +6,10 @@ import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 
 // Material Dashboard 2 React base styles
 import typography from "assets/theme/base/typography";
@@ -34,17 +21,17 @@ function Footer({ company, links, userCompany }) {
 
   const renderLinks = () =>
     links.map((link) => (
-      <MDBox key={link.name} component="li" px={2} lineHeight={1}>
+      <Box key={link.name} component="li" px={2} lineHeight={1}>
         <Link href={link.href} target="_blank">
-          <MDTypography variant="button" fontWeight="regular" color="text">
+          <Typography variant="button" fontWeight="regular" color="text">
             {link.name}
-          </MDTypography>
+          </Typography>
         </Link>
-      </MDBox>
+      </Box>
     ));
 
   return (
-    <MDBox
+    <Box
       width="100%"
       display="flex"
       flexDirection={{ xs: "column", lg: "row" }}
@@ -52,7 +39,7 @@ function Footer({ company, links, userCompany }) {
       alignItems="center"
       px={1.5}
     >
-      <MDBox
+      <Box
         display="flex"
         justifyContent="center"
         alignItems="center"
@@ -63,21 +50,21 @@ function Footer({ company, links, userCompany }) {
       >
         &copy; {new Date().getFullYear()},
         <Link href={href} target="_blank">
-          <MDTypography variant="button" fontWeight="medium">
+          <Typography variant="button" fontWeight="medium">
             &nbsp;Online Academy System by Material&nbsp;
-          </MDTypography>
+          </Typography>
         </Link>
-        <MDBox component="span" mx={2} color="text">
+        <Box component="span" mx={2} color="text">
           &nbsp;&nbsp;
-        </MDBox>
+        </Box>
         Developed by
         <Link href={userHref} target="_blank">
-          <MDTypography variant="button" fontWeight="medium">
+          <Typography variant="button" fontWeight="medium">
             &nbsp;{userName}&nbsp;
-          </MDTypography>
+          </Typography>
         </Link>
-      </MDBox>
-      <MDBox
+      </Box>
+      <Box
         component="ul"
         sx={({ breakpoints }) => ({
           display: "flex",
@@ -95,8 +82,8 @@ function Footer({ company, links, userCompany }) {
         })}
       >
         {renderLinks()}
-      </MDBox>
-    </MDBox>
+      </Box>
+    </Box>
   );
 }
 

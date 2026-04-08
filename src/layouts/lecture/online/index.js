@@ -3,8 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
@@ -41,7 +43,7 @@ function OnlineLectureList() {
           learningNm: item.LEARNING_NM,
           subjectTeacherNm: item.SUBJECT_TEACHER_NM,
           subjectTitle: (
-            <MDTypography
+            <Typography
               component={Link}
               to={`/lecture/online/detail?leccode=${item.LECCODE}`}
               variant="caption"
@@ -49,7 +51,7 @@ function OnlineLectureList() {
               fontWeight="medium"
             >
               {item.SUBJECT_TITLE}
-            </MDTypography>
+            </Typography>
           ),
           isUseNm: item.ISUSENM,
           regDt: item.REG_DT,
@@ -64,23 +66,23 @@ function OnlineLectureList() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   Online Lecture List
-                </MDTypography>
+                </Typography>
                 <Button
                   variant="contained"
                   color="white"
@@ -89,8 +91,8 @@ function OnlineLectureList() {
                 >
                   Create
                 </Button>
-              </MDBox>
-              <MDBox pt={3}>
+              </Box>
+              <Box pt={3}>
                 <DataTable
                   table={{ columns, rows }}
                   isSorted={false}
@@ -98,11 +100,11 @@ function OnlineLectureList() {
                   showTotalEntries={false}
                   noEndBorder
                 />
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout >
   );

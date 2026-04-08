@@ -8,10 +8,14 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
-import MDInput from "components/MDInput";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
+import TextField from "@mui/material/TextField";
+
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
@@ -130,25 +134,25 @@ function DdayDetail() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   D-Day {isEdit ? "상세/수정" : "등록"}
-                </MDTypography>
-              </MDBox>
-              <MDBox p={3}>
+                </Typography>
+              </Box>
+              <Box p={3}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
                     <FormControl fullWidth>
@@ -181,7 +185,7 @@ function DdayDetail() {
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
-                    <MDInput
+                    <TextField
                       label="D-day 설명"
                       name="DDAY_NAME"
                       value={formData.DDAY_NAME}
@@ -190,7 +194,7 @@ function DdayDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} md={6}>
-                    <MDInput
+                    <TextField
                       label="D-day 날짜 (YYYYMMDD)"
                       name="DDAY_DATE"
                       value={formData.DDAY_DATE}
@@ -200,7 +204,7 @@ function DdayDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} md={6}>
-                    <MDInput
+                    <TextField
                       label="D-day Link"
                       name="DDAY_LINK"
                       value={formData.DDAY_LINK || ""}
@@ -225,28 +229,28 @@ function DdayDetail() {
                   </Grid>
 
                   <Grid item xs={12} display="flex" justifyContent="center">
-                    <MDButton variant="gradient" color="info" onClick={handleSubmit}>
+                    <Button variant="contained" color="info" onClick={handleSubmit}>
                       {isEdit ? "수정" : "등록"}
-                    </MDButton>
+                    </Button>
                     {isEdit && (
-                      <MDBox ml={1}>
-                        <MDButton variant="outlined" color="error" onClick={handleDelete}>
+                      <Box ml={1}>
+                        <Button variant="outlined" color="error" onClick={handleDelete}>
                           삭제
-                        </MDButton>
-                      </MDBox>
+                        </Button>
+                      </Box>
                     )}
-                    <MDBox ml={1}>
-                      <MDButton variant="outlined" color="secondary" onClick={() => navigate("/dday")}>
+                    <Box ml={1}>
+                      <Button variant="outlined" color="secondary" onClick={() => navigate("/dday")}>
                         목록
-                      </MDButton>
-                    </MDBox>
+                      </Button>
+                    </Box>
                   </Grid>
                 </Grid>
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

@@ -1,26 +1,15 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // @mui material components
 import Card from "@mui/material/Card";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDInput from "components/MDInput";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import TextField from "@mui/material/TextField";
+
+import Button from "@mui/material/Button";
+
 
 // Authentication layout components
 import CoverLayout from "layouts/authentication/components/CoverLayout";
@@ -32,8 +21,8 @@ function Cover() {
   return (
     <CoverLayout coverHeight="50vh" image={bgImage}>
       <Card>
-        <MDBox
-          variant="gradient"
+        <Box
+          variant="contained"
           bgColor="info"
           borderRadius="lg"
           coloredShadow="success"
@@ -43,25 +32,25 @@ function Cover() {
           mb={1}
           textAlign="center"
         >
-          <MDTypography variant="h3" fontWeight="medium" color="white" mt={1}>
+          <Typography variant="h3" fontWeight="medium" color="white" mt={1}>
             Reset Password
-          </MDTypography>
-          <MDTypography display="block" variant="button" color="white" my={1}>
+          </Typography>
+          <Typography display="block" variant="button" color="white" my={1}>
             You will receive an e-mail in maximum 60 seconds
-          </MDTypography>
-        </MDBox>
-        <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form">
-            <MDBox mb={4}>
-              <MDInput type="email" label="Email" variant="standard" fullWidth />
-            </MDBox>
-            <MDBox mt={6} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
+          </Typography>
+        </Box>
+        <Box pt={4} pb={3} px={3}>
+          <Box component="form" role="form">
+            <Box mb={4}>
+              <TextField type="email" label="Email" variant="standard" fullWidth />
+            </Box>
+            <Box mt={6} mb={1}>
+              <Button variant="contained" color="info" fullWidth>
                 reset
-              </MDButton>
-            </MDBox>
-          </MDBox>
-        </MDBox>
+              </Button>
+            </Box>
+          </Box>
+        </Box>
       </Card>
     </CoverLayout>
   );

@@ -2,9 +2,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
 
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 export default function data(orderList = [], onOpenPayDetail) {
   return {
@@ -21,12 +24,12 @@ export default function data(orderList = [], onOpenPayDetail) {
 
     rows: orderList.map((item, index) => ({
       no: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {index + 1}
-        </MDTypography>
+        </Typography>
       ),
       orderNo: (
-        <MDTypography
+        <Typography
           variant="caption"
           color="info"
           fontWeight="medium"
@@ -34,37 +37,37 @@ export default function data(orderList = [], onOpenPayDetail) {
           onClick={() => onOpenPayDetail && onOpenPayDetail(item)}
         >
           {item.ORDERNO}
-        </MDTypography>
+        </Typography>
       ),
       userName: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.USER_NM} ({item.USER_ID})
-        </MDTypography>
+        </Typography>
       ),
       phone: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.PHONE_NO}
-        </MDTypography>
+        </Typography>
       ),
       productName: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.ORDER_NM}
-        </MDTypography>
+        </Typography>
       ),
       price: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {Number(item.PAY_PRICE).toLocaleString()}
-        </MDTypography>
+        </Typography>
       ),
       status: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.STATUS_NM}
-        </MDTypography>
+        </Typography>
       ),
       regDate: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.REG_DT}
-        </MDTypography>
+        </Typography>
       ),
     })),
   };

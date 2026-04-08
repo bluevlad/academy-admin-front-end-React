@@ -7,9 +7,12 @@ import Tabs from "@mui/material/Tabs";
 import { useNavigate } from "react-router-dom";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -85,16 +88,16 @@ function StatList() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
@@ -102,20 +105,20 @@ function StatList() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   통계 관리
-                </MDTypography>
-              </MDBox>
+                </Typography>
+              </Box>
 
-              <MDBox p={2}>
+              <Box p={2}>
                 <Tabs value={tabValue} onChange={handleTabChange} centered>
                   <Tab label="강사 통계" />
                   <Tab label="회원 구매 통계" />
                   <Tab label="검색어 통계" />
                 </Tabs>
-              </MDBox>
+              </Box>
 
-              <MDBox p={3}>
+              <Box p={3}>
                 <DataTable
                   table={tableData}
                   isSorted={false}
@@ -123,11 +126,11 @@ function StatList() {
                   showTotalEntries={false}
                   noEndBorder
                 />
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

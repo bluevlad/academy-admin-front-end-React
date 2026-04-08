@@ -16,10 +16,14 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDButton from "components/MDButton";
-import MDTypography from "components/MDTypography";
-import MDBadge from "components/MDBadge";
+import Box from "@mui/material/Box";
+
+import Button from "@mui/material/Button";
+
+import Typography from "@mui/material/Typography";
+
+import Badge from "@mui/material/Badge";
+
 
 // Material Dashboard 2 React example components
 import DataTable from "examples/Tables/DataTable";
@@ -148,53 +152,53 @@ function AdminAuth() {
     siteId: auth.SITE_ID,
     siteNm: auth.SITE_NM,
     onoffDiv: (
-      <MDTypography variant="caption" color="text">
+      <Typography variant="caption" color="text">
         {auth.ONOFF_DIV_NM || auth.ONOFF_DIV}
-      </MDTypography>
+      </Typography>
     ),
     isUse: (
-      <MDBox ml={-1}>
-        <MDBadge
+      <Box ml={-1}>
+        <Badge
           badgeContent={auth.ISUSE === "Y" ? "활성" : "비활성"}
           color={auth.ISUSE === "Y" ? "success" : "dark"}
-          variant="gradient"
+          variant="contained"
           size="sm"
         />
-      </MDBox>
+      </Box>
     ),
     regDt: (
-      <MDTypography variant="caption" color="text">
+      <Typography variant="caption" color="text">
         {auth.REG_DT}
-      </MDTypography>
+      </Typography>
     ),
     action: (
-      <MDBox display="flex" justifyContent="center">
-        <MDButton
+      <Box display="flex" justifyContent="center">
+        <Button
           variant="text"
           color="dark"
           iconOnly
           onClick={() => handleOpenDialog("edit", auth)}
         >
           <Icon>edit</Icon>
-        </MDButton>
-        <MDButton variant="text" color="error" iconOnly onClick={() => handleDelete(auth.SITE_ID)}>
+        </Button>
+        <Button variant="text" color="error" iconOnly onClick={() => handleDelete(auth.SITE_ID)}>
           <Icon>delete</Icon>
-        </MDButton>
-      </MDBox>
+        </Button>
+      </Box>
     ),
   }));
 
   return (
-    <MDBox pt={6} pb={3}>
+    <Box pt={6} pb={3}>
       <Grid container spacing={6}>
         <Grid item xs={12}>
           <Card>
-            <MDBox
+            <Box
               mx={2}
               mt={-3}
               py={3}
               px={2}
-              variant="gradient"
+              variant="contained"
               bgColor="info"
               borderRadius="lg"
               coloredShadow="info"
@@ -202,23 +206,23 @@ function AdminAuth() {
               justifyContent="space-between"
               alignItems="center"
             >
-              <MDTypography variant="h6" color="white">
+              <Typography variant="h6" color="white">
                 권한 관리
-              </MDTypography>
-              <MDButton
+              </Typography>
+              <Button
                 variant="contained"
                 color="white"
                 size="small"
                 onClick={() => handleOpenDialog("add")}
               >
                 <Icon>add</Icon>&nbsp;등록
-              </MDButton>
-            </MDBox>
-            <MDBox pt={3}>
+              </Button>
+            </Box>
+            <Box pt={3}>
               {loading ? (
-                <MDBox p={3} textAlign="center">
-                  <MDTypography variant="caption">로딩 중...</MDTypography>
-                </MDBox>
+                <Box p={3} textAlign="center">
+                  <Typography variant="caption">로딩 중...</Typography>
+                </Box>
               ) : (
                 <>
                   <DataTable
@@ -229,14 +233,14 @@ function AdminAuth() {
                     noEndBorder
                   />
                   {paginationInfo && (
-                    <MDBox
+                    <Box
                       p={3}
                       display="flex"
                       justifyContent="space-between"
                       alignItems="center"
                     >
-                      <MDBox>
-                        <MDTypography variant="caption" color="text">
+                      <Box>
+                        <Typography variant="caption" color="text">
                           전체 {paginationInfo.totalRecordCount}건 중{" "}
                           {paginationInfo.firstRecordIndex + 1} -{" "}
                           {Math.min(
@@ -244,8 +248,8 @@ function AdminAuth() {
                             paginationInfo.totalRecordCount
                           )}
                           건 표시
-                        </MDTypography>
-                      </MDBox>
+                        </Typography>
+                      </Box>
                       <Stack spacing={2}>
                         <Pagination
                           count={totalPages}
@@ -257,11 +261,11 @@ function AdminAuth() {
                           showLastButton
                         />
                       </Stack>
-                    </MDBox>
+                    </Box>
                   )}
                 </>
               )}
-            </MDBox>
+            </Box>
           </Card>
         </Grid>
       </Grid>
@@ -270,7 +274,7 @@ function AdminAuth() {
       <Dialog open={dialogOpen} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
         <DialogTitle>{dialogMode === "add" ? "권한 등록" : "권한 수정"}</DialogTitle>
         <DialogContent>
-          <MDBox component="form" pt={2} px={2}>
+          <Box component="form" pt={2} px={2}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -322,18 +326,18 @@ function AdminAuth() {
                 </FormControl>
               </Grid>
             </Grid>
-          </MDBox>
+          </Box>
         </DialogContent>
         <DialogActions>
-          <MDButton onClick={handleCloseDialog} color="secondary">
+          <Button onClick={handleCloseDialog} color="secondary">
             취소
-          </MDButton>
-          <MDButton onClick={handleSubmit} color="info" variant="gradient">
+          </Button>
+          <Button onClick={handleSubmit} color="info" variant="contained">
             {dialogMode === "add" ? "등록" : "수정"}
-          </MDButton>
+          </Button>
         </DialogActions>
       </Dialog>
-    </MDBox>
+    </Box>
   );
 }
 

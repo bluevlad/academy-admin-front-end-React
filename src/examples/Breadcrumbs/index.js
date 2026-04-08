@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // react-router-dom components
 import { Link } from "react-router-dom";
 
@@ -24,14 +9,16 @@ import { Breadcrumbs as MuiBreadcrumbs } from "@mui/material";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 
 function Breadcrumbs({ icon, title, route, light }) {
   const routes = route.slice(0, -1);
 
   return (
-    <MDBox mr={{ xs: 0, xl: 8 }}>
+    <Box mr={{ xs: 0, xl: 8 }}>
       <MuiBreadcrumbs
         sx={{
           "& .MuiBreadcrumbs-separator": {
@@ -40,7 +27,7 @@ function Breadcrumbs({ icon, title, route, light }) {
         }}
       >
         <Link to="/">
-          <MDTypography
+          <Typography
             component="span"
             variant="body2"
             color={light ? "white" : "dark"}
@@ -48,11 +35,11 @@ function Breadcrumbs({ icon, title, route, light }) {
             sx={{ lineHeight: 0 }}
           >
             <Icon>{icon}</Icon>
-          </MDTypography>
+          </Typography>
         </Link>
         {routes.map((el) => (
           <Link to={`/${el}`} key={el}>
-            <MDTypography
+            <Typography
               component="span"
               variant="button"
               fontWeight="regular"
@@ -62,10 +49,10 @@ function Breadcrumbs({ icon, title, route, light }) {
               sx={{ lineHeight: 0 }}
             >
               {el}
-            </MDTypography>
+            </Typography>
           </Link>
         ))}
-        <MDTypography
+        <Typography
           variant="button"
           fontWeight="regular"
           textTransform="capitalize"
@@ -73,9 +60,9 @@ function Breadcrumbs({ icon, title, route, light }) {
           sx={{ lineHeight: 0 }}
         >
           {title.replace("-", " ")}
-        </MDTypography>
+        </Typography>
       </MuiBreadcrumbs>
-      <MDTypography
+      <Typography
         fontWeight="bold"
         textTransform="capitalize"
         variant="h6"
@@ -83,8 +70,8 @@ function Breadcrumbs({ icon, title, route, light }) {
         noWrap
       >
         {title.replace("-", " ")}
-      </MDTypography>
-    </MDBox>
+      </Typography>
+    </Box>
   );
 }
 

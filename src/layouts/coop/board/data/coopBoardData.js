@@ -2,8 +2,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
 
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 import { Link } from "react-router-dom";
 
 export default function data(boardList = []) {
@@ -21,22 +23,22 @@ export default function data(boardList = []) {
 
     rows: boardList.map((item, index) => ({
       no: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.NOTICE_YN === 'Y' ? '공지' : index + 1}
-        </MDTypography>
+        </Typography>
       ),
       area: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.COOP_AREA_NM}
-        </MDTypography>
+        </Typography>
       ),
       hspt: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.COOP_HSPT_NM}
-        </MDTypography>
+        </Typography>
       ),
       subject: (
-        <MDTypography
+        <Typography
           component={Link}
           to={`/coop/board/detail?boardSeq=${item.BOARD_SEQ}&boardMngSeq=${item.BOARD_MNG_SEQ}`}
           variant="button"
@@ -44,27 +46,27 @@ export default function data(boardList = []) {
           fontWeight="medium"
         >
           {item.SUBJECT}
-        </MDTypography>
+        </Typography>
       ),
       writer: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.CREATENAME}
-        </MDTypography>
+        </Typography>
       ),
       file: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.FILE_YN === 'Y' ? 'O' : ''}
-        </MDTypography>
+        </Typography>
       ),
       hits: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.HITS}
-        </MDTypography>
+        </Typography>
       ),
       regDate: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
+        <Typography variant="caption" color="text" fontWeight="medium">
           {item.REG_DT}
-        </MDTypography>
+        </Typography>
       ),
     })),
   };

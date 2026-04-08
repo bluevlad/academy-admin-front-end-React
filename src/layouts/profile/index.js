@@ -5,15 +5,18 @@ import Divider from "@mui/material/Divider";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
 import Header from "layouts/profile/components/Header";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
-import MDButton from "components/MDButton";
+import Button from "@mui/material/Button";
+
 import { getProfile } from "api/login";
 
 function Overview() {
@@ -52,9 +55,9 @@ function Overview() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox mb={2} />
+      <Box mb={2} />
       <Header user={user}>
-        <MDBox mt={5} mb={3}>
+        <Box mt={5} mb={3}>
           <Grid container spacing={1}>
             <Grid item xs={12} md={6} xl={4}>
               <PlatformSettings user={user} />
@@ -97,22 +100,22 @@ function Overview() {
                   shadow={false}
                 />
               ) : (
-                <MDBox p={2}>
-                  <MDTypography variant="body2">No profile data. Please login again.</MDTypography>
-                </MDBox>
+                <Box p={2}>
+                  <Typography variant="body2">No profile data. Please login again.</Typography>
+                </Box>
               )}
               <Divider orientation="vertical" sx={{ mx: 0 }} />
             </Grid>
             <Grid item xs={12} xl={4}>
               {/* Could add more profile content here */}
-              <MDBox p={2}>
-                <MDButton variant="gradient" color="error" fullWidth onClick={logout}>
+              <Box p={2}>
+                <Button variant="contained" color="error" fullWidth onClick={logout}>
                   Logout
-                </MDButton>
-              </MDBox>
+                </Button>
+              </Box>
             </Grid>
           </Grid>
-        </MDBox>
+        </Box>
       </Header>
       <Footer />
     </DashboardLayout>

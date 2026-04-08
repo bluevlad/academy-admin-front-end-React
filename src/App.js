@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState, useEffect, useMemo, Suspense } from "react";
 
 // i18n initialization
@@ -30,7 +15,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
+import Box from "@mui/material/Box";
+
 
 // Material Dashboard 2 React example components
 import Sidenav from "examples/Sidenav";
@@ -140,7 +126,7 @@ export default function App() {
     });
 
   const configsButton = (
-    <MDBox
+    <Box
       display="flex"
       justifyContent="center"
       alignItems="center"
@@ -160,7 +146,7 @@ export default function App() {
       <Icon fontSize="small" color="inherit">
         settings
       </Icon>
-    </MDBox>
+    </Box>
   );
 
   return (
@@ -184,7 +170,7 @@ export default function App() {
               </>
             )}
             {layout === "vr" && <Configurator />}
-            <Suspense fallback={<MDBox display="flex" justifyContent="center" alignItems="center" minHeight="60vh">Loading...</MDBox>}>
+            <Suspense fallback={<Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">Loading...</Box>}>
               <Routes>
                 {getRoutes(routes)}
                 <Route path="*" element={<Navigate to="/dashboard" />} />
@@ -210,7 +196,7 @@ export default function App() {
             </>
           )}
           {layout === "vr" && <Configurator />}
-          <Suspense fallback={<MDBox display="flex" justifyContent="center" alignItems="center" minHeight="60vh">Loading...</MDBox>}>
+          <Suspense fallback={<Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">Loading...</Box>}>
             <Routes>
               {getRoutes(routes)}
               <Route path="*" element={<Navigate to="/dashboard" />} />

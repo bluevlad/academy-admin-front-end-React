@@ -1,25 +1,11 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useEffect } from "react";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
+import Box from "@mui/material/Box";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -54,10 +40,10 @@ function RTL() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox py={3}>
+      <Box py={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
+            <Box mb={1.5}>
               <ComplexStatisticsCard
                 color="dark"
                 icon="weekend"
@@ -69,10 +55,10 @@ function RTL() {
                   label: "من الأسبوع الماضي",
                 }}
               />
-            </MDBox>
+            </Box>
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
+            <Box mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
                 title="مستخدمو اليوم"
@@ -83,10 +69,10 @@ function RTL() {
                   label: "من الأسبوع الماضي",
                 }}
               />
-            </MDBox>
+            </Box>
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
+            <Box mb={1.5}>
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
@@ -98,10 +84,10 @@ function RTL() {
                   label: "من الشهر الماضي",
                 }}
               />
-            </MDBox>
+            </Box>
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
+            <Box mb={1.5}>
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
@@ -113,13 +99,13 @@ function RTL() {
                   label: "مقارنة بيوم أمس",
                 }}
               />
-            </MDBox>
+            </Box>
           </Grid>
         </Grid>
-        <MDBox mt={4.5}>
+        <Box mt={4.5}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
+              <Box mb={3}>
                 <ReportsBarChart
                   color="info"
                   title="مشاهدات الموقع"
@@ -127,10 +113,10 @@ function RTL() {
                   date="الحملة أرسلت قبل يومين"
                   chart={reportsBarChartData}
                 />
-              </MDBox>
+              </Box>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
+              <Box mb={3}>
                 <ReportsLineChart
                   color="success"
                   title="المبيعات اليومية"
@@ -142,10 +128,10 @@ function RTL() {
                   date="تم التحديث منذ 4 دقائق"
                   chart={sales}
                 />
-              </MDBox>
+              </Box>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
+              <Box mb={3}>
                 <ReportsLineChart
                   color="dark"
                   title="المهام المكتملة"
@@ -153,11 +139,11 @@ function RTL() {
                   date="تم تحديثه للتو"
                   chart={tasks}
                 />
-              </MDBox>
+              </Box>
             </Grid>
           </Grid>
-        </MDBox>
-        <MDBox>
+        </Box>
+        <Box>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={8}>
               <Projects />
@@ -166,8 +152,8 @@ function RTL() {
               <OrdersOverview />
             </Grid>
           </Grid>
-        </MDBox>
-      </MDBox>
+        </Box>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

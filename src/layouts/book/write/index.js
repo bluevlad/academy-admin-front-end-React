@@ -5,10 +5,14 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDInput from "components/MDInput";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import TextField from "@mui/material/TextField";
+
+import Button from "@mui/material/Button";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -240,27 +244,27 @@ function BookWrite() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   교재 {seq ? "수정" : "등록"}
-                </MDTypography>
-              </MDBox>
-              <MDBox p={3}>
-                <MDBox mb={2}>
-                  <MDTypography variant="subtitle2">직종</MDTypography>
+                </Typography>
+              </Box>
+              <Box p={3}>
+                <Box mb={2}>
+                  <Typography variant="subtitle2">직종</Typography>
                   <Grid container>
                     {options.kindlist.map((item) => (
                       <Grid item key={item.CODE} xs={6} sm={4} md={3}>
@@ -274,10 +278,10 @@ function BookWrite() {
                       </Grid>
                     ))}
                   </Grid>
-                </MDBox>
+                </Box>
                 <Divider />
-                <MDBox mb={2}>
-                  <MDTypography variant="subtitle2">학습형태</MDTypography>
+                <Box mb={2}>
+                  <Typography variant="subtitle2">학습형태</Typography>
                   <RadioGroup
                     row
                     value={selectedLearning}
@@ -292,11 +296,11 @@ function BookWrite() {
                       />
                     ))}
                   </RadioGroup>
-                </MDBox>
+                </Box>
                 <Divider />
-                <MDBox mb={2}>
-                  <MDTypography variant="subtitle2">과목(강사)</MDTypography>
-                  <MDBox sx={{ maxHeight: 200, overflowY: 'auto' }}>
+                <Box mb={2}>
+                  <Typography variant="subtitle2">과목(강사)</Typography>
+                  <Box sx={{ maxHeight: 200, overflowY: 'auto' }}>
                     <Grid container>
                       {options.subjectteacherlist.map((item) => (
                         <Grid item key={item.SUBJECT_CD + item.USER_ID} xs={6} sm={4} md={3}>
@@ -310,13 +314,13 @@ function BookWrite() {
                         </Grid>
                       ))}
                     </Grid>
-                  </MDBox>
-                </MDBox>
+                  </Box>
+                </Box>
                 <Divider />
 
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <MDInput
+                    <TextField
                       label="도서명"
                       name="BOOK_NM"
                       fullWidth
@@ -325,7 +329,7 @@ function BookWrite() {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <MDInput
+                    <TextField
                       label="도서상세설명"
                       name="BOOK_INFO"
                       fullWidth
@@ -336,7 +340,7 @@ function BookWrite() {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <MDInput
+                    <TextField
                       label="키워드"
                       name="BOOK_KEYWORD"
                       fullWidth
@@ -345,7 +349,7 @@ function BookWrite() {
                     />
                   </Grid>
                   <Grid item xs={12} md={6}>
-                    <MDInput
+                    <TextField
                       type="text"
                       label="기간(이벤트) 종료일 (YYYYMMDD)"
                       name="ISSUE_DATE"
@@ -373,7 +377,7 @@ function BookWrite() {
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
-                    <MDInput
+                    <TextField
                       label="목차"
                       name="BOOK_CONTENTS"
                       fullWidth
@@ -385,7 +389,7 @@ function BookWrite() {
                   </Grid>
 
                   <Grid item xs={12} md={4}>
-                    <MDInput
+                    <TextField
                       label="도서가격"
                       name="PRICE"
                       fullWidth
@@ -394,7 +398,7 @@ function BookWrite() {
                     />
                   </Grid>
                   <Grid item xs={12} md={4}>
-                    <MDInput
+                    <TextField
                       label="할인율(%)"
                       name="DISCOUNT"
                       fullWidth
@@ -403,7 +407,7 @@ function BookWrite() {
                     />
                   </Grid>
                   <Grid item xs={12} md={4}>
-                    <MDInput
+                    <TextField
                       label="할인가"
                       name="DISCOUNT_PRICE"
                       fullWidth
@@ -413,7 +417,7 @@ function BookWrite() {
                   </Grid>
 
                   <Grid item xs={12} md={6}>
-                    <MDInput
+                    <TextField
                       label="출판사"
                       name="BOOK_PUBLISHERS"
                       fullWidth
@@ -422,7 +426,7 @@ function BookWrite() {
                     />
                   </Grid>
                   <Grid item xs={12} md={6}>
-                    <MDInput
+                    <TextField
                       label="저자"
                       name="BOOK_AUTHOR"
                       fullWidth
@@ -431,7 +435,7 @@ function BookWrite() {
                     />
                   </Grid>
                   <Grid item xs={12} md={3}>
-                    <MDInput
+                    <TextField
                       label="페이지수"
                       name="BOOK_PAGE"
                       fullWidth
@@ -440,7 +444,7 @@ function BookWrite() {
                     />
                   </Grid>
                   <Grid item xs={12} md={3}>
-                    <MDInput
+                    <TextField
                       label="판형"
                       name="BOOK_FORMAT"
                       fullWidth
@@ -449,7 +453,7 @@ function BookWrite() {
                     />
                   </Grid>
                   <Grid item xs={12} md={3}>
-                    <MDInput
+                    <TextField
                       label="발행일 (YYYYMMDD)"
                       name="BOOK_DATE"
                       fullWidth
@@ -458,7 +462,7 @@ function BookWrite() {
                     />
                   </Grid>
                   <Grid item xs={12} md={3}>
-                    <MDInput
+                    <TextField
                       label="재고"
                       name="BOOK_STOCK"
                       fullWidth
@@ -493,30 +497,30 @@ function BookWrite() {
                   </Grid>
 
                   <Grid item xs={12} display="flex" justifyContent="center">
-                    <MDButton variant="gradient" color="info" onClick={handleSubmit}>
+                    <Button variant="contained" color="info" onClick={handleSubmit}>
                       {seq ? "수정" : "등록"}
-                    </MDButton>
-                    <MDBox ml={2}>
-                      <MDButton variant="outlined" color="secondary" onClick={() => navigate("/book")}>
+                    </Button>
+                    <Box ml={2}>
+                      <Button variant="outlined" color="secondary" onClick={() => navigate("/book")}>
                         취소
-                      </MDButton>
-                    </MDBox>
+                      </Button>
+                    </Box>
                   </Grid>
                 </Grid>
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );
 }
 
 const TypographyVariant = ({ label }) => (
-  <MDTypography variant="caption" fontWeight="bold" display="block" gutterBottom>
+  <Typography variant="caption" fontWeight="bold" display="block" gutterBottom>
     {label}
-  </MDTypography>
+  </Typography>
 );
 
 export default BookWrite;

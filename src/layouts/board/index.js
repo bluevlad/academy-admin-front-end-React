@@ -7,8 +7,10 @@ import Icon from "@mui/material/Icon";
 import Chip from "@mui/material/Chip";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 
 // Layout
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -111,25 +113,25 @@ function Board() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   게시판 목록
-                </MDTypography>
-              </MDBox>
-              <MDBox p={2}>
+                </Typography>
+              </Box>
+              <Box p={2}>
                 <ServerDataTable
                   columns={columns}
                   data={boardList}
@@ -142,11 +144,11 @@ function Board() {
                   loading={loading}
                   canSearch={false}
                 />
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

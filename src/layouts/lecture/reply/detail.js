@@ -4,9 +4,12 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -60,9 +63,9 @@ function LectureReplyDetail() {
             content: item.CONTENT || item.content || "-", // Assuming content field exist
             regDt: item.REG_DT || item.regDt || "-",
             action: (
-              <MDButton variant="text" color="error" onClick={() => handleDelete(item.SEQ || item.seq)}>
+              <Button variant="text" color="error" onClick={() => handleDelete(item.SEQ || item.seq)}>
                 삭제
-              </MDButton>
+              </Button>
             )
           }));
           setRows(formattedRows);
@@ -89,29 +92,29 @@ function LectureReplyDetail() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   수강 후기 관리 - {detail.SUBJECT_TITLE || detail.subjectTitle || "강의명 로딩중..."}
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={4} pb={3} px={3}>
-                <MDBox mb={3}>
-                  <MDTypography variant="body2">강사: {detail.TEACHER_NM || detail.teacherNm}</MDTypography>
-                  <MDTypography variant="body2">코드: {detail.LECCODE || detail.leccode}</MDTypography>
-                </MDBox>
+                </Typography>
+              </Box>
+              <Box pt={4} pb={3} px={3}>
+                <Box mb={3}>
+                  <Typography variant="body2">강사: {detail.TEACHER_NM || detail.teacherNm}</Typography>
+                  <Typography variant="body2">코드: {detail.LECCODE || detail.leccode}</Typography>
+                </Box>
                 <DataTable
                   table={{ columns, rows }}
                   isSorted={false}
@@ -119,20 +122,20 @@ function LectureReplyDetail() {
                   showTotalEntries={false}
                   noEndBorder
                 />
-                <MDBox mt={4} display="flex" justifyContent="flex-end">
-                  <MDButton
+                <Box mt={4} display="flex" justifyContent="flex-end">
+                  <Button
                     variant="outlined"
                     color="secondary"
                     onClick={() => navigate("/lecture/reply")}
                   >
                     목록으로
-                  </MDButton>
-                </MDBox>
-              </MDBox>
+                  </Button>
+                </Box>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

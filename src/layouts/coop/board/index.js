@@ -7,10 +7,14 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
-import MDInput from "components/MDInput";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
+import TextField from "@mui/material/TextField";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -65,16 +69,16 @@ function CoopBoardList() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
@@ -82,29 +86,29 @@ function CoopBoardList() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   제휴사 게시판
-                </MDTypography>
-                <MDButton variant="gradient" color="dark" onClick={handleCreate}>
+                </Typography>
+                <Button variant="contained" color="dark" onClick={handleCreate}>
                   글쓰기
-                </MDButton>
-              </MDBox>
+                </Button>
+              </Box>
 
-              <MDBox p={3}>
-                <MDBox display="flex" mb={2}>
-                  <MDInput
+              <Box p={3}>
+                <Box display="flex" mb={2}>
+                  <TextField
                     label="검색어"
                     value={searchParams.SEARCHTEXT}
                     onChange={(e) => setSearchParams(prev => ({ ...prev, SEARCHTEXT: e.target.value }))}
                     sx={{ marginRight: 2 }}
                   />
-                  <MDButton variant="gradient" color="info" onClick={handleSearch}>
+                  <Button variant="contained" color="info" onClick={handleSearch}>
                     검색
-                  </MDButton>
-                </MDBox>
+                  </Button>
+                </Box>
 
                 {loading ? (
-                  <MDTypography>Loading...</MDTypography>
+                  <Typography>Loading...</Typography>
                 ) : (
                   <DataTable
                     table={tableData}
@@ -114,11 +118,11 @@ function CoopBoardList() {
                     noEndBorder
                   />
                 )}
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

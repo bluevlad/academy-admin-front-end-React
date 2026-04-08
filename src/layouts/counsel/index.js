@@ -6,10 +6,14 @@ import Icon from "@mui/material/Icon";
 import { useNavigate } from "react-router-dom";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
-import MDInput from "components/MDInput";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
+import TextField from "@mui/material/TextField";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -104,16 +108,16 @@ function CounselList() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
@@ -121,18 +125,18 @@ function CounselList() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   상담예약관리
-                </MDTypography>
-                <MDButton variant="gradient" color="dark" onClick={() => navigate("/counsel/write")}>
+                </Typography>
+                <Button variant="contained" color="dark" onClick={() => navigate("/counsel/write")}>
                   상담일정등록
-                </MDButton>
-              </MDBox>
+                </Button>
+              </Box>
 
-              <MDBox p={3}>
+              <Box p={3}>
                 <Grid container spacing={2} alignItems="center" mb={2}>
                   <Grid item xs={12} md={3}>
-                    <MDInput
+                    <TextField
                       label="시작일 (YYYYMMDD)"
                       value={searchParams.SDate}
                       onChange={(e) => setSearchParams(prev => ({ ...prev, SDate: e.target.value }))}
@@ -140,7 +144,7 @@ function CounselList() {
                     />
                   </Grid>
                   <Grid item xs={12} md={3}>
-                    <MDInput
+                    <TextField
                       label="종료일 (YYYYMMDD)"
                       value={searchParams.EDate}
                       onChange={(e) => setSearchParams(prev => ({ ...prev, EDate: e.target.value }))}
@@ -148,14 +152,14 @@ function CounselList() {
                     />
                   </Grid>
                   <Grid item xs={12} md={2}>
-                    <MDButton variant="gradient" color="info" onClick={handleSearch} fullWidth>
+                    <Button variant="contained" color="info" onClick={handleSearch} fullWidth>
                       검색
-                    </MDButton>
+                    </Button>
                   </Grid>
                   <Grid item xs={12} md={2}>
-                    <MDButton variant="outlined" color="error" onClick={handleDelete} fullWidth>
+                    <Button variant="outlined" color="error" onClick={handleDelete} fullWidth>
                       삭제
-                    </MDButton>
+                    </Button>
                   </Grid>
                 </Grid>
 
@@ -166,11 +170,11 @@ function CounselList() {
                   showTotalEntries={false}
                   noEndBorder
                 />
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

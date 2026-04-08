@@ -15,9 +15,12 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -165,16 +168,16 @@ function CoopList() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
@@ -182,16 +185,16 @@ function CoopList() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   제휴사 관리
-                </MDTypography>
-                <MDButton variant="gradient" color="dark" onClick={handleAdd}>
+                </Typography>
+                <Button variant="contained" color="dark" onClick={handleAdd}>
                   제휴사 등록
-                </MDButton>
-              </MDBox>
-              <MDBox pt={3}>
+                </Button>
+              </Box>
+              <Box pt={3}>
                 {loading ? (
-                  <MDTypography p={3}>Loading...</MDTypography>
+                  <Typography p={3}>Loading...</Typography>
                 ) : (
                   <DataTable
                     table={tableData}
@@ -201,11 +204,11 @@ function CoopList() {
                     noEndBorder
                   />
                 )}
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
 
       {/* Coop Form Dialog */}
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)} maxWidth="sm" fullWidth>
@@ -253,8 +256,8 @@ function CoopList() {
           />
         </DialogContent>
         <DialogActions>
-          <MDButton color="secondary" onClick={() => setOpenDialog(false)}>취소</MDButton>
-          <MDButton color="info" onClick={handleSave}>{currentCoop ? "수정" : "등록"}</MDButton>
+          <Button color="secondary" onClick={() => setOpenDialog(false)}>취소</Button>
+          <Button color="info" onClick={handleSave}>{currentCoop ? "수정" : "등록"}</Button>
         </DialogActions>
       </Dialog>
 
@@ -262,7 +265,7 @@ function CoopList() {
       <Dialog open={openIpDialog} onClose={() => setOpenIpDialog(false)} maxWidth="sm" fullWidth>
         <DialogTitle>IP 관리 - {currentIpCoop?.COOP_NM}</DialogTitle>
         <DialogContent>
-          <MDBox display="flex" mb={2} alignItems="center">
+          <Box display="flex" mb={2} alignItems="center">
             <TextField
               label="New IP Address"
               value={newIp}
@@ -270,8 +273,8 @@ function CoopList() {
               size="small"
               sx={{ flexGrow: 1, mr: 1 }}
             />
-            <MDButton variant="gradient" color="info" onClick={handleAddIp}>추가</MDButton>
-          </MDBox>
+            <Button variant="contained" color="info" onClick={handleAddIp}>추가</Button>
+          </Box>
           <List>
             {ipList.map((ip) => (
               <ListItem key={ip.SEQ}>
@@ -283,11 +286,11 @@ function CoopList() {
                 </ListItemSecondaryAction>
               </ListItem>
             ))}
-            {ipList.length === 0 && <MDTypography variant="caption">등록된 IP가 없습니다.</MDTypography>}
+            {ipList.length === 0 && <Typography variant="caption">등록된 IP가 없습니다.</Typography>}
           </List>
         </DialogContent>
         <DialogActions>
-          <MDButton color="secondary" onClick={() => { setOpenIpDialog(false); loadData(); /* Refresh main list count */ }}>닫기</MDButton>
+          <Button color="secondary" onClick={() => { setOpenIpDialog(false); loadData(); /* Refresh main list count */ }}>닫기</Button>
         </DialogActions>
       </Dialog>
 

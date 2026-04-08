@@ -5,9 +5,12 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDBadge from "components/MDBadge";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Badge from "@mui/material/Badge";
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -66,35 +69,35 @@ function BoardAll() {
 
   const rows = boardList.map((item) => ({
     boardSeq: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
+      <Typography variant="caption" color="text" fontWeight="medium">
         {item.boardSeq}
-      </MDTypography>
+      </Typography>
     ),
     subject: (
-      <MDTypography variant="button" color="text" fontWeight="medium">
+      <Typography variant="button" color="text" fontWeight="medium">
         {item.subject}
-      </MDTypography>
+      </Typography>
     ),
     regId: (
-      <MDTypography variant="caption" color="text">
+      <Typography variant="caption" color="text">
         {item.regId}
-      </MDTypography>
+      </Typography>
     ),
     regDt: (
-      <MDTypography variant="caption" color="text">
+      <Typography variant="caption" color="text">
         {item.regDt}
-      </MDTypography>
+      </Typography>
     ),
     hits: (
-      <MDTypography variant="caption" color="text">
+      <Typography variant="caption" color="text">
         {item.hits}
-      </MDTypography>
+      </Typography>
     ),
     isUse: (
-      <MDBadge
+      <Badge
         badgeContent={item.isUse === "Y" ? "사용" : "미사용"}
         color={item.isUse === "Y" ? "success" : "secondary"}
-        variant="gradient"
+        variant="contained"
         size="sm"
       />
     ),
@@ -103,29 +106,29 @@ function BoardAll() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="primary"
                 borderRadius="lg"
                 coloredShadow="primary"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   게시물 전체 조회
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
+                </Typography>
+              </Box>
+              <Box pt={3}>
                 {loading ? (
-                  <MDBox p={3} textAlign="center">
-                    <MDTypography variant="caption">로딩 중...</MDTypography>
-                  </MDBox>
+                  <Box p={3} textAlign="center">
+                    <Typography variant="caption">로딩 중...</Typography>
+                  </Box>
                 ) : (
                   <>
                     <DataTable
@@ -136,17 +139,17 @@ function BoardAll() {
                       noEndBorder
                     />
                     {paginationInfo && (
-                      <MDBox
+                      <Box
                         p={3}
                         display="flex"
                         justifyContent="space-between"
                         alignItems="center"
                       >
-                        <MDBox>
-                          <MDTypography variant="caption" color="text">
+                        <Box>
+                          <Typography variant="caption" color="text">
                             Total {paginationInfo.totalRecordCount} records
-                          </MDTypography>
-                        </MDBox>
+                          </Typography>
+                        </Box>
                         <Stack spacing={2}>
                           <Pagination
                             count={totalPages}
@@ -158,15 +161,15 @@ function BoardAll() {
                             showLastButton
                           />
                         </Stack>
-                      </MDBox>
+                      </Box>
                     )}
                   </>
                 )}
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

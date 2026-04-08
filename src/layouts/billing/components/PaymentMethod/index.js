@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
@@ -20,9 +5,12 @@ import Icon from "@mui/material/Icon";
 import Tooltip from "@mui/material/Tooltip";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 // Images
 import masterCardLogo from "assets/images/logos/mastercard.png";
@@ -37,19 +25,19 @@ function PaymentMethod() {
 
   return (
     <Card id="delete-account">
-      <MDBox pt={2} px={2} display="flex" justifyContent="space-between" alignItems="center">
-        <MDTypography variant="h6" fontWeight="medium">
+      <Box pt={2} px={2} display="flex" justifyContent="space-between" alignItems="center">
+        <Typography variant="h6" fontWeight="medium">
           Payment Method
-        </MDTypography>
-        <MDButton variant="gradient" color="dark">
+        </Typography>
+        <Button variant="contained" color="dark">
           <Icon sx={{ fontWeight: "bold" }}>add</Icon>
           &nbsp;add new card
-        </MDButton>
-      </MDBox>
-      <MDBox p={2}>
+        </Button>
+      </Box>
+      <Box p={2}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
-            <MDBox
+            <Box
               borderRadius="lg"
               display="flex"
               justifyContent="space-between"
@@ -60,21 +48,21 @@ function PaymentMethod() {
                   `${borderWidth[1]} solid ${borderColor}`,
               }}
             >
-              <MDBox component="img" src={masterCardLogo} alt="master card" width="10%" mr={2} />
-              <MDTypography variant="h6" fontWeight="medium">
+              <Box component="img" src={masterCardLogo} alt="master card" width="10%" mr={2} />
+              <Typography variant="h6" fontWeight="medium">
                 ****&nbsp;&nbsp;****&nbsp;&nbsp;****&nbsp;&nbsp;7852
-              </MDTypography>
-              <MDBox ml="auto" lineHeight={0} color={darkMode ? "white" : "dark"}>
+              </Typography>
+              <Box ml="auto" lineHeight={0} color={darkMode ? "white" : "dark"}>
                 <Tooltip title="Edit Card" placement="top">
                   <Icon sx={{ cursor: "pointer" }} fontSize="small">
                     edit
                   </Icon>
                 </Tooltip>
-              </MDBox>
-            </MDBox>
+              </Box>
+            </Box>
           </Grid>
           <Grid item xs={12} md={6}>
-            <MDBox
+            <Box
               borderRadius="lg"
               display="flex"
               justifyContent="space-between"
@@ -85,21 +73,21 @@ function PaymentMethod() {
                   `${borderWidth[1]} solid ${borderColor}`,
               }}
             >
-              <MDBox component="img" src={visaLogo} alt="master card" width="10%" mr={2} />
-              <MDTypography variant="h6" fontWeight="medium">
+              <Box component="img" src={visaLogo} alt="master card" width="10%" mr={2} />
+              <Typography variant="h6" fontWeight="medium">
                 ****&nbsp;&nbsp;****&nbsp;&nbsp;****&nbsp;&nbsp;5248
-              </MDTypography>
-              <MDBox ml="auto" lineHeight={0} color={darkMode ? "white" : "dark"}>
+              </Typography>
+              <Box ml="auto" lineHeight={0} color={darkMode ? "white" : "dark"}>
                 <Tooltip title="Edit Card" placement="top">
                   <Icon sx={{ cursor: "pointer" }} fontSize="small">
                     edit
                   </Icon>
                 </Tooltip>
-              </MDBox>
-            </MDBox>
+              </Box>
+            </Box>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
     </Card>
   );
 }

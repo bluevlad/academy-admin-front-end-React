@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useEffect, useState } from "react";
 
 // react-router-dom components
@@ -29,9 +14,12 @@ import Icon from "@mui/material/Icon";
 import Collapse from "@mui/material/Collapse";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 // Material Dashboard 2 React example components
 import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
@@ -102,25 +90,25 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           // Render parent item with nested items
           returnValue = (
             <div key={key}>
-              <MDBox onClick={() => handleToggleCollapse(key)} sx={{ cursor: "pointer" }}>
+              <Box onClick={() => handleToggleCollapse(key)} sx={{ cursor: "pointer" }}>
                 <SidenavCollapse
                   name={name}
                   icon={icon}
                   active={key === collapseName}
                   noCollapse={false}
                 />
-              </MDBox>
+              </Box>
               <Collapse in={openCollapse[key]} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   {collapse.map((item) => (
                     <NavLink key={item.key} to={item.route} style={{ textDecoration: "none" }}>
-                      <MDBox pl={4}>
+                      <Box pl={4}>
                         <SidenavCollapse
                           name={item.name}
                           icon={item.icon || <Icon fontSize="small">fiber_manual_record</Icon>}
                           active={item.key === collapseName}
                         />
-                      </MDBox>
+                      </Box>
                     </NavLink>
                   ))}
                 </List>
@@ -152,7 +140,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
         }
       } else if (type === "title") {
         returnValue = (
-          <MDTypography
+          <Typography
             key={key}
             color={textColor}
             display="block"
@@ -165,7 +153,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             ml={1}
           >
             {title}
-          </MDTypography>
+          </Typography>
         );
       } else if (type === "divider") {
         returnValue = (
@@ -189,8 +177,8 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
       variant="permanent"
       ownerState={{ transparentSidenav, whiteSidenav, miniSidenav, darkMode }}
     >
-      <MDBox pt={3} pb={1} px={4} textAlign="center">
-        <MDBox
+      <Box pt={3} pb={1} px={4} textAlign="center">
+        <Box
           display={{ xs: "block", xl: "none" }}
           position="absolute"
           top={0}
@@ -199,22 +187,22 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           onClick={closeSidenav}
           sx={{ cursor: "pointer" }}
         >
-          <MDTypography variant="h6" color="secondary">
+          <Typography variant="h6" color="secondary">
             <Icon sx={{ fontWeight: "bold" }}>close</Icon>
-          </MDTypography>
-        </MDBox>
-        <MDBox component={NavLink} to="/" display="flex" alignItems="center">
-          {brand && <MDBox component="img" src={brand} alt="Brand" width="2rem" />}
-          <MDBox
+          </Typography>
+        </Box>
+        <Box component={NavLink} to="/" display="flex" alignItems="center">
+          {brand && <Box component="img" src={brand} alt="Brand" width="2rem" />}
+          <Box
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
           >
-            <MDTypography component="h6" variant="button" fontWeight="medium" color={textColor}>
+            <Typography component="h6" variant="button" fontWeight="medium" color={textColor}>
               {brandName}
-            </MDTypography>
-          </MDBox>
-        </MDBox>
-      </MDBox>
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
       <Divider
         light={
           (!darkMode && !whiteSidenav && !transparentSidenav) ||
@@ -222,19 +210,19 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
         }
       />
       <List>{renderRoutes}</List>
-      <MDBox p={2} mt="auto">
-        <MDButton
+      <Box p={2} mt="auto">
+        <Button
           component="a"
           href="https://www.creative-tim.com/product/material-dashboard-pro-react"
           target="_blank"
           rel="noreferrer"
-          variant="gradient"
+          variant="contained"
           color={sidenavColor}
           fullWidth
         >
           upgrade to pro
-        </MDButton>
-      </MDBox>
+        </Button>
+      </Box>
     </SidenavRoot>
   );
 }

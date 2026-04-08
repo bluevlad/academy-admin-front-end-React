@@ -4,9 +4,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
@@ -56,25 +59,25 @@ function CounselDetail() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   상담 상세 ({date})
-                </MDTypography>
-              </MDBox>
-              <MDBox p={3}>
+                </Typography>
+              </Box>
+              <Box p={3}>
                 <table style={{ width: "100%", borderCollapse: "collapse" }}>
                   <thead>
                     <tr style={{ borderBottom: "2px solid #ddd" }}>
@@ -88,8 +91,8 @@ function CounselDetail() {
                         <td style={{ padding: "10px" }}>{time.TIME_SET}</td>
                         <td style={{ padding: "10px" }}>
                           {getUsersForTime(time.TS_IDX).map((r, rIdx) => (
-                            <MDBox key={rIdx} component="span" mr={1} display="inline-block">
-                              <MDTypography
+                            <Box key={rIdx} component="span" mr={1} display="inline-block">
+                              <Typography
                                 variant="button"
                                 color="info"
                                 fontWeight="medium"
@@ -99,8 +102,8 @@ function CounselDetail() {
                                 style={{ cursor: 'pointer' }}
                               >
                                 [{r.USER_NM}({r.USER_ID})]
-                              </MDTypography>
-                            </MDBox>
+                              </Typography>
+                            </Box>
                           ))}
                         </td>
                       </tr>
@@ -114,16 +117,16 @@ function CounselDetail() {
                     )}
                   </tbody>
                 </table>
-                <MDBox mt={2} display="flex" justifyContent="center">
-                  <MDButton variant="outlined" color="dark" onClick={() => navigate("/counsel")}>
+                <Box mt={2} display="flex" justifyContent="center">
+                  <Button variant="outlined" color="dark" onClick={() => navigate("/counsel")}>
                     목록
-                  </MDButton>
-                </MDBox>
-              </MDBox>
+                  </Button>
+                </Box>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

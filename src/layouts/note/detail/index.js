@@ -10,10 +10,13 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
-import MDInput from "components/MDInput";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -106,16 +109,16 @@ function NoteDetail() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
@@ -123,14 +126,14 @@ function NoteDetail() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   {noteNo ? "쪽지 상세" : "쪽지 보내기"}
-                </MDTypography>
-              </MDBox>
-              <MDBox p={3}>
+                </Typography>
+              </Box>
+              <Box p={3}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <MDInput
+                    <TextField
                       label="받는 사람 (ID)"
                       name="recvId"
                       value={form.recvId}
@@ -140,7 +143,7 @@ function NoteDetail() {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <MDInput
+                    <TextField
                       label="내용"
                       name="noteContent"
                       value={form.noteContent}
@@ -152,26 +155,26 @@ function NoteDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} display="flex" justifyContent="flex-end" gap={1}>
-                    <MDButton variant="outlined" color="secondary" onClick={() => navigate("/note")}>
+                    <Button variant="outlined" color="secondary" onClick={() => navigate("/note")}>
                       목록
-                    </MDButton>
+                    </Button>
                     {noteNo && (
-                      <MDButton variant="outlined" color="error" onClick={handleDelete}>
+                      <Button variant="outlined" color="error" onClick={handleDelete}>
                         삭제
-                      </MDButton>
+                      </Button>
                     )}
                     {!noteNo && (
-                      <MDButton variant="gradient" color="info" onClick={handleSend}>
+                      <Button variant="contained" color="info" onClick={handleSend}>
                         보내기
-                      </MDButton>
+                      </Button>
                     )}
                   </Grid>
                 </Grid>
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

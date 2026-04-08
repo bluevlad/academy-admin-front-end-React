@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -22,15 +7,17 @@ import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 
 function ComplexStatisticsCard({ color, title, count, percentage, icon }) {
   return (
     <Card>
-      <MDBox display="flex" justifyContent="space-between" pt={1} px={2}>
-        <MDBox
-          variant="gradient"
+      <Box display="flex" justifyContent="space-between" pt={1} px={2}>
+        <Box
+          variant="contained"
           bgColor={color}
           color={color === "light" ? "dark" : "white"}
           coloredShadow={color}
@@ -45,28 +32,28 @@ function ComplexStatisticsCard({ color, title, count, percentage, icon }) {
           <Icon fontSize="medium" color="inherit">
             {icon}
           </Icon>
-        </MDBox>
-        <MDBox textAlign="right" lineHeight={1.25}>
-          <MDTypography variant="button" fontWeight="light" color="text">
+        </Box>
+        <Box textAlign="right" lineHeight={1.25}>
+          <Typography variant="button" fontWeight="light" color="text">
             {title}
-          </MDTypography>
-          <MDTypography variant="h4">{count}</MDTypography>
-        </MDBox>
-      </MDBox>
+          </Typography>
+          <Typography variant="h4">{count}</Typography>
+        </Box>
+      </Box>
       <Divider />
-      <MDBox pb={2} px={2}>
-        <MDTypography component="p" variant="button" color="text" display="flex">
-          <MDTypography
+      <Box pb={2} px={2}>
+        <Typography component="p" variant="button" color="text" display="flex">
+          <Typography
             component="span"
             variant="button"
             fontWeight="bold"
             color={percentage.color}
           >
             {percentage.amount}
-          </MDTypography>
+          </Typography>
           &nbsp;{percentage.label}
-        </MDTypography>
-      </MDBox>
+        </Typography>
+      </Box>
     </Card>
   );
 }

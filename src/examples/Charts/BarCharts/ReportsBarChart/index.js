@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2  React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useMemo } from "react";
 
 // porp-types is a library for typechecking of props
@@ -36,8 +21,10 @@ import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 
 // ReportsBarChart configurations
 import configs from "examples/Charts/BarCharts/ReportsBarChart/configs";
@@ -49,11 +36,11 @@ function ReportsBarChart({ color, title, description, date, chart }) {
 
   return (
     <Card sx={{ height: "100%" }}>
-      <MDBox padding="1rem">
+      <Box padding="1rem">
         {useMemo(
           () => (
-            <MDBox
-              variant="gradient"
+            <Box
+              variant="contained"
               bgColor={color}
               borderRadius="lg"
               coloredShadow={color}
@@ -63,28 +50,28 @@ function ReportsBarChart({ color, title, description, date, chart }) {
               height="12.5rem"
             >
               <Bar data={data} options={options} redraw />
-            </MDBox>
+            </Box>
           ),
           [color, chart]
         )}
-        <MDBox pt={3} pb={1} px={1}>
-          <MDTypography variant="h6" textTransform="capitalize">
+        <Box pt={3} pb={1} px={1}>
+          <Typography variant="h6" textTransform="capitalize">
             {title}
-          </MDTypography>
-          <MDTypography component="div" variant="button" color="text" fontWeight="light">
+          </Typography>
+          <Typography component="div" variant="button" color="text" fontWeight="light">
             {description}
-          </MDTypography>
+          </Typography>
           <Divider />
-          <MDBox display="flex" alignItems="center">
-            <MDTypography variant="button" color="text" lineHeight={1} sx={{ mt: 0.15, mr: 0.5 }}>
+          <Box display="flex" alignItems="center">
+            <Typography variant="button" color="text" lineHeight={1} sx={{ mt: 0.15, mr: 0.5 }}>
               <Icon>schedule</Icon>
-            </MDTypography>
-            <MDTypography variant="button" color="text" fontWeight="light">
+            </Typography>
+            <Typography variant="button" color="text" fontWeight="light">
               {date}
-            </MDTypography>
-          </MDBox>
-        </MDBox>
-      </MDBox>
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
     </Card>
   );
 }

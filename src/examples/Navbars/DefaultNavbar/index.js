@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState, useEffect } from "react";
 
 // react-router components
@@ -26,9 +11,12 @@ import Container from "@mui/material/Container";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
 
 // Material Dashboard 2 React example components
 import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
@@ -77,7 +65,7 @@ function DefaultNavbar({ transparent, light, action }) {
 
   return (
     <Container>
-      <MDBox
+      <Box
         py={1}
         px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}
         my={3}
@@ -102,18 +90,18 @@ function DefaultNavbar({ transparent, light, action }) {
           backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`,
         })}
       >
-        <MDBox
+        <Box
           component={Link}
           to="/"
           py={transparent ? 1.5 : 0.75}
           lineHeight={1}
           pl={{ xs: 0, lg: 1 }}
         >
-          <MDTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
+          <Typography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
             Material Dashboard 2
-          </MDTypography>
-        </MDBox>
-        <MDBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
+          </Typography>
+        </Box>
+        <Box color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
           <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" light={light} />
           <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} />
           <DefaultNavbarLink
@@ -128,37 +116,37 @@ function DefaultNavbar({ transparent, light, action }) {
             route="/authentication/sign-in"
             light={light}
           />
-        </MDBox>
+        </Box>
         {action &&
           (action.type === "internal" ? (
-            <MDBox display={{ xs: "none", lg: "inline-block" }}>
-              <MDButton
+            <Box display={{ xs: "none", lg: "inline-block" }}>
+              <Button
                 component={Link}
                 to={action.route}
-                variant="gradient"
+                variant="contained"
                 color={action.color ? action.color : "info"}
                 size="small"
               >
                 {action.label}
-              </MDButton>
-            </MDBox>
+              </Button>
+            </Box>
           ) : (
-            <MDBox display={{ xs: "none", lg: "inline-block" }}>
-              <MDButton
+            <Box display={{ xs: "none", lg: "inline-block" }}>
+              <Button
                 component="a"
                 href={action.route}
                 target="_blank"
                 rel="noreferrer"
-                variant="gradient"
+                variant="contained"
                 color={action.color ? action.color : "info"}
                 size="small"
                 sx={{ mt: -0.3 }}
               >
                 {action.label}
-              </MDButton>
-            </MDBox>
+              </Button>
+            </Box>
           ))}
-        <MDBox
+        <Box
           display={{ xs: "inline-block", lg: "none" }}
           lineHeight={0}
           py={1.5}
@@ -168,8 +156,8 @@ function DefaultNavbar({ transparent, light, action }) {
           onClick={openMobileNavbar}
         >
           <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon>
-        </MDBox>
-      </MDBox>
+        </Box>
+      </Box>
       {mobileView && <DefaultNavbarMobile open={mobileNavbar} close={closeMobileNavbar} />}
     </Container>
   );

@@ -3,8 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
@@ -39,7 +41,7 @@ function MouiList() {
           response.data.map((item, index) => ({
             no: index + 1,
             examNm: (
-              <MDTypography
+              <Typography
                 component={Link}
                 to={`/exam/moui/detail?examSeq=${item.examSeq}`}
                 variant="caption"
@@ -47,7 +49,7 @@ function MouiList() {
                 fontWeight="medium"
               >
                 {item.examNm}
-              </MDTypography>
+              </Typography>
             ),
             examTypeNm: item.examTypeNm || item.examType,
             examYear: item.examYear,
@@ -65,23 +67,23 @@ function MouiList() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="success"
                 borderRadius="lg"
                 coloredShadow="success"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   모의고사 목록 (Moui)
-                </MDTypography>
+                </Typography>
                 <Button
                   variant="contained"
                   color="white"
@@ -90,8 +92,8 @@ function MouiList() {
                 >
                   Create
                 </Button>
-              </MDBox>
-              <MDBox pt={3}>
+              </Box>
+              <Box pt={3}>
                 <DataTable
                   table={{ columns, rows }}
                   isSorted={false}
@@ -99,11 +101,11 @@ function MouiList() {
                   showTotalEntries={false}
                   noEndBorder
                 />
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );

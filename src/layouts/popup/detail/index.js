@@ -10,10 +10,13 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
-import MDInput from "components/MDInput";
+import Box from "@mui/material/Box";
+
+import Typography from "@mui/material/Typography";
+
+import Button from "@mui/material/Button";
+
+
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -119,16 +122,16 @@ function PopupDetail() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <Box pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox
+              <Box
                 mx={2}
                 mt={-3}
                 py={3}
                 px={2}
-                variant="gradient"
+                variant="contained"
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
@@ -136,14 +139,14 @@ function PopupDetail() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <MDTypography variant="h6" color="white">
+                <Typography variant="h6" color="white">
                   {popNo ? "팝업 수정" : "팝업 등록"}
-                </MDTypography>
-              </MDBox>
-              <MDBox p={3}>
+                </Typography>
+              </Box>
+              <Box p={3}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <MDInput
+                    <TextField
                       label="제목"
                       name="popTitle"
                       value={form.popTitle}
@@ -192,7 +195,7 @@ function PopupDetail() {
 
                   {/* Position and Size */}
                   <Grid item xs={3}>
-                    <MDInput
+                    <TextField
                       label="왼쪽 위치"
                       name="locLeft"
                       value={form.locLeft}
@@ -201,7 +204,7 @@ function PopupDetail() {
                     />
                   </Grid>
                   <Grid item xs={3}>
-                    <MDInput
+                    <TextField
                       label="상단 위치"
                       name="locTop"
                       value={form.locTop}
@@ -210,7 +213,7 @@ function PopupDetail() {
                     />
                   </Grid>
                   <Grid item xs={3}>
-                    <MDInput
+                    <TextField
                       label="너비"
                       name="width"
                       value={form.width}
@@ -219,7 +222,7 @@ function PopupDetail() {
                     />
                   </Grid>
                   <Grid item xs={3}>
-                    <MDInput
+                    <TextField
                       label="높이"
                       name="height"
                       value={form.height}
@@ -229,7 +232,7 @@ function PopupDetail() {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <MDInput
+                    <TextField
                       label="내용"
                       name="popContent"
                       value={form.popContent}
@@ -240,24 +243,24 @@ function PopupDetail() {
                     />
                   </Grid>
                   <Grid item xs={12} display="flex" justifyContent="flex-end" gap={1}>
-                    <MDButton variant="outlined" color="secondary" onClick={() => navigate("/popup")}>
+                    <Button variant="outlined" color="secondary" onClick={() => navigate("/popup")}>
                       목록
-                    </MDButton>
+                    </Button>
                     {popNo && (
-                      <MDButton variant="outlined" color="error" onClick={handleDelete}>
+                      <Button variant="outlined" color="error" onClick={handleDelete}>
                         삭제
-                      </MDButton>
+                      </Button>
                     )}
-                    <MDButton variant="gradient" color="info" onClick={handleSave}>
+                    <Button variant="contained" color="info" onClick={handleSave}>
                       저장
-                    </MDButton>
+                    </Button>
                   </Grid>
                 </Grid>
-              </MDBox>
+              </Box>
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </Box>
       <Footer />
     </DashboardLayout>
   );
