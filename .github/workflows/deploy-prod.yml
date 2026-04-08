@@ -1,4 +1,4 @@
-name: Deploy to Local Windows Docker
+name: Deploy to Production
 
 on:
   push:
@@ -6,19 +6,30 @@ on:
 
 jobs:
   deploy:
-    name: Deploy on Local Machine
-    # 이 작업은 사용자의 로컬 머신에 설치된 Self-Hosted Runner에서 실행됩니다.
+    name: Deploy on Self-Hosted Runner
     runs-on: self-hosted
-    
+
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+
+    - name: Detect OS and set compose command
+      id: detect
+      shell: bash
+      run: |
+        OS=$(uname -s)
+        echo "os=$OS" >> $GITHUB_OUTPUT
+        if [ "$OS" = "Darwin" ]; then
+          echo "compose_file=docker-compose.yml" >> $GITHUB_OUTPUT
+        else
+          echo "compose_file=docker-compose.local.yml" >> $GITHUB_OUTPUT
+        fi
 
     - name: Docker Compose Down
-      # 기존 컨테이너 종료 및 삭제 (네트워크, 고아 컨테이너 정리)
-      run: docker-compose down --remove-orphans
+      shell: bash
+      run: docker compose -f ${{ steps.detect.outputs.compose_file }} down --remove-orphans
       continue-on-error: true
 
-    - name: Docker Compose Up
-      # 이미지 리빌드 및 백그라운드 실행
-      run: docker-compose up -d --build
+    - name: Docker Compose Build and Up
+      shell: bash
+      run: docker compose -f ${{ steps.detect.outputs.compose_file }} up -d --build
