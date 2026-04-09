@@ -8,7 +8,7 @@
 import axios from "axios";
 
 const BASE_API =
-  import.meta.env.VITE_API_URL || "http://admin.unmong.com:8080/api";
+  import.meta.env.VITE_API_URL || "http://academy.unmong.com:9001/admin/api";
 
 const apiClient = axios.create({
   baseURL: BASE_API,
