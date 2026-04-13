@@ -13,6 +13,7 @@ const BASE_API =
 const apiClient = axios.create({
   baseURL: BASE_API,
   timeout: 60 * 1000,
+  withCredentials: true, // 세션 쿠키 전송 (관리자 인증)
   headers: {
     "Content-Type": "application/json;charset=UTF-8",
     Accept: "application/json",
@@ -68,16 +69,22 @@ apiClient.interceptors.request.use(
 );
 
 // 응답 인터셉터: 401 처리
+// 공개 화면(/dashboard, /authentication)에서 발생한 401은 리다이렉트하지 않고
+// 호출자가 조용히 무시하도록 한다. 그 외에는 로그인 페이지로 이동.
+const PUBLIC_PATH_PATTERNS = ["/dashboard", "/authentication"];
+
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // 토큰 만료 시 로그인 페이지로 이동
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("userProfile");
-      // 로그인 페이지가 아닌 경우에만 리다이렉트
-      if (!window.location.pathname.includes("/authentication")) {
-        window.location.href = "/authentication/sign-in";
+      const currentPath = window.location.pathname;
+      const isOnPublicPage = PUBLIC_PATH_PATTERNS.some((p) =>
+        currentPath.includes(p)
+      );
+      if (!isOnPublicPage) {
+        window.location.href = "/admin/authentication/sign-in";
       }
     }
     return Promise.reject(error);

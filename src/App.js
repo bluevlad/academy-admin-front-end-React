@@ -41,6 +41,17 @@ import routes from "routes";
 // Material Dashboard 2 React contexts
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
+// Admin auth
+import { AuthProvider } from "shared/auth/AuthContext";
+import ProtectedRoute from "shared/auth/ProtectedRoute";
+
+// 공개 접근 허용 경로 — 나머지는 모두 관리자 세션 필요
+const PUBLIC_ROUTES = new Set([
+  "/dashboard",
+  "/authentication/sign-in",
+  "/authentication/sign-up",
+]);
+
 // Images
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
@@ -119,7 +130,13 @@ export default function App() {
       }
 
       if (route.route) {
-        return <Route exact path={route.route} element={route.component} key={route.key} />;
+        const isPublic = PUBLIC_ROUTES.has(route.route);
+        const element = isPublic ? (
+          route.component
+        ) : (
+          <ProtectedRoute>{route.component}</ProtectedRoute>
+        );
+        return <Route exact path={route.route} element={element} key={route.key} />;
       }
 
       return null;
@@ -151,6 +168,7 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <AuthProvider>
       {direction === "rtl" ? (
         <CacheProvider value={rtlCache}>
           <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
@@ -204,6 +222,7 @@ export default function App() {
           </Suspense>
         </ThemeProvider>
       )}
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

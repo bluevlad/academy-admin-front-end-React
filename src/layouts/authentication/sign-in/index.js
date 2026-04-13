@@ -1,73 +1,95 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import Card from "@mui/material/Card";
-import Switch from "@mui/material/Switch";
-import Grid from "@mui/material/Grid";
-import MuiLink from "@mui/material/Link";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import GoogleIcon from "@mui/icons-material/Google";
 import Box from "@mui/material/Box";
-
 import Typography from "@mui/material/Typography";
-
 import TextField from "@mui/material/TextField";
-
 import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
 
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
-import { login } from "api/login";
+import apiClient from "shared/api/client";
+import { useAuth } from "shared/auth/AuthContext";
+
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "";
 
 function Basic() {
-  const [rememberMe, setRememberMe] = useState(false);
-  const [userId, setUserId] = useState("");
-  const [userPwd, setUserPwd] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { refresh } = useAuth();
+  const googleBtnRef = useRef(null);
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const from = location.state?.from?.pathname || "/dashboard";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setSubmitting(true);
     try {
-      const token = sessionStorage.getItem("token") || "";
-      const payload = { userId, userPwd, token };
-
-      const response = await login(payload);
-
-      if (response && response.token) {
-        sessionStorage.setItem("token", response.token);
-
-        const userProfile = {
-          userId: response.userId,
-          userNm: response.userNm,
-          userPwd: response.userPwd,
-          sex: response.sex,
-          userRole: response.userRole,
-          adminRole: response.adminRole,
-          birthDay: response.birthDay,
-          email: response.email,
-          zipCode: response.zipCode,
-          address1: response.address1,
-          address2: response.address2,
-          userPoint: response.userPoint,
-          memo: response.memo,
-          pic: response.pic,
-          isokSms: response.isokSms,
-          isokEmail: response.isokEmail,
-        };
-        sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
-        navigate("/dashboard");
-      } else {
-        throw new Error("Login failed: No token received");
-      }
+      await apiClient.post("/admin-auth/login", { username, password });
+      await refresh();
+      navigate(from, { replace: true });
     } catch (err) {
-      console.error(err);
-      setError(err.message || "Login failed");
+      setError(
+        err.response?.data?.error ||
+          err.message ||
+          "로그인에 실패했습니다."
+      );
+    } finally {
+      setSubmitting(false);
     }
   };
+
+  // Google Identity Services 로드 및 버튼 렌더
+  useEffect(() => {
+    if (!GOOGLE_CLIENT_ID) return;
+
+    const existing = document.getElementById("google-gsi-script");
+    const init = () => {
+      if (!window.google || !googleBtnRef.current) return;
+      window.google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: async (resp) => {
+          try {
+            await apiClient.post("/auth/google/verify", {
+              credential: resp.credential,
+            });
+            await refresh();
+            navigate(from, { replace: true });
+          } catch (err) {
+            setError(
+              err.response?.data?.error ||
+                err.message ||
+                "Google 로그인에 실패했습니다."
+            );
+          }
+        },
+      });
+      window.google.accounts.id.renderButton(googleBtnRef.current, {
+        theme: "outline",
+        size: "large",
+        width: 280,
+        text: "signin_with",
+      });
+    };
+
+    if (existing) {
+      init();
+      return;
+    }
+    const script = document.createElement("script");
+    script.id = "google-gsi-script";
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    script.defer = true;
+    script.onload = init;
+    document.head.appendChild(script);
+  }, [from, navigate, refresh]);
 
   return (
     <BasicLayout image={bgImage}>
@@ -84,57 +106,33 @@ function Basic() {
           textAlign="center"
         >
           <Typography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Sign in
+            관리자 로그인
           </Typography>
-          <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
-            <Grid item xs={2}>
-              <Typography component={MuiLink} href="#" variant="body1" color="white">
-                <FacebookIcon color="inherit" />
-              </Typography>
-            </Grid>
-            <Grid item xs={2}>
-              <Typography component={MuiLink} href="#" variant="body1" color="white">
-                <GitHubIcon color="inherit" />
-              </Typography>
-            </Grid>
-            <Grid item xs={2}>
-              <Typography component={MuiLink} href="#" variant="body1" color="white">
-                <GoogleIcon color="inherit" />
-              </Typography>
-            </Grid>
-          </Grid>
+          <Typography variant="caption" color="white">
+            지정된 관리자 계정 또는 Google 계정으로만 접근할 수 있습니다.
+          </Typography>
         </Box>
         <Box pt={4} pb={3} px={3}>
           <Box component="form" role="form" onSubmit={handleSubmit}>
             <Box mb={2}>
               <TextField
                 type="text"
-                label="ID"
+                label="관리자 ID"
                 fullWidth
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                autoComplete="username"
               />
             </Box>
             <Box mb={2}>
               <TextField
                 type="password"
-                label="Password"
+                label="비밀번호"
                 fullWidth
-                value={userPwd}
-                onChange={(e) => setUserPwd(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
               />
-            </Box>
-            <Box display="flex" alignItems="center" ml={-1}>
-              <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-              <Typography
-                variant="button"
-                fontWeight="regular"
-                color="text"
-                onClick={handleSetRememberMe}
-                sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-              >
-                &nbsp;&nbsp;Remember me
-              </Typography>
             </Box>
             {error && (
               <Box mt={2} mb={1}>
@@ -143,25 +141,37 @@ function Basic() {
                 </Typography>
               </Box>
             )}
-            <Box mt={4} mb={1}>
-              <Button variant="contained" color="info" fullWidth type="submit">
-                sign in
+            <Box mt={3} mb={1}>
+              <Button
+                variant="contained"
+                color="info"
+                fullWidth
+                type="submit"
+                disabled={submitting}
+              >
+                {submitting ? "로그인 중..." : "관리자 계정으로 로그인"}
               </Button>
             </Box>
-            <Box mt={3} mb={1} textAlign="center">
-              <Typography variant="button" color="text">
-                Don&apos;t have an account?{" "}
-                <Typography
-                  component={Link}
-                  to="/authentication/sign-up"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
-                >
-                  Sign up
-                </Typography>
+          </Box>
+
+          <Box my={3}>
+            <Divider>
+              <Typography variant="caption" color="text">
+                또는
               </Typography>
-            </Box>
+            </Divider>
+          </Box>
+
+          <Box display="flex" justifyContent="center">
+            {GOOGLE_CLIENT_ID ? (
+              <div ref={googleBtnRef} />
+            ) : (
+              <Typography variant="caption" color="text" textAlign="center">
+                Google 로그인을 사용하려면{" "}
+                <code>VITE_GOOGLE_CLIENT_ID</code> 환경변수를 설정하고 서버를
+                재시작해 주세요.
+              </Typography>
+            )}
           </Box>
         </Box>
       </Card>
